@@ -14,7 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booking_requests: {
+        Row: {
+          agreed_terms: boolean | null
+          contact_method: string | null
+          created_at: string
+          customer_type: string | null
+          email: string
+          form_type: string
+          full_name: string
+          has_skin_conditions: boolean | null
+          id: string
+          location_address: string | null
+          location_preference: string | null
+          notes: string | null
+          phone: string
+          preferred_date: string | null
+          preferred_time: string | null
+          service: string | null
+          skills_requested: string | null
+          skin_details: string | null
+          wants_promotions: boolean | null
+        }
+        Insert: {
+          agreed_terms?: boolean | null
+          contact_method?: string | null
+          created_at?: string
+          customer_type?: string | null
+          email: string
+          form_type?: string
+          full_name: string
+          has_skin_conditions?: boolean | null
+          id?: string
+          location_address?: string | null
+          location_preference?: string | null
+          notes?: string | null
+          phone: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          skills_requested?: string | null
+          skin_details?: string | null
+          wants_promotions?: boolean | null
+        }
+        Update: {
+          agreed_terms?: boolean | null
+          contact_method?: string | null
+          created_at?: string
+          customer_type?: string | null
+          email?: string
+          form_type?: string
+          full_name?: string
+          has_skin_conditions?: boolean | null
+          id?: string
+          location_address?: string | null
+          location_preference?: string | null
+          notes?: string | null
+          phone?: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          skills_requested?: string | null
+          skin_details?: string | null
+          wants_promotions?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
