@@ -28,7 +28,7 @@ export const submitBooking = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const row: Record<string, unknown> = {
+    const { error } = await supabaseAdmin.from("booking_requests").insert({
       form_type: data.formType,
       customer_type: data.customerType,
       service: data.service,
@@ -46,9 +46,7 @@ export const submitBooking = createServerFn({ method: "POST" })
       agreed_terms: data.agreedTerms,
       wants_promotions: data.wantsPromotions,
       skills_requested: data.skillsRequested,
-    };
-
-    const { error } = await supabaseAdmin.from("booking_requests").insert(row);
+    });
 
     if (error) {
       console.error("booking_requests insert failed:", error.message);
