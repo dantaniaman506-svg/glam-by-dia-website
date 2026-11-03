@@ -296,7 +296,7 @@ function FeaturesStrip() {
 
 function Testimonials() {
   const [index, setIndex] = useState(0);
-  const t = TESTIMONIALS[index];
+  const t = TESTIMONIALS[index] ?? TESTIMONIALS[0];
 
   return (
     <section className="px-3 pt-14 sm:px-6">
