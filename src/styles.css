@@ -48,30 +48,32 @@
 
 :root {
   --radius: 1rem;
+  --brand-pink: #F35B85;
+  --brand-pink-deep: #E23F72;
   --background: oklch(0.973 0.015 20);
   --foreground: oklch(0.38 0.055 356);
   --card: oklch(0.992 0.008 20);
   --card-foreground: oklch(0.38 0.055 356);
   --popover: oklch(0.992 0.008 20);
   --popover-foreground: oklch(0.38 0.055 356);
-  --primary: oklch(0.655 0.115 10);
+  --primary: var(--brand-pink-deep);
   --primary-foreground: oklch(0.995 0.008 20);
-  --secondary: oklch(0.928 0.04 18);
-  --secondary-foreground: oklch(0.5 0.09 355);
+  --secondary: oklch(0.978 0.012 28);
+  --secondary-foreground: var(--brand-pink-deep);
   --muted: oklch(0.952 0.022 18);
   --muted-foreground: oklch(0.545 0.045 352);
-  --accent: oklch(0.945 0.03 15);
-  --accent-foreground: oklch(0.5 0.09 355);
+  --accent: oklch(0.978 0.012 28);
+  --accent-foreground: var(--brand-pink-deep);
   --destructive: oklch(0.577 0.215 27.325);
   --destructive-foreground: oklch(0.984 0.003 20);
   --border: oklch(0.912 0.032 18);
   --input: oklch(0.9 0.035 18);
-  --ring: oklch(0.7 0.09 8);
+  --ring: var(--brand-pink);
   --gold: oklch(0.79 0.09 85);
   --plum: oklch(0.44 0.08 352);
   --blush: oklch(0.94 0.035 15);
   --blush-deep: oklch(0.88 0.06 12);
-  --script-rose: oklch(0.7 0.13 5);
+  --script-rose: var(--brand-pink);
 }
 
 @layer base {
@@ -81,6 +83,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -88,6 +91,15 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
   }
 }
 
@@ -108,30 +120,6 @@
   .site-bg {
     background-image: url("/images/background-desktop.webp");
     background-attachment: fixed;
-  }
-}
-
-/* Keep the hero image visible on mobile without losing text contrast. */
-.hero-image-overlay {
-  background-image: linear-gradient(
-    to right,
-    oklch(0.975 0.02 15 / 0.97),
-    oklch(0.975 0.02 15 / 0.75),
-    transparent
-  );
-}
-
-@media (max-width: 639px) {
-  .hero-image-overlay {
-    right: auto;
-    width: 72%;
-    background-image: linear-gradient(
-      90deg,
-      oklch(0.975 0.02 15 / 0.96) 0%,
-      oklch(0.975 0.02 15 / 0.88) 44%,
-      oklch(0.975 0.02 15 / 0.4) 76%,
-      transparent 100%
-    );
   }
 }
 
@@ -169,14 +157,14 @@
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--color-primary-foreground);
-  background-image: linear-gradient(135deg, oklch(0.72 0.1 8), oklch(0.6 0.13 352));
-  box-shadow: 0 10px 24px -10px oklch(0.6 0.13 352 / 0.55);
+  background-image: linear-gradient(135deg, var(--brand-pink), var(--brand-pink-deep));
+  box-shadow: 0 10px 24px -10px rgb(226 63 114 / 0.42);
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
 
   &:hover {
     transform: translateY(-2px);
     filter: brightness(1.05);
-    box-shadow: 0 14px 30px -10px oklch(0.6 0.13 352 / 0.65);
+    box-shadow: 0 14px 30px -10px rgb(226 63 114 / 0.5);
   }
 }
 

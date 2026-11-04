@@ -9,8 +9,14 @@ Use the transparent logo supplied by the user for the site identity. For the fou
 
 **How to apply:** preserve these assets when updating the home header, footer, or quick-service shortcuts; use photos only in separate service and gallery sections.
 
-On mobile, keep the hero portrait visible on the right and confine the blush text fade to the left. Use one static optimized hero slide on phones to avoid downloading extra slides.
+Use the latest supplied poster as the homepage hero with rounded edges and no added overlay, shadow, or text. Its incorrect Gurgaon location must not be shown; keep the real booking button as a separate clickable link below the artwork.
 
-**Why:** the user asked for a clearer mobile hero photo and faster image loading without losing text readability.
+**Why:** the user asked to use this exact poster without extra visual layers, and its location copy conflicts with the Clayton South, Melbourne business address.
 
-**How to apply:** avoid full-image white overlays and unnecessary mobile carousel downloads when changing the homepage hero.
+**How to apply:** preserve the supplied artwork, omit the incorrect location block, keep the CTA outside the image, and do not restore a mobile hero carousel.
+
+Use the requested #F35B85-to-#E23F72 gradient for primary actions, and let the extracted wordmark protrude slightly from the header without covering navigation. Prevent horizontal page overflow on mobile.
+
+**Why:** the user asked for these exact brand colors, a visible header mark, and a steady mobile layout.
+
+**How to apply:** use the gradient on primary buttons, keep the logo clear of the menu and booking link, and clip accidental horizontal overflow.
