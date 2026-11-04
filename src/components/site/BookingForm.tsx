@@ -48,7 +48,7 @@ function Pills({
   onChange,
 }: {
   options: readonly Pill[];
-  value?: string;
+  value: string | undefined;
   onChange: (v: string) => void;
 }) {
   return (
@@ -90,7 +90,8 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
     setBusy(true);
     try {
       const result = await submitBooking({
-        formType: config.formType,
+        data: {
+          formType: config.formType,
         service: state.service,
         customerType: state.customerType,
         preferredDate: state.preferredDate,
