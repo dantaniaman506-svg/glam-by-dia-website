@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/logo.jpg.asset.json";
+import { Link } from "react-router-dom";
 import { SITE } from "@/lib/site";
 
 const socials = [
@@ -126,17 +125,6 @@ export function Footer() {
               >
                 {SITE.instagramHandle}
               </ContactRow>
-              <ContactRow
-                href={`https://${SITE.website}`}
-                icon={
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
-                  </svg>
-                }
-              >
-                {SITE.website}
-              </ContactRow>
             </div>
           </div>
 
@@ -158,7 +146,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-white/80 text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/30 bg-white/80 text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                   {s.path}
@@ -169,7 +157,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/60 bg-white/55 px-6 py-6 text-center backdrop-blur-sm">
-          <img src={logoAsset.url} alt="Glam by Dia" width={64} height={64} className="mx-auto h-16 w-16 rounded-full object-cover shadow-md" />
+          <img src="/images/brand-logo.jpg" alt="Glam by Dia" width={64} height={64} className="mx-auto h-16 w-16 rounded-full object-cover shadow-md" />
           <p className="text-script mt-1 text-2xl">Glam by Dia</p>
           <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">{SITE.tagline}</p>
         </div>

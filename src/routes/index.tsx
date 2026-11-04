@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { Header } from "@/components/site/Header";
@@ -28,8 +28,10 @@ import galleryIndian from "@/assets/gallery-indian-bride.jpg";
 import galleryVeil from "@/assets/gallery-veil-bride.jpg";
 import galleryBunVeil from "@/assets/gallery-bun-veil.jpg";
 import galleryFlowerCrown from "@/assets/gallery-flower-crown.jpg";
+import bridalPortrait from "@/assets/bridal-portrait-open-hair.jpg";
+import brideVeil from "@/assets/bride-veil-portrait.jpg";
 
-const HERO_SLIDES = [heroBride, aboutBride, galleryVeil];
+const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
 
 const QUICK_SERVICES = [
   { title: "Makeup with hair down", Icon: FaceWavesIcon, to: "/services" },
@@ -131,8 +133,10 @@ function Hero() {
               key={i}
               aria-label={`Slide ${i + 1}`}
               onClick={() => setSlide(i)}
-              className={`h-2.5 w-2.5 rounded-full transition-all ${i === slide ? "scale-110 bg-primary" : "bg-primary/35"}`}
-            />
+              className="flex h-11 w-11 items-center justify-center rounded-full"
+            >
+              <span className={`h-2.5 w-2.5 rounded-full transition-all ${i === slide ? "scale-110 bg-primary" : "bg-primary/35"}`} />
+            </button>
           ))}
         </div>
       </div>
@@ -304,14 +308,14 @@ function Testimonials() {
         <button
           aria-label="Previous testimonial"
           onClick={() => setIndex((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-          className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-primary transition-colors hover:bg-blush"
+          className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-primary transition-colors hover:bg-blush"
         >
           <ChevronLeft />
         </button>
         <button
           aria-label="Next testimonial"
           onClick={() => setIndex((i) => (i + 1) % TESTIMONIALS.length)}
-          className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-primary transition-colors hover:bg-blush"
+          className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-primary transition-colors hover:bg-blush"
         >
           <ChevronRight />
         </button>
@@ -323,8 +327,10 @@ function Testimonials() {
               key={i}
               aria-label={`Testimonial ${i + 1}`}
               onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-all ${i === index ? "scale-110 bg-primary" : "bg-primary/35"}`}
-            />
+              className="flex h-11 w-11 items-center justify-center rounded-full"
+            >
+              <span className={`h-2 w-2 rounded-full transition-all ${i === index ? "scale-110 bg-primary" : "bg-primary/35"}`} />
+            </button>
           ))}
         </div>
       </div>
@@ -332,28 +338,7 @@ function Testimonials() {
   );
 }
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Glam by Dia | Mobile Bridal Hair & Makeup Artist Melbourne" },
-      {
-        name: "description",
-        content:
-          "Glam by Dia — Melbourne mobile bridal hair and makeup artist. Studio in Clayton South. Look Beautiful, Feel Unforgettable. Book bridal makeup, hairstyling, henna and self-makeup classes.",
-      },
-      { property: "og:title", content: "Glam by Dia | Mobile Bridal Hair & Makeup Artist" },
-      {
-        property: "og:description",
-        content: "Specialised in Bridal. Studio in Clayton South. Look Beautiful, Feel Unforgettable.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Home,
-});
-
-function Home() {
+export default function Home() {
   return (
     <div className="min-h-screen pb-6">
       <Header />

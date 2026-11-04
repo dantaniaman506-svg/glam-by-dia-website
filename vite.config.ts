@@ -1,15 +1,66 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
-//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
-//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig, type Plugin } from "vite";
+
+function localBookingApi(): Plugin {
+  return {
+    name: "local-booking-api",
+    configureServer(server) {
+      server.middlewares.use("/api/booking", async (request, response) => {
+        if (request.method !== "POST") {
+          response.statusCode = 405;
+          response.setHeader("Allow", "POST");
+          response.end();
+          return;
+        }
+
+        try {
+          const chunks: Buffer[] = [];
+          for await (const chunk of request) {
+            chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+          }
+          const body = JSON.parse(Buffer.concat(chunks).toString("utf8")) as unknown;
+          const apiRequest = Object.assign(request, { body });
+          const { default: handler } = await server.ssrLoadModule("/api/booking.ts");
+          await handler(apiRequest, {
+            status(code: number) {
+              response.statusCode = code;
+              return {
+                json(payload: unknown) {
+                  response.setHeader("Content-Type", "application/json");
+                  response.end(JSON.stringify(payload));
+                },
+              };
+            },
+          });
+        } catch (error) {
+          console.error("Local booking API failed:", error);
+          if (!response.headersSent) {
+            response.statusCode = 500;
+            response.setHeader("Content-Type", "application/json");
+            response.end(JSON.stringify({ ok: false, message: "We couldn't send your request. Please try again." }));
+          }
+        }
+      });
+    },
+  };
+}
 
 export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+  plugins: [react(), tailwindcss(), localBookingApi()],
+  resolve: { tsconfigPaths: true },
+  server: {
+    host: "0.0.0.0",
+    port: 5000,
+    strictPort: true,
+    allowedHosts: true,
+    watch: {
+      ignored: ["**/.cache/**", "**/.local/**", "**/.agents/**", "**/attached_assets/**", "**/dist/**"],
+    },
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 5000,
+    strictPort: true,
   },
 });

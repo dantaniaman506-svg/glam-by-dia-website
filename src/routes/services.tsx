@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -40,7 +40,7 @@ const EXTRAS = [
   },
 ];
 
-function Services() {
+export default function Services() {
   return (
     <div className="min-h-screen pb-6">
       <Header />
@@ -140,24 +140,3 @@ function Services() {
   );
 }
 
-export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services & Prices | Glam by Dia Bridal Hair & Makeup Melbourne" },
-      {
-        name: "description",
-        content:
-          "Bridal makeup with hair down or up, makeup only, hairstyling, the complete bridal package, trials and groom touch-ups — mobile across Melbourne. View prices and book online.",
-      },
-      { property: "og:title", content: "Services & Prices | Glam by Dia Bridal Hair & Makeup" },
-      {
-        property: "og:description",
-        content: "From soft romantic makeup to full glam — see all bridal hair and makeup services and prices.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/services" }],
-  }),
-  component: Services,
-});

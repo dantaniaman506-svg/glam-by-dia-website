@@ -10,7 +10,6 @@ export const SITE = {
   address: "52 Oakes Avenue, Clayton South, 3169",
   instagram: "https://www.instagram.com/glam_bydia",
   instagramHandle: "www.instagram.com/glam_bydia",
-  website: "www.glambydia.com",
   ownerEmail: "dantaniaman506@gmail.com",
 } as const;
 

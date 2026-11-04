@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
-import logoAsset from "@/assets/logo.jpg.asset.json";
+import { Link, useNavigate } from "react-router-dom";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 function ArrowIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -25,7 +24,7 @@ export function Header() {
 
   const go = (to: string) => {
     setOpen(false);
-    navigate({ to });
+    navigate(to);
   };
 
   return (
@@ -36,7 +35,7 @@ export function Header() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className="flex h-10 w-10 flex-col items-start justify-center gap-[5px] rounded-full px-2 transition-colors hover:bg-secondary sm:h-11 sm:w-12"
+            className="flex h-11 w-11 flex-col items-start justify-center gap-[5px] rounded-full px-2 transition-colors hover:bg-secondary sm:w-12"
           >
             <span className="h-[2px] w-5 rounded-full bg-primary/80" />
             <span className="h-[2px] w-3.5 rounded-full bg-primary/80" />
@@ -46,7 +45,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" aria-label="Glam by Dia home" className="absolute left-1/2 -translate-x-1/2">
             <img
-              src={logoAsset.url}
+              src="/images/brand-logo.jpg"
               alt="Glam by Dia logo"
               width={64}
               height={64}
@@ -75,11 +74,11 @@ export function Header() {
           className={`absolute left-0 top-0 flex h-full w-[300px] max-w-[85vw] flex-col gap-1 overflow-y-auto rounded-r-3xl bg-white/95 p-6 pt-8 shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="mb-4 flex items-center justify-between">
-            <img src={logoAsset.url} alt="Glam by Dia" width={56} height={56} className="h-14 w-14 rounded-full object-cover" />
+            <img src="/images/brand-logo.jpg" alt="Glam by Dia" width={56} height={56} className="h-14 w-14 rounded-full object-cover" />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="flex h-9 w-9 items-center justify-center rounded-full text-plum transition-colors hover:bg-secondary"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-plum transition-colors hover:bg-secondary"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <path d="M18 6 6 18" />

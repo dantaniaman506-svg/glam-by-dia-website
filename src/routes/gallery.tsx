@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { Header } from "@/components/site/Header";
@@ -7,28 +7,36 @@ import { PageHero, CtaBanner } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowRight } from "@/components/site/icons";
 
-import galleryVeil from "@/assets/gallery-veil-bride.jpg";
-import galleryIndian from "@/assets/gallery-indian-bride.jpg";
-import galleryFlowerCrown from "@/assets/gallery-flower-crown.jpg";
-import galleryBunVeil from "@/assets/gallery-bun-veil.jpg";
-import galleryPearl from "@/assets/gallery-pearl-bride.jpg";
-import galleryBraided from "@/assets/gallery-braided-updo.jpg";
-import serviceHairDown from "@/assets/service-hair-down.jpg";
-import serviceHairUp from "@/assets/service-hair-up.jpg";
-import serviceMakeupOnly from "@/assets/service-makeup-only.jpg";
-import serviceHairstyleOnly from "@/assets/service-hairstyle-only.jpg";
+import brideGarden from "@/assets/bride-garden-updo.jpg";
+import makeupClass from "@/assets/makeup-class-session.jpg";
+import bridalCloseup from "@/assets/bridal-softglam-closeup.jpg";
+import hennaHands from "@/assets/bridal-henna-hands.jpg";
+import floralUpdo from "@/assets/bride-floral-updo.jpg";
+import veilBack from "@/assets/bride-veil-back.jpg";
+import makeupArtist from "@/assets/makeup-artist-closeup.jpg";
+import floralBun from "@/assets/bride-floral-bun-profile.jpg";
+import indianBride from "@/assets/indian-bride-red.jpg";
+import openHair from "@/assets/bridal-portrait-open-hair.jpg";
+import hairDown from "@/assets/bridal-hair-down-back.jpg";
+import roseBun from "@/assets/bride-rose-bun.jpg";
+import veilCloseup from "@/assets/bride-veil-closeup.jpg";
+import veilPortrait from "@/assets/bride-veil-portrait.jpg";
 
 const PHOTOS = [
-  { img: galleryVeil, alt: "Bride with crystal veil and soft glam makeup", tall: true },
-  { img: galleryIndian, alt: "Indian bride in red lehenga with gold jewellery", tall: false },
-  { img: galleryPearl, alt: "Bride with pearl headpiece and soft glam makeup", tall: true },
-  { img: galleryBunVeil, alt: "Bridal low bun with veil and baby's breath", tall: false },
-  { img: galleryBraided, alt: "Braided bridal updo with baby's breath flowers", tall: true },
-  { img: galleryFlowerCrown, alt: "Bride with pink rose and baby's breath hair piece", tall: false },
-  { img: serviceHairUp, alt: "Elegant bridal updo with full glam makeup", tall: false },
-  { img: serviceHairDown, alt: "Bridal makeup with soft waves worn down", tall: true },
-  { img: serviceMakeupOnly, alt: "Flawless soft glam bridal makeup", tall: false },
-  { img: serviceHairstyleOnly, alt: "Side profile of an elegant bridal hairstyle", tall: true },
+  { img: brideGarden, alt: "Bride with a floral updo in a garden" },
+  { img: makeupClass, alt: "One-on-one makeup lesson in a blush studio" },
+  { img: bridalCloseup, alt: "Soft glam bridal makeup with a rose bouquet" },
+  { img: hennaHands, alt: "Intricate bridal henna with gold bangles" },
+  { img: floralUpdo, alt: "Bridal makeup with a romantic floral updo" },
+  { img: veilBack, alt: "Bride wearing a delicate veil over a low bun" },
+  { img: makeupArtist, alt: "Close-up of a polished bridal makeup look" },
+  { img: floralBun, alt: "Bridal bun accented with pink blossoms" },
+  { img: indianBride, alt: "Indian bride in a red lehenga and gold jewellery" },
+  { img: openHair, alt: "Bride wearing soft glam makeup and loose waves" },
+  { img: hairDown, alt: "Long bridal waves finished with a pearl comb" },
+  { img: roseBun, alt: "Romantic bridal bun with roses and soft makeup" },
+  { img: veilCloseup, alt: "Close-up bridal portrait with veil and flowers" },
+  { img: veilPortrait, alt: "Bride in an embroidered veil with luminous makeup" },
 ];
 
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
@@ -52,7 +60,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-plum shadow-lg"
+          className="absolute -top-3 -right-3 flex h-11 w-11 items-center justify-center rounded-full bg-white text-plum shadow-lg"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M18 6 6 18M6 6l12 12" />
@@ -64,7 +72,7 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
   );
 }
 
-function Gallery() {
+export default function Gallery() {
   const [open, setOpen] = useState<{ img: string; alt: string } | null>(null);
 
   return (
@@ -94,7 +102,6 @@ function Gallery() {
                     loading="lazy"
                     className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="pointer-events-none absolute" />
                 </button>
               </Reveal>
             ))}
@@ -118,24 +125,3 @@ function Gallery() {
   );
 }
 
-export const Route = createFileRoute("/gallery")({
-  head: () => ({
-    meta: [
-      { title: "Gallery | Real Brides by Glam by Dia — Bridal Makeup & Hair Melbourne" },
-      {
-        name: "description",
-        content:
-          "Browse real bridal looks by Glam by Dia — soft glam makeup, elegant updos, veils, flower crowns and Indian bridal glamour. Mobile bridal beauty across Melbourne.",
-      },
-      { property: "og:title", content: "Gallery | Real Brides by Glam by Dia" },
-      {
-        property: "og:description",
-        content: "Soft glam makeup, elegant updos, veils and Indian bridal glamour — real brides, real magic.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/gallery" }],
-  }),
-  component: Gallery,
-});

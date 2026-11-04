@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import { Header } from "@/components/site/Header";
@@ -65,7 +65,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function About() {
+export default function About() {
   return (
     <div className="min-h-screen pb-6">
       <Header />
@@ -236,24 +236,3 @@ function About() {
   );
 }
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Glam by Dia | Bridal Makeup & Hair Artist Melbourne" },
-      {
-        name: "description",
-        content:
-          "Meet Glam by Dia — a Melbourne-based mobile bridal hair, makeup and henna team with a studio in Clayton South. Our story, our promise and how we work with every bride.",
-      },
-      { property: "og:title", content: "About Glam by Dia | Bridal Makeup & Hair Artist Melbourne" },
-      {
-        property: "og:description",
-        content: "A Melbourne bridal beauty team devoted to making you feel unforgettable on your wedding day.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
-  component: About,
-});

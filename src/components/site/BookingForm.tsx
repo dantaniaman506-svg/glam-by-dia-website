@@ -90,8 +90,7 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
     setBusy(true);
     try {
       const result = await submitBooking({
-        data: {
-          formType: config.formType,
+        formType: config.formType,
         service: state.service,
         customerType: state.customerType,
         preferredDate: state.preferredDate,
@@ -321,7 +320,7 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
         </p>
       ) : null}
 
-      <button type="submit" disabled={busy} className="btn-primary w-full disabled:opacity-60">
+      <button type="submit" disabled={busy} className="btn-primary min-h-11 w-full disabled:opacity-60">
         {busy ? "Sending…" : "Send Booking Request"}
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">
