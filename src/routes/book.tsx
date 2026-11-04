@@ -1,3 +1,8 @@
+import priceBridalTrial from "@/assets/price-bridal-trial.jpg";
+import priceHairstyleOnly from "@/assets/price-hairstyle-only.jpg";
+import priceMakeupHairDown from "@/assets/price-makeup-hair-down.jpg";
+import priceMakeupHairUp from "@/assets/price-makeup-hair-up.jpg";
+import priceMakeupOnly from "@/assets/price-makeup-only.jpg";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BookingForm, type BookingFormConfig } from "@/components/site/BookingForm";
@@ -18,6 +23,14 @@ const config: BookingFormConfig = {
   skinQuestion: true,
 };
 
+const pricingVisuals = [
+  { image: priceMakeupHairDown, alt: "Bride with soft makeup and loose waves", detail: "Soft glam · loose waves" },
+  { image: priceMakeupHairUp, alt: "Bride with a pearl-pinned updo", detail: "Soft glam · polished updo" },
+  { image: priceMakeupOnly, alt: "Close-up of luminous bridal makeup", detail: "A fresh bridal finish" },
+  { image: priceHairstyleOnly, alt: "Romantic bridal bun with flowers", detail: "Romantic hair styling" },
+  { image: priceBridalTrial, alt: "Makeup artist preparing a bridal look", detail: "Your look, planned together" },
+];
+
 const faqs = [
   ["When is my appointment confirmed?", "We’ll contact you to confirm availability and send a quote. Your date is secured once the booking details and deposit are agreed."],
   ["Do you travel to my venue?", "Yes. Glam by Dia travels across Melbourne and surrounding suburbs. A travel fee may apply; share your location and Dia will include a quote."],
@@ -37,13 +50,35 @@ export default function Book() {
               <div className="space-y-5">
                 <div className="glass-panel p-6 sm:p-7">
                   <p className="eyebrow">Bridal beauty pricing</p>
-                  <ul className="mt-4 space-y-3 text-sm">
-                    {config.services.map((service) => {
+                  <ul className="mt-4 grid gap-2.5 text-sm">
+                    {config.services.map((service, index) => {
                       const [name, price] = service.split(" ($");
-                      return <li key={service} className="flex justify-between gap-3 border-b border-primary/10 pb-3"><span>{name}</span><span className="shrink-0 font-medium text-primary">${price?.replace(")", "")}</span></li>;
+                      const visual = pricingVisuals[index];
+                      if (!visual) return null;
+
+                      return (
+                        <li
+                          key={service}
+                          className="group flex min-h-[76px] items-center gap-2.5 rounded-2xl border border-primary/10 bg-white/65 p-2 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md sm:gap-3"
+                        >
+                          <img
+                            src={visual.image}
+                            alt={visual.alt}
+                            width={96}
+                            height={80}
+                            loading="lazy"
+                            className="h-16 w-[4.5rem] shrink-0 rounded-xl object-cover object-center sm:h-[4.25rem] sm:w-20"
+                          />
+                          <span className="min-w-0 flex-1">
+                            <span className="block font-display text-sm font-semibold leading-tight text-plum sm:text-[0.95rem]">{name}</span>
+                            <span className="mt-1 block text-[0.64rem] leading-tight text-muted-foreground sm:text-xs">{visual.detail}</span>
+                          </span>
+                          <span className="shrink-0 rounded-full bg-blush px-2.5 py-1 font-display text-sm font-semibold text-primary sm:px-3">${price?.replace(")", "")}</span>
+                        </li>
+                      );
                     })}
                   </ul>
-                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Prices are in AUD. Travel fees may apply for mobile appointments.</p>
+                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Illustrative style imagery. Prices are in AUD; travel fees may apply for mobile appointments.</p>
                 </div>
                 <div className="rounded-[1.5rem] border border-primary/15 bg-secondary/60 p-5 text-sm leading-relaxed text-foreground/80">
                   <p className="font-display text-lg font-semibold text-plum">A note about deposits</p>
