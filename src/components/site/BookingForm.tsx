@@ -144,7 +144,6 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
 
   return (
     <form onSubmit={submit} className="glass-panel mx-auto max-w-2xl px-5 py-8 sm:px-10 sm:py-10">
-      <Field label={config.customerTypes ? "I am the" : undefined ? "" : "Your details"} className="hidden" />
       {config.customerTypes ? (
         <div className="mb-5">
           <span className={labelCls}>Who is this for?</span>
