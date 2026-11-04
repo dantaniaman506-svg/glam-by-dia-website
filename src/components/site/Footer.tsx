@@ -157,7 +157,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/60 bg-white/55 px-6 py-6 text-center backdrop-blur-sm">
-          <img src="/images/brand-logo.jpg" alt="Glam by Dia" width={64} height={64} className="mx-auto h-16 w-16 rounded-full object-cover shadow-md" />
+          <img src="/images/brand-logo.webp" alt="Glam by Dia" width={76} height={70} className="mx-auto h-16 w-[76px] object-contain drop-shadow-sm" />
           <p className="text-script mt-1 text-2xl">Glam by Dia</p>
           <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">{SITE.tagline}</p>
         </div>

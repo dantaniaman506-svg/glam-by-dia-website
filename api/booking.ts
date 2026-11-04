@@ -51,6 +51,7 @@ function emailShell(title: string, content: string): string {
 }
 
 async function sendEmail(email: EmailMessage): Promise<void> {
+  // This server-side variable must never use a VITE_ prefix or enter the client bundle.
   const apiKey = process.env["RESEND_API_KEY"];
   let response: Response;
 
@@ -74,8 +75,7 @@ async function sendEmail(email: EmailMessage): Promise<void> {
   }
 
   if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(`Resend returned ${response.status}: ${detail}`);
+    throw new Error(`Resend request failed (${response.status}).`);
   }
 }
 
@@ -210,7 +210,9 @@ export default async function bookingHandler(request: ApiRequest, response: ApiR
 
   emailResults.forEach((result, index) => {
     if (result.status === "rejected") {
-      console.error(index === 0 ? "Owner email failed:" : "Customer confirmation email failed:", result.reason);
+      console.error(
+        index === 0 ? "Owner email failed; provider details redacted." : "Customer email failed; provider details redacted.",
+      );
     }
   });
 

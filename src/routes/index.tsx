@@ -30,10 +30,26 @@ import brideVeil from "@/assets/bride-veil-portrait.webp";
 const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
 
 const QUICK_SERVICES = [
-  { title: "Makeup with hair down", img: serviceHairDown, service: BRIDAL_BOOKING_SERVICES.hairDown },
-  { title: "Makeup with hair up", img: serviceHairUp, service: BRIDAL_BOOKING_SERVICES.hairUp },
-  { title: "Makeup only", img: serviceMakeupOnly, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
-  { title: "Hairstyle only", img: serviceHairstyleOnly, service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
+  {
+    title: "Makeup with hair down",
+    icon: "/images/service-icon-hair-down.webp",
+    service: BRIDAL_BOOKING_SERVICES.hairDown,
+  },
+  {
+    title: "Makeup with hair up",
+    icon: "/images/service-icon-hair-up.webp",
+    service: BRIDAL_BOOKING_SERVICES.hairUp,
+  },
+  {
+    title: "Makeup only",
+    icon: "/images/service-icon-makeup-only.webp",
+    service: BRIDAL_BOOKING_SERVICES.makeupOnly,
+  },
+  {
+    title: "Hairstyle only",
+    icon: "/images/service-icon-hairstyle-only.webp",
+    service: BRIDAL_BOOKING_SERVICES.hairstyleOnly,
+  },
 ];
 
 const SERVICE_CARDS = [
@@ -147,7 +163,7 @@ function QuickServiceStrip() {
   return (
     <section className="px-3 pt-8 sm:px-6">
       <div className="glass-panel mx-auto grid max-w-5xl grid-cols-2 gap-y-6 px-4 py-6 sm:grid-cols-4 sm:px-6 sm:py-7">
-        {QUICK_SERVICES.map(({ title, img, service }, i) => (
+        {QUICK_SERVICES.map(({ title, icon, service }, i) => (
           <Link
             key={title}
             to={`/book?service=${encodeURIComponent(service)}`}
@@ -156,7 +172,7 @@ function QuickServiceStrip() {
             } ${i < 2 ? "max-sm:border-b max-sm:border-primary/15 max-sm:pb-5" : ""} ${i === 1 ? "max-sm:border-r-0" : ""}`}
           >
             <img
-              src={img}
+              src={icon}
               alt=""
               width={128}
               height={128}

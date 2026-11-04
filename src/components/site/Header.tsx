@@ -45,11 +45,11 @@ export function Header() {
           {/* Logo */}
           <Link to="/" aria-label="Glam by Dia home" className="absolute left-1/2 -translate-x-1/2">
             <img
-              src="/images/brand-logo.jpg"
+              src="/images/brand-logo.webp"
               alt="Glam by Dia logo"
-              width={64}
-              height={64}
-              className="h-14 w-14 rounded-full object-cover shadow-[0_6px_18px_-6px_rgba(150,80,110,0.5)] ring-2 ring-white sm:h-16 sm:w-16"
+              width={72}
+              height={66}
+              className="h-14 w-16 object-contain drop-shadow-[0_6px_12px_rgba(150,80,110,0.3)] sm:h-16 sm:w-[72px]"
             />
           </Link>
 
@@ -74,7 +74,7 @@ export function Header() {
           className={`absolute left-0 top-0 flex h-full w-[300px] max-w-[85vw] flex-col gap-1 overflow-y-auto rounded-r-3xl bg-white/95 p-6 pt-8 shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="mb-4 flex items-center justify-between">
-            <img src="/images/brand-logo.jpg" alt="Glam by Dia" width={56} height={56} className="h-14 w-14 rounded-full object-cover" />
+            <img src="/images/brand-logo.webp" alt="Glam by Dia" width={64} height={60} className="h-14 w-16 object-contain" />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"

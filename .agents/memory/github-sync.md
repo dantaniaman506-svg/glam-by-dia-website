@@ -8,3 +8,7 @@ After completing and verifying requested changes to this project, commit and pus
 **Why:** the user explicitly asked that changes continue to be kept on GitHub.
 
 **How to apply:** verify the build and relevant tests first, then push a normal fast-forward update; do not force-push.
+
+If repeated pushes fail with GitHub proxy server errors, use the authorized GitHub API to create a single tree/commit and update `main` with `force: false`. Fetch the remote result and compare file trees before aligning local `main`; preserve the previous local tip on a backup branch when the generated commit hash differs.
+
+**Why:** the GitHub proxy rejected repeated pushes, including a tiny fast-forward, while the authorized API succeeded.
