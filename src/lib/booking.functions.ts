@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 const bookingSchema = z.object({
-  formType: z.enum(["beauty", "henna", "class"]),
+  formType: z.enum(["beauty", "henna", "class", "message"]),
   customerType: z.string().max(40).optional(),
   service: z.string().max(160).optional(),
   preferredDate: z.string().max(40).optional(),

@@ -77,6 +77,86 @@ export const SERVICES = [
   },
 ] as const;
 
+export const HENNA_SERVICES = [
+  {
+    title: "Bridal Henna",
+    description:
+      "Intricate, personalised bridal mehndi for hands and feet — designed around your story, outfit and jewellery.",
+  },
+  {
+    title: "Bridal Party & Family Henna",
+    description:
+      "Beautiful designs for bridesmaids, mothers and guests — from minimal elegance to bold traditional patterns.",
+  },
+  {
+    title: "Engagement & Mehndi Night",
+    description:
+      "Celebration-ready henna for your sangeet, mehndi night or engagement — done at your home or venue.",
+  },
+  {
+    title: "Festive & Casual Henna",
+    description:
+      "Quick, graceful designs for festivals, baby showers, birthdays or just because — available year round.",
+  },
+] as const;
+
+export const CLASS_MODULES = [
+  {
+    title: "Skin Prep & Base",
+    description:
+      "Learn to prep, prime and match your foundation for a base that looks like skin and lasts all day.",
+  },
+  {
+    title: "Eyes & Brows",
+    description:
+      "Everyday and glam eye looks, liner that suits your eye shape, and brows that frame your face.",
+  },
+  {
+    title: "Blush, Bronze & Glow",
+    description:
+      "Where to place blush, bronzer and highlight for your face shape — the secret to lifted, radiant makeup.",
+  },
+  {
+    title: "Lips & Finishing",
+    description:
+      "Lip shapes and colour choices, plus setting techniques so everything stays picture-perfect.",
+  },
+] as const;
+
+export const PROCESS_STEPS = [
+  {
+    title: "Enquiry",
+    description: "Send your date, venue and the looks you love — we reply with availability and a quote.",
+  },
+  {
+    title: "Trial & Planning",
+    description: "We design your look together at a relaxed trial, perfecting every detail before the big day.",
+  },
+  {
+    title: "Your Day",
+    description: "We arrive at your home, hotel or venue early, calm and fully prepared — you just enjoy it.",
+  },
+] as const;
+
+export const FAQS = [
+  {
+    q: "Do you travel to my home or venue?",
+    a: "Yes — we are a mobile team and travel across Melbourne and surrounding suburbs. Travel fees may apply for long distances.",
+  },
+  {
+    q: "How far in advance should I book?",
+    a: "For weekends and wedding season we recommend 3–6 months ahead, but always ask — we may still have your date.",
+  },
+  {
+    q: "Which products do you use?",
+    a: "We use professional, long-wear, skin-loving products and sanitised, hygienic kits for every booking.",
+  },
+  {
+    q: "How long does bridal makeup and hair take?",
+    a: "Around 2.5–3 hours for the bride, with the party booked in a timed schedule so everyone is ready on time.",
+  },
+] as const;
+
 export const TESTIMONIALS = [
   {
     quote:
