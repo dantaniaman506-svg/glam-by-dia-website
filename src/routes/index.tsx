@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -14,6 +14,7 @@ import {
 } from "@/components/site/icons";
 import { BRIDAL_BOOKING_SERVICES, SITE, TESTIMONIALS } from "@/lib/site";
 
+import heroBride from "@/assets/hero-bride.webp";
 import aboutBride from "@/assets/about-bride.jpg";
 import serviceHairDown from "@/assets/service-hair-down.webp";
 import serviceHairUp from "@/assets/service-hair-up.webp";
@@ -23,6 +24,10 @@ import galleryIndian from "@/assets/gallery-indian-bride.jpg";
 import galleryVeil from "@/assets/gallery-veil-bride.jpg";
 import galleryBunVeil from "@/assets/gallery-bun-veil.jpg";
 import galleryFlowerCrown from "@/assets/gallery-flower-crown.jpg";
+import bridalPortrait from "@/assets/bridal-portrait-open-hair.webp";
+import brideVeil from "@/assets/bride-veil-portrait.webp";
+
+const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
 const QUICK_SERVICES = [
   {
     title: "Makeup with hair down",
@@ -89,22 +94,100 @@ function SectionHeading({
 }
 
 function Hero() {
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 640px)");
+    let timer: number | undefined;
+
+    const syncCarousel = () => {
+      if (desktop.matches) {
+        if (timer === undefined) {
+          timer = window.setInterval(() => setSlide((current) => (current + 1) % HERO_SLIDES.length), 5000);
+        }
+        return;
+      }
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+      setSlide(0);
+    };
+
+    syncCarousel();
+    desktop.addEventListener("change", syncCarousel);
+    return () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      desktop.removeEventListener("change", syncCarousel);
+    };
+  }, []);
+
   return (
     <section className="px-3 pt-4 sm:px-6">
-      <div className="mx-auto flex max-w-[36rem] flex-col items-center">
+      <div className="mx-auto flex max-w-[36rem] flex-col items-center sm:hidden">
         <img
           src="/images/hero-artwork.webp"
           alt="Glam by Dia bridal makeup and hair artistry"
           width={841}
           height={915}
-          fetchPriority="high"
+          loading="lazy"
+          fetchPriority="auto"
           decoding="async"
           className="block h-auto w-full rounded-[1.75rem] object-cover"
         />
         <Link to="/book" className="btn-primary mt-5">
-            Book Now
-            <ArrowRight />
+          Book Now
+          <ArrowRight />
         </Link>
+      </div>
+
+      <div className="hidden sm:block">
+        <div className="relative mx-auto min-h-[480px] max-w-5xl overflow-hidden rounded-[2rem] shadow-[0_24px_60px_-30px_rgba(150,80,110,0.45)] ring-1 ring-white/60">
+          <div className="absolute inset-y-0 right-0 w-[62%]">
+            {HERO_SLIDES.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={i === slide ? "Glam by Dia bridal look" : ""}
+                width={1024}
+                height={1024}
+                loading="lazy"
+                fetchPriority={i === slide ? "high" : "low"}
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
+              />
+            ))}
+            <div className="hero-image-overlay absolute inset-0" />
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[oklch(0.973_0.015_20)] to-transparent" />
+          </div>
+
+          <div className="relative z-10 px-6 py-14 sm:max-w-[55%] sm:px-12 sm:py-24">
+            <p className="eyebrow">Mobile Bridal Hair &amp; Makeup Artist</p>
+            <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3">
+              <span className="heading-display text-5xl sm:text-7xl">Glam</span>
+              <span className="text-script text-5xl sm:text-6xl">by Dia</span>
+            </h1>
+            <p className="mt-4 font-display text-lg italic text-plum sm:text-2xl">{SITE.heroTagline}</p>
+            <p className="mt-4 max-w-xs text-sm text-foreground/85 sm:max-w-none sm:text-base">
+              Specialised in Bridal. Studio in Clayton South.
+            </p>
+            <Link to="/book" className="btn-primary mt-7">
+              Book Now
+              <ArrowRight />
+            </Link>
+          </div>
+
+          <div className="absolute bottom-4 right-6 flex gap-2 sm:right-10">
+            {HERO_SLIDES.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Slide ${i + 1}`}
+                onClick={() => setSlide(i)}
+                className="flex h-11 w-11 items-center justify-center rounded-full"
+              >
+                <span className={`h-2.5 w-2.5 rounded-full transition-all ${i === slide ? "scale-110 bg-primary" : "bg-primary/35"}`} />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

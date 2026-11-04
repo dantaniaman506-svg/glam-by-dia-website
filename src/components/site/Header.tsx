@@ -45,11 +45,11 @@ export function Header() {
           {/* Logo */}
           <Link to="/" aria-label="Glam by Dia home" className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <img
-              src="/images/header-wordmark.webp"
+              src="/images/brand-logo.webp"
               alt="Glam by Dia logo"
-              width={370}
-              height={315}
-              className="h-[4.6rem] w-[5.5rem] rounded-xl border border-white/80 object-cover shadow-[0_8px_20px_-12px_rgba(226,63,114,0.55)] sm:h-[5.4rem] sm:w-[6.5rem]"
+              width={523}
+              height={477}
+              className="block h-[4.9rem] w-[5.4rem] object-contain drop-shadow-[0_5px_10px_rgba(226,63,114,0.25)] sm:h-[5.8rem] sm:w-[6.3rem]"
             />
           </Link>
 
@@ -74,7 +74,7 @@ export function Header() {
           className={`absolute left-0 top-0 flex h-full w-[300px] max-w-[85vw] flex-col gap-1 overflow-y-auto rounded-r-3xl bg-white/95 p-6 pt-8 shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="mb-4 flex items-center justify-between">
-            <img src="/images/header-wordmark.webp" alt="Glam by Dia" width={370} height={315} className="h-14 w-[68px] rounded-xl border border-white/70 object-cover" />
+            <img src="/images/brand-logo.webp" alt="Glam by Dia" width={523} height={477} className="h-16 w-[70px] object-contain" />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"

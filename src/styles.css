@@ -123,6 +123,16 @@
   }
 }
 
+/* Desktop-only photo hero; mobile uses the supplied poster artwork. */
+.hero-image-overlay {
+  background-image: linear-gradient(
+    to right,
+    oklch(0.975 0.02 15 / 0.97),
+    oklch(0.975 0.02 15 / 0.75),
+    transparent
+  );
+}
+
 /* ---------- Shared type styles ---------- */
 @utility eyebrow {
   font-size: 0.72rem;

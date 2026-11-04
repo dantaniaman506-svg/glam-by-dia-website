@@ -9,13 +9,13 @@ Use the transparent logo supplied by the user for the site identity. For the fou
 
 **How to apply:** preserve these assets when updating the home header, footer, or quick-service shortcuts; use photos only in separate service and gallery sections.
 
-Use the latest supplied poster as the homepage hero with rounded edges and no added overlay, shadow, or text. Its incorrect Gurgaon location must not be shown; keep the real booking button as a separate clickable link below the artwork.
+Use the latest supplied poster as the mobile homepage hero with rounded edges and no added overlay, shadow, or text. Keep the earlier photo-and-copy carousel on desktop. Do not show the poster's incorrect Gurgaon location; keep the real mobile booking button as a separate clickable link below the artwork.
 
-**Why:** the user asked to use this exact poster without extra visual layers, and its location copy conflicts with the Clayton South, Melbourne business address.
+**Why:** the user asked to keep the earlier desktop design and use the poster only on mobile; its location copy conflicts with the Clayton South, Melbourne business address.
 
-**How to apply:** preserve the supplied artwork, omit the incorrect location block, keep the CTA outside the image, and do not restore a mobile hero carousel.
+**How to apply:** preserve the supplied artwork on mobile, omit its incorrect location block, keep the CTA outside the image, and retain the previous desktop carousel.
 
-Use the requested #F35B85-to-#E23F72 gradient for primary actions, and let the extracted wordmark protrude slightly from the header without covering navigation. Prevent horizontal page overflow on mobile.
+Use the requested #F35B85-to-#E23F72 gradient for primary actions. Display the latest transparent logo fully in the header, slightly protruding without covering navigation. Prevent horizontal page overflow on mobile.
 
 **Why:** the user asked for these exact brand colors, a visible header mark, and a steady mobile layout.
 
