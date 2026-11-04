@@ -86,6 +86,48 @@ export function HeartIcon({ className = "h-8 w-8" }: IconProps) {
   );
 }
 
+export function SparkleIcon({ className = "h-8 w-8" }: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 6c1.6 7.4 5 11.9 12 14-7 2.1-10.4 6.6-12 14-1.6-7.4-5-11.9-12-14 7-2.1 10.4-6.6 12-14Z" />
+      <path d="M38 32c.8 3.6 2.4 5.8 5.8 7-3.4 1.2-5 3.4-5.8 7-.8-3.6-2.4-5.8-5.8-7 3.4-1.2 5-3.4 5.8-7Z" />
+      <path d="M9 4c.6 2.7 1.8 4.3 4.4 5.2-2.6.9-3.8 2.5-4.4 5.2-.6-2.7-1.8-4.3-4.4-5.2C7.2 8.3 8.4 6.7 9 4Z" />
+    </svg>
+  );
+}
+
+export function UsersIcon({ className = "h-8 w-8" }: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="18" cy="16" r="7" />
+      <path d="M6 40c0-7 5.4-12 12-12s12 5 12 12" />
+      <path d="M30 10.5a7 7 0 0 1 0 11" />
+      <path d="M33 28.6c5 .9 9 5.2 9 11.4" />
+    </svg>
+  );
+}
+
+export function HennaHandIcon({ className = "h-8 w-8" }: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 44V26l-3.5-8c-.8-2 2.2-3.4 3.2-1.5l3.3 6V10a2 2 0 0 1 4 0v12V7a2 2 0 0 1 4 0v15V9a2 2 0 0 1 4 0v13V12a2 2 0 0 1 4 0v18c0 8-3 10.5-3 14" />
+      <path d="M15 32c-2-1.5-3.5-3.8-3-6" />
+      <circle cx="24" cy="27" r="3.2" />
+      <path d="M24 21.5v-2M24 34.5v-1.3M29.5 27h1.5M17 27h3.3M28 24.5l1.5-1.5M20 29.5l-1.5 1.5" />
+    </svg>
+  );
+}
+
+export function GraduationIcon({ className = "h-8 w-8" }: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m4 19 20-8 20 8-20 8-20-8Z" />
+      <path d="M12 22.5V33c0 2.8 5.4 6 12 6s12-3.2 12-6v-10.5" />
+      <path d="M40 21v10" />
+    </svg>
+  );
+}
+
 export function ArrowRight({ className = "h-4 w-4" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
