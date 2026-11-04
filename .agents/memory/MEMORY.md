@@ -1,1 +1,2 @@
 - [Vite watch scope](vite-watch-scope.md) — exclude Replit caches, local skills, and uploaded assets from workspace-root file watching to avoid EMFILE.
+- [GitHub sync](github-sync.md) — after verified project changes, push them to the configured GitHub main branch.

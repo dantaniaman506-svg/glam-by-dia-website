@@ -20,6 +20,8 @@ bun run preview
 
 The static site is built into `dist/`. `vercel.json` configures Vercel to serve that build and route browser page URLs to the SPA while leaving `/api/booking` available as a serverless function.
 
+Vercel uses `vercel-install.sh` to replace Replit-only tarball URLs in its temporary build checkout with the corresponding public npm registry URLs, then installs from the frozen Bun lockfile. The committed `bun.lock` remains unchanged for Replit.
+
 ## Pages
 
 - `/` — Home
