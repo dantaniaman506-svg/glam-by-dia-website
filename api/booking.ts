@@ -140,9 +140,11 @@ export default async function bookingHandler(request: ApiRequest, response: ApiR
     }
   } catch (error) {
     console.error("Booking database connection failed:", error);
-    response.status(500).json({
+    const isConfigurationError =
+      error instanceof Error && error.message.includes("Missing Supabase environment variable");
+    response.status(isConfigurationError ? 503 : 500).json({
       ok: false,
-      message: "We couldn't save your request. Please try again or call us directly.",
+      message: "Online booking is temporarily unavailable.",
     });
     return;
   }

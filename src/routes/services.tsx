@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { PageHero, SectionTitle, CtaBanner } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowRight, HennaHandIcon, GraduationIcon } from "@/components/site/icons";
-import { SERVICES, TESTIMONIALS } from "@/lib/site";
+import { BRIDAL_BOOKING_SERVICES, SERVICES, TESTIMONIALS } from "@/lib/site";
 
 import serviceHairDown from "@/assets/service-hair-down.jpg";
 import serviceHairUp from "@/assets/service-hair-up.jpg";
@@ -23,6 +23,14 @@ const SERVICE_IMAGES: Record<string, string | undefined> = {
   "bridal-package": galleryBunVeil,
   "wedding-trial": galleryVeil,
   "groom-touchup": galleryIndian,
+};
+
+const BOOKING_SERVICE_BY_SLUG: Record<string, string> = {
+  "hair-down": BRIDAL_BOOKING_SERVICES.hairDown,
+  "hair-up": BRIDAL_BOOKING_SERVICES.hairUp,
+  "makeup-only": BRIDAL_BOOKING_SERVICES.makeupOnly,
+  "hairstyle-only": BRIDAL_BOOKING_SERVICES.hairstyleOnly,
+  "wedding-trial": BRIDAL_BOOKING_SERVICES.bridalTrial,
 };
 
 const EXTRAS = [
@@ -56,16 +64,18 @@ export default function Services() {
           <div className="mx-auto max-w-5xl space-y-5">
             {SERVICES.map((s, i) => {
               const img = SERVICE_IMAGES[s.slug];
+              const bookingService = BOOKING_SERVICE_BY_SLUG[s.slug];
               return (
                 <Reveal key={s.slug} delay={Math.min(i * 60, 240)}>
                   <article className="glass-panel grid h-full overflow-hidden sm:grid-cols-[240px_1fr]">
                     <div className="relative h-44 sm:h-auto">
-                      <img
+                        <img
                         src={img}
                         alt={s.title}
                         width={1024}
                         height={1024}
                         loading="lazy"
+                          decoding="async"
                         className="absolute inset-0 h-full w-full object-cover object-top"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/25 to-transparent sm:bg-gradient-to-r" />
@@ -82,7 +92,11 @@ export default function Services() {
                       </p>
                       <div className="mt-5 flex items-center justify-between gap-3 sm:justify-start sm:gap-6">
                         <Link
-                          to="/book"
+                          to={
+                            bookingService
+                              ? `/book?service=${encodeURIComponent(bookingService)}`
+                              : "/book"
+                          }
                           className="btn-primary !px-5 !py-2.5 !text-[0.85rem]"
                         >
                           Book This Look

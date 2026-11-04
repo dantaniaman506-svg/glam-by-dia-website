@@ -3,23 +3,19 @@ import priceHairstyleOnly from "@/assets/price-hairstyle-only.jpg";
 import priceMakeupHairDown from "@/assets/price-makeup-hair-down.jpg";
 import priceMakeupHairUp from "@/assets/price-makeup-hair-up.jpg";
 import priceMakeupOnly from "@/assets/price-makeup-only.jpg";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BookingForm, type BookingFormConfig } from "@/components/site/BookingForm";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { PageHero, SectionTitle } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
+import { BRIDAL_BOOKING_SERVICES } from "@/lib/site";
 
 const config: BookingFormConfig = {
   formType: "beauty",
-  services: [
-    "Makeup with hair down ($170)",
-    "Makeup with hair up ($210)",
-    "Makeup only ($130)",
-    "Hairstyle only ($90)",
-    "Bridal Trial ($150)",
-  ],
+  services: Object.values(BRIDAL_BOOKING_SERVICES),
   skinQuestion: true,
 };
 
@@ -39,6 +35,32 @@ const faqs = [
 ];
 
 export default function Book() {
+  const [searchParams] = useSearchParams();
+  const requestedService = searchParams.get("service");
+  const [selectedService, setSelectedService] = useState<string>();
+
+  useEffect(() => {
+    if (!requestedService || !config.services.includes(requestedService)) return;
+
+    setSelectedService(requestedService);
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("booking-request-form")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [requestedService]);
+
+  const chooseService = (service: string) => {
+    setSelectedService(service);
+    document.getElementById("booking-request-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div className="min-h-screen pb-6">
       <Header />
@@ -51,22 +73,28 @@ export default function Book() {
                 <div className="glass-panel p-6 sm:p-7">
                   <p className="eyebrow">Bridal beauty pricing</p>
                   <ul className="mt-4 grid gap-2.5 text-sm">
-                    {config.services.map((service, index) => {
+                    {config.services.map((service) => {
                       const [name, price] = service.split(" ($");
-                      const visual = pricingVisuals[index];
+                      const visual = pricingVisuals[config.services.indexOf(service)];
                       if (!visual) return null;
 
                       return (
-                        <li
-                          key={service}
-                          className="group flex min-h-[76px] items-center gap-2.5 rounded-2xl border border-primary/10 bg-white/65 p-2 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md sm:gap-3"
-                        >
+                        <li key={service}>
+                          <button
+                            type="button"
+                            aria-label={`Choose ${service}`}
+                            aria-pressed={selectedService === service}
+                            data-selected={selectedService === service}
+                            onClick={() => chooseService(service)}
+                            className="group flex min-h-[76px] w-full items-center gap-2.5 rounded-2xl border border-primary/10 bg-white/65 p-2 text-left shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary data-[selected=true]:border-primary/40 data-[selected=true]:bg-secondary/45 sm:gap-3"
+                          >
                           <img
                             src={visual.image}
                             alt={visual.alt}
                             width={96}
                             height={80}
                             loading="lazy"
+                            decoding="async"
                             className="h-16 w-[4.5rem] shrink-0 rounded-xl object-cover object-center sm:h-[4.25rem] sm:w-20"
                           />
                           <span className="min-w-0 flex-1">
@@ -74,6 +102,7 @@ export default function Book() {
                             <span className="mt-1 block text-[0.64rem] leading-tight text-muted-foreground sm:text-xs">{visual.detail}</span>
                           </span>
                           <span className="shrink-0 rounded-full bg-blush px-2.5 py-1 font-display text-sm font-semibold text-primary sm:px-3">${price?.replace(")", "")}</span>
+                          </button>
                         </li>
                       );
                     })}
@@ -86,7 +115,13 @@ export default function Book() {
                 </div>
               </div>
             </Reveal>
-            <Reveal delay={100}><BookingForm config={config} /></Reveal>
+            <Reveal delay={100}>
+              <BookingForm
+                config={config}
+                selectedService={selectedService}
+                onServiceChange={(service) => setSelectedService(service || undefined)}
+              />
+            </Reveal>
           </div>
         </section>
         <section className="px-3 pt-6 sm:px-6">

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { submitBooking, type BookingInput } from "@/lib/booking.functions";
 import { HeartIcon } from "@/components/site/icons";
+import { SITE } from "@/lib/site";
 
 type Pill = { value: string; label: string };
 
@@ -68,11 +69,27 @@ function Pills({
   );
 }
 
-export function BookingForm({ config }: { config: BookingFormConfig }) {
-  const [state, setState] = useState<Partial<BookingInput>>({});
+export function BookingForm({
+  config,
+  selectedService,
+  onServiceChange,
+}: {
+  config: BookingFormConfig;
+  selectedService?: string | undefined;
+  onServiceChange?: (service: string) => void;
+}) {
+  const [state, setState] = useState<Partial<BookingInput>>(() =>
+    selectedService ? { service: selectedService } : {},
+  );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    if (selectedService && config.services.includes(selectedService)) {
+      setState((current) => ({ ...current, service: selectedService }));
+    }
+  }, [config.services, selectedService]);
 
   const set = (patch: Partial<BookingInput>) => setState((s) => ({ ...s, ...patch }));
 
@@ -143,7 +160,11 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
   }
 
   return (
-    <form onSubmit={submit} className="glass-panel mx-auto max-w-2xl px-5 py-8 sm:px-10 sm:py-10">
+    <form
+      id="booking-request-form"
+      onSubmit={submit}
+      className="glass-panel mx-auto max-w-2xl scroll-mt-28 px-5 py-8 sm:px-10 sm:py-10"
+    >
       {config.customerTypes ? (
         <div className="mb-5">
           <span className={labelCls}>Who is this for?</span>
@@ -160,7 +181,10 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
           <select
             className="field-select"
             value={state.service ?? ""}
-            onChange={(e) => set({ service: e.target.value })}
+            onChange={(e) => {
+              set({ service: e.target.value });
+              onServiceChange?.(e.target.value);
+            }}
           >
             <option value="">Select a service…</option>
             {config.services.map((s) => (
@@ -315,8 +339,18 @@ export function BookingForm({ config }: { config: BookingFormConfig }) {
       </label>
 
       {error ? (
-        <p className="mb-4 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-          {error}
+        <p
+          role="alert"
+          className="mb-4 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
+          {error}{" "}
+          <a className="font-semibold underline underline-offset-2" href={SITE.phoneHref}>
+            Call {SITE.phoneDisplay}
+          </a>{" "}
+          or{" "}
+          <a className="font-semibold underline underline-offset-2" href={SITE.emailHref}>
+            email Dia
+          </a>
         </p>
       ) : null}
 

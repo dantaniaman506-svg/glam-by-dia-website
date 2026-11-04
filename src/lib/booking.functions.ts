@@ -19,7 +19,7 @@ export async function submitBooking(data: BookingInput): Promise<
   if (!response.ok || !result?.ok) {
     return {
       ok: false,
-      message: result?.message ?? "We couldn't save your request. Please try again or call us.",
+      message: result?.message ?? "We couldn't save your request. Please try again.",
     };
   }
 

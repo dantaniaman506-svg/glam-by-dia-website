@@ -98,7 +98,7 @@
   z-index: -10;
   pointer-events: none;
   background-color: var(--color-background);
-  background-image: url("/images/background-mobile.png");
+  background-image: url("/images/background-mobile.webp");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -106,8 +106,29 @@
 
 @media (min-width: 768px) {
   .site-bg {
-    background-image: url("/images/background-desktop.png");
+    background-image: url("/images/background-desktop.webp");
     background-attachment: fixed;
+  }
+}
+
+/* Keep the hero image visible on mobile without losing text contrast. */
+.hero-image-overlay {
+  background-image: linear-gradient(
+    to right,
+    oklch(0.975 0.02 15 / 0.97),
+    oklch(0.975 0.02 15 / 0.75),
+    transparent
+  );
+}
+
+@media (max-width: 639px) {
+  .hero-image-overlay {
+    background-image: linear-gradient(
+      90deg,
+      oklch(0.975 0.02 15 / 0.5) 0%,
+      oklch(0.975 0.02 15 / 0.26) 52%,
+      oklch(0.975 0.02 15 / 0.12) 100%
+    );
   }
 }
 

@@ -23,12 +23,13 @@ const PAGE_TITLES: Record<string, string> = {
 };
 
 function RouteEffects() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   useEffect(() => {
     document.title = PAGE_TITLES[pathname] ?? "Glam by Dia | Melbourne Bridal Artist";
+    if (pathname === "/book" && new URLSearchParams(search).has("service")) return;
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
+  }, [pathname, search]);
 
   return null;
 }

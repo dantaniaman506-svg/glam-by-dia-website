@@ -24,6 +24,14 @@ export const NAV_LINKS = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+export const BRIDAL_BOOKING_SERVICES = {
+  hairDown: "Makeup with hair down ($170)",
+  hairUp: "Makeup with hair up ($210)",
+  makeupOnly: "Makeup only ($130)",
+  hairstyleOnly: "Hairstyle only ($90)",
+  bridalTrial: "Bridal Trial ($150)",
+} as const;
+
 export const SERVICES = [
   {
     slug: "hair-down",
@@ -42,14 +50,14 @@ export const SERVICES = [
   {
     slug: "makeup-only",
     title: "Makeup only",
-    price: "$100",
+    price: "$130",
     description:
       "A flawless, long-lasting makeup look tailored to your features — from natural and soft glam to full glam.",
   },
   {
     slug: "hairstyle-only",
     title: "Hairstyle only",
-    price: "$100",
+    price: "$90",
     description:
       "Bridal-inspired hairstyling — elegant updos, soft waves and everything in between, finished to last all day.",
   },
@@ -63,7 +71,7 @@ export const SERVICES = [
   {
     slug: "wedding-trial",
     title: "Wedding Trial (Hair and Makeup)",
-    price: "$200",
+    price: "$150",
     description:
       "Try your complete wedding look before the big day, so you walk down the aisle feeling completely confident.",
   },

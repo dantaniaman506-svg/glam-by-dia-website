@@ -5,46 +5,42 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
   ArrowRight,
-  BunUpdoIcon,
-  BrushIcon,
   CarIcon,
   ChevronLeft,
   ChevronRight,
-  FaceWavesIcon,
   HeartIcon,
   PinIcon,
   ShieldIcon,
-  SideProfileIcon,
 } from "@/components/site/icons";
-import { SITE, TESTIMONIALS } from "@/lib/site";
+import { BRIDAL_BOOKING_SERVICES, SITE, TESTIMONIALS } from "@/lib/site";
 
-import heroBride from "@/assets/hero-bride.jpg";
+import heroBride from "@/assets/hero-bride.webp";
 import aboutBride from "@/assets/about-bride.jpg";
-import serviceHairDown from "@/assets/service-hair-down.jpg";
-import serviceHairUp from "@/assets/service-hair-up.jpg";
-import serviceMakeupOnly from "@/assets/service-makeup-only.jpg";
-import serviceHairstyleOnly from "@/assets/service-hairstyle-only.jpg";
+import serviceHairDown from "@/assets/service-hair-down.webp";
+import serviceHairUp from "@/assets/service-hair-up.webp";
+import serviceMakeupOnly from "@/assets/service-makeup-only.webp";
+import serviceHairstyleOnly from "@/assets/service-hairstyle-only.webp";
 import galleryIndian from "@/assets/gallery-indian-bride.jpg";
 import galleryVeil from "@/assets/gallery-veil-bride.jpg";
 import galleryBunVeil from "@/assets/gallery-bun-veil.jpg";
 import galleryFlowerCrown from "@/assets/gallery-flower-crown.jpg";
-import bridalPortrait from "@/assets/bridal-portrait-open-hair.jpg";
-import brideVeil from "@/assets/bride-veil-portrait.jpg";
+import bridalPortrait from "@/assets/bridal-portrait-open-hair.webp";
+import brideVeil from "@/assets/bride-veil-portrait.webp";
 
 const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
 
 const QUICK_SERVICES = [
-  { title: "Makeup with hair down", Icon: FaceWavesIcon, to: "/services" },
-  { title: "Makeup with hair up", Icon: BunUpdoIcon, to: "/services" },
-  { title: "Makeup only", Icon: BrushIcon, to: "/services" },
-  { title: "Hairstyle only", Icon: SideProfileIcon, to: "/services" },
+  { title: "Makeup with hair down", img: serviceHairDown, service: BRIDAL_BOOKING_SERVICES.hairDown },
+  { title: "Makeup with hair up", img: serviceHairUp, service: BRIDAL_BOOKING_SERVICES.hairUp },
+  { title: "Makeup only", img: serviceMakeupOnly, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
+  { title: "Hairstyle only", img: serviceHairstyleOnly, service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
 ];
 
 const SERVICE_CARDS = [
-  { title: "Makeup with hair down", img: serviceHairDown, Icon: FaceWavesIcon },
-  { title: "Makeup with hair up", img: serviceHairUp, Icon: BunUpdoIcon },
-  { title: "Makeup only", img: serviceMakeupOnly, Icon: BrushIcon },
-  { title: "Hairstyle only", img: serviceHairstyleOnly, Icon: SideProfileIcon },
+  { title: "Makeup with hair down", img: serviceHairDown, service: BRIDAL_BOOKING_SERVICES.hairDown },
+  { title: "Makeup with hair up", img: serviceHairUp, service: BRIDAL_BOOKING_SERVICES.hairUp },
+  { title: "Makeup only", img: serviceMakeupOnly, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
+  { title: "Hairstyle only", img: serviceHairstyleOnly, service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
 ];
 
 const GALLERY_PREVIEW = [
@@ -94,18 +90,21 @@ function Hero() {
     <section className="px-3 pt-4 sm:px-6">
       <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] shadow-[0_24px_60px_-30px_rgba(150,80,110,0.45)] ring-1 ring-white/60">
         {/* photo */}
-        <div className="absolute inset-y-0 right-0 w-full sm:w-[62%]">
+        <div className="absolute inset-y-0 right-0 w-[88%] sm:w-[62%]">
           {HERO_SLIDES.map((src, i) => (
             <img
               key={src}
               src={src}
-              alt="Glam by Dia bridal look"
+              alt={i === slide ? "Glam by Dia bridal look" : ""}
               width={1024}
               height={1024}
+              loading={i === slide ? "eager" : "lazy"}
+              fetchPriority={i === slide ? "high" : "low"}
+              decoding="async"
               className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.975_0.02_15/0.97)] via-[oklch(0.975_0.02_15/0.75)] to-transparent max-sm:bg-[oklch(0.975_0.02_15/0.55)]" />
+          <div className="hero-image-overlay absolute inset-0" />
           <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[oklch(0.973_0.015_20)] to-transparent max-sm:hidden" />
         </div>
 
@@ -148,17 +147,23 @@ function QuickServiceStrip() {
   return (
     <section className="px-3 pt-8 sm:px-6">
       <div className="glass-panel mx-auto grid max-w-5xl grid-cols-2 gap-y-6 px-4 py-6 sm:grid-cols-4 sm:px-6 sm:py-7">
-        {QUICK_SERVICES.map(({ title, Icon, to }, i) => (
+        {QUICK_SERVICES.map(({ title, img, service }, i) => (
           <Link
             key={title}
-            to={to}
+            to={`/book?service=${encodeURIComponent(service)}`}
             className={`group flex flex-col items-center gap-2.5 px-2 text-center ${
               i % 2 === 0 ? "border-r border-primary/15 sm:border-r" : "sm:border-r sm:border-primary/15 last:border-r-0"
             } ${i < 2 ? "max-sm:border-b max-sm:border-primary/15 max-sm:pb-5" : ""} ${i === 1 ? "max-sm:border-r-0" : ""}`}
           >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-blush text-primary transition-transform group-hover:scale-105">
-              <Icon />
-            </span>
+            <img
+              src={img}
+              alt=""
+              width={128}
+              height={128}
+              loading="lazy"
+              decoding="async"
+              className="h-16 w-16 rounded-full object-cover shadow-sm ring-2 ring-white transition-transform group-hover:scale-105"
+            />
             <span className="text-[0.88rem] font-medium leading-snug text-foreground/90">{title}</span>
             <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
           </Link>
@@ -220,19 +225,14 @@ function ServicesSection() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="Our Services" title="Bridal Beauty Services" />
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
-          {SERVICE_CARDS.map(({ title, img, Icon }) => (
+          {SERVICE_CARDS.map(({ title, img, service }) => (
             <Link
               key={title}
-              to="/services"
+              to={`/book?service=${encodeURIComponent(service)}`}
               className="group glass-panel overflow-hidden !rounded-3xl pb-5 transition-transform hover:-translate-y-1"
             >
-              <img src={img} alt={title} width={1024} height={1024} loading="lazy" className="h-36 w-full object-cover object-top sm:h-44" />
-              <div className="relative -mt-7 flex justify-center">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-blush text-primary ring-4 ring-card">
-                  <Icon className="h-7 w-7" />
-                </span>
-              </div>
-              <p className="mt-2.5 px-3 text-center text-[0.88rem] font-medium leading-snug text-foreground/90">{title}</p>
+              <img src={img} alt={title} width={1024} height={1024} loading="lazy" decoding="async" className="h-36 w-full object-cover object-top sm:h-44" />
+              <p className="mt-4 px-3 text-center text-[0.88rem] font-medium leading-snug text-foreground/90">{title}</p>
               <div className="mt-3 flex justify-center">
                 <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
               </div>
