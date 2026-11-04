@@ -98,15 +98,34 @@ function Hero() {
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setSlide((s) => (s + 1) % HERO_SLIDES.length), 5000);
-    return () => clearInterval(t);
+    const mobile = window.matchMedia("(max-width: 639px)");
+    let timer: number | undefined;
+
+    const syncCarousel = () => {
+      if (mobile.matches) {
+        if (timer !== undefined) window.clearInterval(timer);
+        timer = undefined;
+        setSlide(0);
+        return;
+      }
+      if (timer === undefined) {
+        timer = window.setInterval(() => setSlide((current) => (current + 1) % HERO_SLIDES.length), 5000);
+      }
+    };
+
+    syncCarousel();
+    mobile.addEventListener("change", syncCarousel);
+    return () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      mobile.removeEventListener("change", syncCarousel);
+    };
   }, []);
 
   return (
     <section className="px-3 pt-4 sm:px-6">
-      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] shadow-[0_24px_60px_-30px_rgba(150,80,110,0.45)] ring-1 ring-white/60">
+      <div className="relative mx-auto min-h-[560px] max-w-5xl overflow-hidden rounded-[2rem] shadow-[0_24px_60px_-30px_rgba(150,80,110,0.45)] ring-1 ring-white/60 sm:min-h-[480px]">
         {/* photo */}
-        <div className="absolute inset-y-0 right-0 w-[88%] sm:w-[62%]">
+        <div className="absolute inset-y-0 right-0 w-[92%] sm:w-[62%]">
           {HERO_SLIDES.map((src, i) => (
             <img
               key={src}
@@ -117,17 +136,17 @@ function Hero() {
               loading={i === slide ? "eager" : "lazy"}
               fetchPriority={i === slide ? "high" : "low"}
               decoding="async"
-              className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-0 h-full w-full object-cover object-[70%_center] transition-opacity duration-1000 sm:object-top ${i > 0 ? "max-sm:hidden" : ""} ${i === slide ? "opacity-100" : "opacity-0"}`}
             />
           ))}
           <div className="hero-image-overlay absolute inset-0" />
-          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[oklch(0.973_0.015_20)] to-transparent max-sm:hidden" />
+          <div className="absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-[oklch(0.973_0.015_20)] to-transparent sm:block" />
         </div>
 
         {/* copy */}
-        <div className="relative px-6 py-14 sm:max-w-[55%] sm:px-12 sm:py-24">
+        <div className="relative z-10 flex min-h-[560px] w-[68%] flex-col justify-center px-5 py-10 sm:min-h-0 sm:max-w-[55%] sm:px-12 sm:py-24">
           <p className="eyebrow">Mobile Bridal Hair &amp; Makeup Artist</p>
-          <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3">
+          <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3 max-sm:flex-col max-sm:items-start max-sm:gap-0">
             <span className="heading-display text-5xl sm:text-7xl">Glam</span>
             <span className="text-script text-5xl sm:text-6xl">by Dia</span>
           </h1>
@@ -135,14 +154,14 @@ function Hero() {
           <p className="mt-4 max-w-xs text-sm text-foreground/85 sm:max-w-none sm:text-base">
             Specialised in Bridal. Studio in Clayton South.
           </p>
-          <Link to="/book" className="btn-primary mt-7">
+          <Link to="/book" className="btn-primary mt-7 self-start">
             Book Now
             <ArrowRight />
           </Link>
         </div>
 
         {/* dots */}
-        <div className="absolute bottom-4 right-6 flex gap-2 sm:right-10">
+        <div className="absolute bottom-4 right-6 hidden gap-2 sm:flex sm:right-10">
           {HERO_SLIDES.map((_, i) => (
             <button
               key={i}
