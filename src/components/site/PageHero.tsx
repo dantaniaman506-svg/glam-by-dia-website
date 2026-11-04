@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 /** Shared soft hero banner for inner pages. */
@@ -76,9 +77,9 @@ export function CtaBanner({ children }: { children?: ReactNode }) {
           {children ?? "We'd love to be part of your day — check our availability and book your date."}
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <a href="/book" className="btn-primary">
+          <Link to="/book" className="btn-primary">
             Book Your Appointment
-          </a>
+          </Link>
           <a href="tel:+61478666466" className="btn-outline">
             Call 0478 666 466
           </a>
