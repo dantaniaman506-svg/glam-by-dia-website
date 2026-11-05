@@ -18,16 +18,20 @@ export function createBookingEmailDraft(data: BookingInput): string {
         ? "Studio in Clayton South"
         : data.locationPreference;
 
-  const details = [
+  const requestDetails: Array<[string, string | undefined]> = [
+    ["Request type", FORM_LABELS[data.formType]],
+    ["Service", data.service],
+    ["Preferred date", data.preferredDate],
+    ["Preferred time", data.preferredTime],
+    ["Location", location],
+  ];
+  const customerDetails: Array<[string, string | undefined]> = [
     ["Name", data.fullName],
     ["Email", data.email],
     ["Phone", data.phone],
     ["Preferred contact method", data.contactMethod],
-    ["Request type", FORM_LABELS[data.formType]],
-    ["Service selected", data.service],
-    ["Preferred date", data.preferredDate],
-    ["Preferred time", data.preferredTime],
-    ["Location", location],
+  ];
+  const additionalDetails: Array<[string, string | undefined]> = [
     [
       "Skin allergies or conditions",
       data.hasSkinConditions === undefined
@@ -37,25 +41,31 @@ export function createBookingEmailDraft(data: BookingInput): string {
           : "No",
     ],
     ["Skills to learn", data.skillsRequested],
-    ["Notes or special requests", data.notes],
-  ]
-    .filter(([, value]) => value?.trim())
-    .map(([label, value]) => `${label}: ${value}`);
+    ["Message or special requests", data.notes],
+  ];
+  const formatSection = (title: string, rows: Array<[string, string | undefined]>) => [
+    title,
+    ...rows
+      .filter(([, value]) => value?.trim())
+      .map(([label, value]) => `${label}: ${value}`),
+  ];
 
   const subject =
-    data.formType === "message"
-      ? `Website enquiry from ${data.fullName}`
-      : `Booking request from ${data.fullName} — ${data.service || FORM_LABELS[data.formType]}`;
+    `Glam by Dia — ${data.formType === "message" ? "Contact enquiry" : "Booking request"} — ${data.fullName}`;
   const body = [
     "Hello Dia,",
     "",
-    "I'd like to enquire about the following:",
+    "I'd like to enquire about a Glam by Dia service.",
     "",
-    ...details,
+    ...formatSection("REQUEST DETAILS", requestDetails),
+    "",
+    ...formatSection("CUSTOMER DETAILS", customerDetails),
+    "",
+    ...formatSection("ADDITIONAL INFORMATION", additionalDetails),
     "",
     "Please contact me to discuss availability and next steps.",
-  ].join("\n");
-  const params = new URLSearchParams({ subject, body });
+  ].join("\r\n");
+  const params = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  return `mailto:${SITE.ownerEmail}?${params.toString()}`;
+  return `mailto:${SITE.ownerEmail}?${params}`;
 }

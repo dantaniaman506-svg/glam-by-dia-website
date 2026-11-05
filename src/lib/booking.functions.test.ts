@@ -25,6 +25,10 @@ describe("createBookingEmailDraft", () => {
     expect(draft.searchParams.get("body")).toContain("Makeup with hair up");
     expect(draft.searchParams.get("body")).toContain("Sensitive skin");
     expect(draft.searchParams.get("body")).toContain("Clayton South");
+    expect(draft.searchParams.get("body")).toContain("REQUEST DETAILS\r\nRequest type:");
+    expect(draft.searchParams.get("body")).toContain("\r\n\r\nCUSTOMER DETAILS");
+    expect(draft.search).not.toContain("+");
+    expect(draft.search).toContain("%20");
   });
 
   it("creates a contact enquiry draft with the message", () => {
@@ -36,7 +40,8 @@ describe("createBookingEmailDraft", () => {
       notes: "I would like to ask about availability.",
     }));
 
-    expect(draft.searchParams.get("subject")).toContain("Website enquiry");
+    expect(draft.searchParams.get("subject")).toContain("Contact enquiry");
     expect(draft.searchParams.get("body")).toContain("I would like to ask about availability.");
+    expect(draft.searchParams.get("body")).toContain("ADDITIONAL INFORMATION");
   });
 });
