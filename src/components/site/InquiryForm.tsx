@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { submitBooking, type BookingInput } from "@/lib/booking.functions";
+import { createBookingEmailDraft, type BookingInput } from "@/lib/booking.functions";
 
 const inputClass = "field-input";
 
@@ -8,6 +8,7 @@ export function InquiryForm() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const [emailDraftUrl, setEmailDraftUrl] = useState("");
 
   const update = (values: Partial<BookingInput>) => setForm((current) => ({ ...current, ...values }));
 
@@ -20,7 +21,7 @@ export function InquiryForm() {
     }
     setBusy(true);
     try {
-      const result = await submitBooking({
+      const draftUrl = createBookingEmailDraft({
         formType: "message",
         fullName: form.fullName,
         phone: form.phone,
@@ -28,10 +29,9 @@ export function InquiryForm() {
         contactMethod: form.contactMethod,
         notes: form.notes,
       });
-      if (result.ok) setSent(true);
-      else setError(result.message);
-    } catch {
-      setError("We couldn't send your message. Please call or email Dia directly.");
+      setEmailDraftUrl(draftUrl);
+      setSent(true);
+      window.location.href = draftUrl;
     } finally {
       setBusy(false);
     }
@@ -40,10 +40,14 @@ export function InquiryForm() {
   if (sent) {
     return (
       <div className="glass-panel px-6 py-10 text-center sm:px-9">
-        <h3 className="heading-display text-2xl">Your message is on its way</h3>
+        <h3 className="heading-display text-2xl">Your email draft is ready</h3>
         <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          Thank you for reaching out. Dia will get back to you within 24–48 hours.
+          Check your email app and tap Send to deliver your enquiry. The website cannot confirm
+          delivery until you send it. If no app opened, use the button below.
         </p>
+        <a className="btn-primary mt-5 inline-flex min-h-11 items-center justify-center px-6" href={emailDraftUrl}>
+          Open email draft
+        </a>
       </div>
     );
   }
@@ -80,7 +84,7 @@ export function InquiryForm() {
       </div>
       {error ? <p role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">{error}</p> : null}
       <button type="submit" disabled={busy} className="btn-primary min-h-11 w-full disabled:opacity-60">
-        {busy ? "Sending…" : "Send your message"}
+        {busy ? "Opening email…" : "Continue to email"}
       </button>
       <p className="text-center text-xs text-muted-foreground">Your details are only used to respond to your enquiry.</p>
     </form>

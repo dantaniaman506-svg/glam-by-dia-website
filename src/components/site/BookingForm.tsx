@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { submitBooking, type BookingInput } from "@/lib/booking.functions";
+import { createBookingEmailDraft, type BookingInput } from "@/lib/booking.functions";
 import { HeartIcon } from "@/components/site/icons";
 import { SITE } from "@/lib/site";
 
@@ -84,6 +84,7 @@ export function BookingForm({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [emailDraftUrl, setEmailDraftUrl] = useState("");
 
   useEffect(() => {
     if (selectedService && config.services.includes(selectedService)) {
@@ -106,7 +107,7 @@ export function BookingForm({
     }
     setBusy(true);
     try {
-      const result = await submitBooking({
+      const data: BookingInput = {
         formType: config.formType,
         service: state.service,
         customerType: state.customerType,
@@ -124,20 +125,12 @@ export function BookingForm({
         agreedTerms: state.agreedTerms,
         wantsPromotions: state.wantsPromotions,
         skillsRequested: state.skillsRequested,
-      });
-      if (!result.ok) {
-        setError(result.message);
-      } else {
-        setDone(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "";
-      setError(
-        /valid|expected/i.test(msg)
-          ? "Please check the highlighted details and try again."
-          : "Something went wrong sending your request. Please try again, or call us directly.",
-      );
+      };
+      const draftUrl = createBookingEmailDraft(data);
+      setEmailDraftUrl(draftUrl);
+      setDone(true);
+      window.location.href = draftUrl;
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setBusy(false);
     }
@@ -149,11 +142,16 @@ export function BookingForm({
         <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blush text-primary">
           <HeartIcon className="h-9 w-9" />
         </span>
-        <h2 className="heading-display mt-5 text-3xl">Thank you!</h2>
-        <p className="text-script mt-1 text-3xl">Your request is in.</p>
+        <h2 className="heading-display mt-5 text-3xl">Your email draft is ready</h2>
         <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-          We've received your request and will get back to you very soon to confirm your date and
-          details. If it's urgent, call us on <a className="font-medium text-primary" href="tel:+61478666466">0478 666 466</a>.
+          Your email app should open with your request addressed to Dia. Review it, then tap Send.
+          If it didn't open, use the button below. Your request is not sent until you send that email.
+        </p>
+        <a className="btn-primary mt-6 inline-flex min-h-11 items-center justify-center px-6" href={emailDraftUrl}>
+          Open email draft
+        </a>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Need help? Call <a className="font-medium text-primary" href="tel:+61478666466">0478 666 466</a>.
         </p>
       </div>
     );

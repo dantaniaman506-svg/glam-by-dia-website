@@ -1,3 +1,4 @@
 - [Vite watch scope](vite-watch-scope.md) — exclude Replit caches, local skills, and uploaded assets from workspace-root file watching to avoid EMFILE.
 - [GitHub sync](github-sync.md) — after verified project changes, push them to the configured GitHub main branch.
 - [Brand assets](brand-assets.md) — use Dia's supplied logo and cropped illustrations in the home service shortcuts, not photos.
+- [Website email submission](email-submission.md) — keep forms as prefilled email drafts; don't add database/API sending unless the user changes this requirement.
