@@ -10,7 +10,6 @@ export const SITE = {
   address: "52 Oakes Avenue, Clayton South, 3169",
   instagram: "https://www.instagram.com/glam_bydia",
   instagramHandle: "www.instagram.com/glam_bydia",
-  ownerEmail: "dantaniaman506@gmail.com",
 } as const;
 
 export const NAV_LINKS = [
@@ -133,15 +132,18 @@ export const CLASS_MODULES = [
 export const PROCESS_STEPS = [
   {
     title: "Enquiry",
-    description: "Send your date, venue and the looks you love — we reply with availability and a quote.",
+    description:
+      "Send your date, venue and the looks you love — we reply with availability and a quote.",
   },
   {
     title: "Trial & Planning",
-    description: "We design your look together at a relaxed trial, perfecting every detail before the big day.",
+    description:
+      "We design your look together at a relaxed trial, perfecting every detail before the big day.",
   },
   {
     title: "Your Day",
-    description: "We arrive at your home, hotel or venue early, calm and fully prepared — you just enjoy it.",
+    description:
+      "We arrive at your home, hotel or venue early, calm and fully prepared — you just enjoy it.",
   },
 ] as const;
 

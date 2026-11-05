@@ -30,11 +30,11 @@ describe("App routing", () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(
-      screen.getByRole("button", { name: "Choose Makeup with hair down ($170)" }),
-    );
+    fireEvent.click(screen.getByRole("button", { name: "Choose Makeup with hair down ($170)" }));
 
-    expect(screen.getByRole("combobox")).toHaveValue("Makeup with hair down ($170)");
+    expect(screen.getByRole("combobox", { name: "Which service would you like?" })).toHaveValue(
+      "Makeup with hair down ($170)",
+    );
     expect(scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",
       block: "start",
@@ -55,10 +55,12 @@ describe("App routing", () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     const scrollIntoView = vi.fn();
     const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
-    const requestAnimationFrame = vi.spyOn(window, "requestAnimationFrame").mockImplementation((callback) => {
-      callback(0);
-      return 1;
-    });
+    const requestAnimationFrame = vi
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((callback) => {
+        callback(0);
+        return 1;
+      });
     Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
       configurable: true,
       value: scrollIntoView,
@@ -66,16 +68,16 @@ describe("App routing", () => {
 
     render(
       <MemoryRouter
-        initialEntries={[
-          `/book?service=${encodeURIComponent("Makeup with hair up ($210)")}`,
-        ]}
+        initialEntries={[`/book?service=${encodeURIComponent("Makeup with hair up ($210)")}`]}
       >
         <AppRoutes />
       </MemoryRouter>,
     );
 
     await waitFor(() =>
-      expect(screen.getByRole("combobox")).toHaveValue("Makeup with hair up ($210)"),
+      expect(screen.getByRole("combobox", { name: "Which service would you like?" })).toHaveValue(
+        "Makeup with hair up ($210)",
+      ),
     );
     expect(scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",

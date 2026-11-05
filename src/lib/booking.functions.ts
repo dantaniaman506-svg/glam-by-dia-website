@@ -1,71 +1,47 @@
 import type { BookingInput } from "@/lib/booking.schema";
-import { SITE } from "@/lib/site";
 
 export type { BookingInput } from "@/lib/booking.schema";
 
-const FORM_LABELS: Record<BookingInput["formType"], string> = {
-  beauty: "Bridal Makeup & Hair",
-  henna: "Henna / Mehndi",
-  class: "Self Makeup Class",
-  message: "Contact Enquiry",
-};
+type BookingResult =
+  { ok: true; emailSent: boolean; message?: string } | { ok: false; message: string };
 
-export function createBookingEmailDraft(data: BookingInput): string {
-  const location =
-    data.locationPreference === "Mobile"
-      ? `Mobile at ${data.locationAddress || "address to be confirmed"}`
-      : data.locationPreference === "Studio"
-        ? "Studio in Clayton South"
-        : data.locationPreference;
+export async function submitBooking(data: BookingInput): Promise<BookingResult> {
+  const apiBase = (import.meta.env["VITE_BOOKING_API_BASE_URL"] as string | undefined)?.replace(
+    /\/+$/,
+    "",
+  );
+  const endpoint = `${apiBase ?? ""}/api/booking`;
 
-  const requestDetails: Array<[string, string | undefined]> = [
-    ["Request type", FORM_LABELS[data.formType]],
-    ["Service", data.service],
-    ["Preferred date", data.preferredDate],
-    ["Preferred time", data.preferredTime],
-    ["Location", location],
-  ];
-  const customerDetails: Array<[string, string | undefined]> = [
-    ["Name", data.fullName],
-    ["Email", data.email],
-    ["Phone", data.phone],
-    ["Preferred contact method", data.contactMethod],
-  ];
-  const additionalDetails: Array<[string, string | undefined]> = [
-    [
-      "Skin allergies or conditions",
-      data.hasSkinConditions === undefined
-        ? undefined
-        : data.hasSkinConditions
-          ? data.skinDetails || "Yes"
-          : "No",
-    ],
-    ["Skills to learn", data.skillsRequested],
-    ["Message or special requests", data.notes],
-  ];
-  const formatSection = (title: string, rows: Array<[string, string | undefined]>) => [
-    title,
-    ...rows
-      .filter(([, value]) => value?.trim())
-      .map(([label, value]) => `${label}: ${value}`),
-  ];
+  let response: Response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    return {
+      ok: false,
+      message: "We couldn't reach the booking service. Please try again or call Dia.",
+    };
+  }
 
-  const subject =
-    `Glam by Dia — ${data.formType === "message" ? "Contact enquiry" : "Booking request"} — ${data.fullName}`;
-  const body = [
-    "Hello Dia,",
-    "",
-    "I'd like to enquire about a Glam by Dia service.",
-    "",
-    ...formatSection("REQUEST DETAILS", requestDetails),
-    "",
-    ...formatSection("CUSTOMER DETAILS", customerDetails),
-    "",
-    ...formatSection("ADDITIONAL INFORMATION", additionalDetails),
-    "",
-    "Please contact me to discuss availability and next steps.",
-  ].join("\r\n");
-  const params = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const result = (await response.json().catch(() => null)) as {
+    ok?: boolean;
+    emailSent?: boolean;
+    message?: string;
+  } | null;
 
-  return `mailto:${SITE.ownerEmail}?${params}`;
+  if (!response.ok || !result?.ok) {
+    return {
+      ok: false,
+      message: result?.message ?? "We couldn't save your request. Please try again or call Dia.",
+    };
+  }
+
+  return {
+    ok: true,
+    emailSent: result.emailSent === true,
+    ...(result.message ? { message: result.message } : {}),
+  };
 }

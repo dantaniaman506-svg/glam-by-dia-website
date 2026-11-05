@@ -1,10 +1,10 @@
 ---
 name: Website email submission
-description: The site's booking and contact forms should use prefilled email drafts, not database or API submission.
+description: Booking and contact forms save to Google Sheets and send transactional email through the Replit backend.
 ---
 
-For now, booking and contact forms should open the visitor's email app with a prefilled draft addressed to the business owner. Do not add Supabase or a server-side email provider to this flow unless the user changes this requirement. The page must make clear that the visitor still needs to press Send; it must not claim the message was delivered.
+Booking, henna, class, and contact submissions should append to separate tabs in the connected Google Sheet and send owner/customer notifications through the connected Gmail account. Keep the frontend static on Vercel; integrations run through a separately published Replit API. Do not add Supabase or switch back to mailto drafts unless the user changes this requirement. Clearly disclose that request details are stored and require consent before submission.
 
-**Why:** The user explicitly asked to avoid Supabase and API setup and wants visitors to send the prefilled message from their own email account.
+**Why:** The user changed the previous email-draft flow and explicitly requested real-time Google Sheets storage plus automatic email notifications, without Supabase. Vercel's static frontend cannot access Replit integration credentials directly.
 
-**How to apply:** Keep all form details in the draft body, prefill the owner as the recipient, and provide a usable fallback link if the email app does not open.
+**How to apply:** Keep Google Sheets/Gmail connector calls server-side in the Replit API, route browser submissions to its published URL, and expose only a customer-facing privacy notice in the website.
