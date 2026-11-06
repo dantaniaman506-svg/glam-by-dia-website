@@ -29,7 +29,7 @@ Vercel uses `vercel-install.sh` to replace Replit-only tarball URLs in its tempo
 - `/book` — Makeup and hair booking
 - `/henna` — Henna and mehndi
 - `/self-makeup-class` — Self-makeup lessons
-- `/contact` — Studio details, map, and enquiry form
+- `/contact` — Studio details, directions, and enquiry form
 
 ## Booking and contact forms
 
