@@ -1,4 +1,4 @@
 - [Vite watch scope](vite-watch-scope.md) — exclude Replit caches, local skills, and uploaded assets from workspace-root file watching to avoid EMFILE.
 - [GitHub sync](github-sync.md) — after verified project changes, push them to the configured GitHub main branch.
 - [Brand assets](brand-assets.md) — use Dia's supplied logo and cropped illustrations in the home service shortcuts, not photos.
-- [Website email submission](email-submission.md) — append requests to separate Google Sheets tabs and send email through a Replit API; keep storage disclosure visible.
+- [Website email submission](email-submission.md) — use prefilled mailto drafts; the visitor must send them, with no server-side storage.

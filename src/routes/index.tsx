@@ -28,6 +28,16 @@ import bridalPortrait from "@/assets/bridal-portrait-open-hair.webp";
 import brideVeil from "@/assets/bride-veil-portrait.webp";
 
 const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
+const MOBILE_HERO_SLIDES = [
+  {
+    src: "/images/hero-artwork.webp",
+    alt: "Glam by Dia bridal makeup and hair artistry",
+  },
+  {
+    src: "/images/hero-mobile-secondary.webp",
+    alt: "Bride in pink bridal makeup with soft cherry blossom details",
+  },
+];
 const QUICK_SERVICES = [
   {
     title: "Makeup with hair down",
@@ -52,10 +62,18 @@ const QUICK_SERVICES = [
 ];
 
 const SERVICE_CARDS = [
-  { title: "Makeup with hair down", img: serviceHairDown, service: BRIDAL_BOOKING_SERVICES.hairDown },
+  {
+    title: "Makeup with hair down",
+    img: serviceHairDown,
+    service: BRIDAL_BOOKING_SERVICES.hairDown,
+  },
   { title: "Makeup with hair up", img: serviceHairUp, service: BRIDAL_BOOKING_SERVICES.hairUp },
   { title: "Makeup only", img: serviceMakeupOnly, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
-  { title: "Hairstyle only", img: serviceHairstyleOnly, service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
+  {
+    title: "Hairstyle only",
+    img: serviceHairstyleOnly,
+    service: BRIDAL_BOOKING_SERVICES.hairstyleOnly,
+  },
 ];
 
 const GALLERY_PREVIEW = [
@@ -95,6 +113,7 @@ function SectionHeading({
 
 function Hero() {
   const [slide, setSlide] = useState(0);
+  const [mobileSlide, setMobileSlide] = useState(0);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 640px)");
@@ -103,7 +122,10 @@ function Hero() {
     const syncCarousel = () => {
       if (desktop.matches) {
         if (timer === undefined) {
-          timer = window.setInterval(() => setSlide((current) => (current + 1) % HERO_SLIDES.length), 5000);
+          timer = window.setInterval(
+            () => setSlide((current) => (current + 1) % HERO_SLIDES.length),
+            5000,
+          );
         }
         return;
       }
@@ -120,19 +142,56 @@ function Hero() {
     };
   }, []);
 
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 639px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer: number | undefined;
+
+    const syncMobileCarousel = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+
+      if (mobile.matches && !reducedMotion.matches) {
+        timer = window.setInterval(
+          () => setMobileSlide((current) => (current + 1) % MOBILE_HERO_SLIDES.length),
+          5200,
+        );
+      } else {
+        setMobileSlide(0);
+      }
+    };
+
+    syncMobileCarousel();
+    mobile.addEventListener("change", syncMobileCarousel);
+    reducedMotion.addEventListener("change", syncMobileCarousel);
+    return () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      mobile.removeEventListener("change", syncMobileCarousel);
+      reducedMotion.removeEventListener("change", syncMobileCarousel);
+    };
+  }, []);
+
   return (
     <section className="px-3 pt-4 sm:px-6">
       <div className="mx-auto flex max-w-[36rem] flex-col items-center sm:hidden">
-        <img
-          src="/images/hero-artwork.webp"
-          alt="Glam by Dia bridal makeup and hair artistry"
-          width={841}
-          height={915}
-          loading="lazy"
-          fetchPriority="auto"
-          decoding="async"
-          className="block h-auto w-full rounded-[1.75rem] object-cover"
-        />
+        <div className="relative aspect-[841/915] w-full overflow-hidden rounded-[1.75rem]">
+          {MOBILE_HERO_SLIDES.map((image, index) => (
+            <img
+              key={image.src}
+              src={image.src}
+              alt={mobileSlide === index ? image.alt : ""}
+              aria-hidden={mobileSlide !== index}
+              width={841}
+              height={915}
+              loading="lazy"
+              fetchPriority={mobileSlide === index ? "high" : "low"}
+              decoding="async"
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out motion-reduce:transition-none ${
+                mobileSlide === index ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+        </div>
         <Link to="/book" className="btn-primary mt-5">
           Book Now
           <ArrowRight />
@@ -165,7 +224,9 @@ function Hero() {
               <span className="heading-display text-5xl sm:text-7xl">Glam</span>
               <span className="text-script text-5xl sm:text-6xl">by Dia</span>
             </h1>
-            <p className="mt-4 font-display text-lg italic text-plum sm:text-2xl">{SITE.heroTagline}</p>
+            <p className="mt-4 font-display text-lg italic text-plum sm:text-2xl">
+              {SITE.heroTagline}
+            </p>
             <p className="mt-4 max-w-xs text-sm text-foreground/85 sm:max-w-none sm:text-base">
               Specialised in Bridal. Studio in Clayton South.
             </p>
@@ -183,7 +244,9 @@ function Hero() {
                 onClick={() => setSlide(i)}
                 className="flex h-11 w-11 items-center justify-center rounded-full"
               >
-                <span className={`h-2.5 w-2.5 rounded-full transition-all ${i === slide ? "scale-110 bg-primary" : "bg-primary/35"}`} />
+                <span
+                  className={`h-2.5 w-2.5 rounded-full transition-all ${i === slide ? "scale-110 bg-primary" : "bg-primary/35"}`}
+                />
               </button>
             ))}
           </div>
@@ -202,7 +265,9 @@ function QuickServiceStrip() {
             key={title}
             to={`/book?service=${encodeURIComponent(service)}`}
             className={`group flex flex-col items-center gap-2.5 px-2 text-center ${
-              i % 2 === 0 ? "border-r border-primary/15 sm:border-r" : "sm:border-r sm:border-primary/15 last:border-r-0"
+              i % 2 === 0
+                ? "border-r border-primary/15 sm:border-r"
+                : "sm:border-r sm:border-primary/15 last:border-r-0"
             } ${i < 2 ? "max-sm:border-b max-sm:border-primary/15 max-sm:pb-5" : ""} ${i === 1 ? "max-sm:border-r-0" : ""}`}
           >
             <img
@@ -214,7 +279,9 @@ function QuickServiceStrip() {
               decoding="async"
               className="h-16 w-16 rounded-full object-cover shadow-sm ring-2 ring-white transition-transform group-hover:scale-105"
             />
-            <span className="text-[0.88rem] font-medium leading-snug text-foreground/90">{title}</span>
+            <span className="text-[0.88rem] font-medium leading-snug text-foreground/90">
+              {title}
+            </span>
             <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
           </Link>
         ))}
@@ -281,8 +348,18 @@ function ServicesSection() {
               to={`/book?service=${encodeURIComponent(service)}`}
               className="group glass-panel overflow-hidden !rounded-3xl pb-5 transition-transform hover:-translate-y-1"
             >
-              <img src={img} alt={title} width={1024} height={1024} loading="lazy" decoding="async" className="h-36 w-full object-cover object-top sm:h-44" />
-              <p className="mt-4 px-3 text-center text-[0.88rem] font-medium leading-snug text-foreground/90">{title}</p>
+              <img
+                src={img}
+                alt={title}
+                width={1024}
+                height={1024}
+                loading="lazy"
+                decoding="async"
+                className="h-36 w-full object-cover object-top sm:h-44"
+              />
+              <p className="mt-4 px-3 text-center text-[0.88rem] font-medium leading-snug text-foreground/90">
+                {title}
+              </p>
               <div className="mt-3 flex justify-center">
                 <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
               </div>
@@ -369,7 +446,9 @@ function Testimonials() {
         >
           <ChevronRight />
         </button>
-        <p className="font-display text-[1.02rem] italic leading-relaxed text-plum sm:text-lg">"{t.quote}"</p>
+        <p className="font-display text-[1.02rem] italic leading-relaxed text-plum sm:text-lg">
+          "{t.quote}"
+        </p>
         <p className="mt-4 text-sm font-medium text-foreground/85">— {t.author} —</p>
         <div className="mt-5 flex justify-center gap-2">
           {TESTIMONIALS.map((_, i) => (
@@ -379,7 +458,9 @@ function Testimonials() {
               onClick={() => setIndex(i)}
               className="flex h-11 w-11 items-center justify-center rounded-full"
             >
-              <span className={`h-2 w-2 rounded-full transition-all ${i === index ? "scale-110 bg-primary" : "bg-primary/35"}`} />
+              <span
+                className={`h-2 w-2 rounded-full transition-all ${i === index ? "scale-110 bg-primary" : "bg-primary/35"}`}
+              />
             </button>
           ))}
         </div>

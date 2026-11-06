@@ -1,10 +1,10 @@
 ---
 name: Website email submission
-description: Booking and contact forms save to Google Sheets and send transactional email through the Replit backend.
+description: Form submissions open a prefilled email draft; the visitor must send it from their email app.
 ---
 
-Booking, henna, class, and contact submissions should append to separate tabs in the connected Google Sheet and send owner/customer notifications through the connected Gmail account. Keep the frontend static on Vercel; integrations run through a separately published Replit API. Do not add Supabase or switch back to mailto drafts unless the user changes this requirement. Clearly disclose that request details are stored and require consent before submission.
+Booking, henna, class, and contact forms should validate locally and open a prefilled email draft to Dia. The visitor must tap Send; the site cannot know whether the message was sent. Do not add a backend, Google Sheets, Supabase, or another storage provider unless the user explicitly changes this requirement. Use percent-encoding for the subject and body rather than URLSearchParams so spaces appear as spaces, not plus signs, in common mobile email apps.
 
-**Why:** The user changed the previous email-draft flow and explicitly requested real-time Google Sheets storage plus automatic email notifications, without Supabase. Vercel's static frontend cannot access Replit integration credentials directly.
+**Why:** The user asked to remove all APIs and the backend, preferring a simple mail-app handoff where they tap Send themselves. A prior Android Gmail draft displayed plus signs instead of spaces when the URL was incorrectly encoded.
 
-**How to apply:** Keep Google Sheets/Gmail connector calls server-side in the Replit API, route browser submissions to its published URL, and expose only a customer-facing privacy notice in the website.
+**How to apply:** Keep all form submission logic in the Vite SPA, explicitly tell users that opening the draft does not send it, and do not claim that requests are received or saved before the visitor sends the message.

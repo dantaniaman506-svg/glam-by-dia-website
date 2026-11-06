@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from "react";
 import type { CountryCode } from "libphonenumber-js";
-import { submitBooking, type BookingInput } from "@/lib/booking.functions";
+import type { BookingInput } from "@/lib/booking.types";
+import { createEmailDraft } from "@/lib/email-draft";
 import { InternationalPhoneInput } from "@/components/site/InternationalPhoneInput";
 import { DEFAULT_PHONE_COUNTRY, getPhoneDetails } from "@/lib/phone";
-import { prepareSuccessChime } from "@/lib/success-chime";
 
 const inputClass = "field-input";
 
@@ -12,15 +12,13 @@ export function InquiryForm() {
     formType: "message",
     phoneCountryCode: DEFAULT_PHONE_COUNTRY,
   });
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [sent, setSent] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
+  const [emailDraftUrl, setEmailDraftUrl] = useState("");
 
   const update = (values: Partial<BookingInput>) =>
     setForm((current) => ({ ...current, ...values }));
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
     if (
@@ -41,61 +39,39 @@ export function InquiryForm() {
       return;
     }
     if (!form.agreedTerms) {
-      setError("Please agree to the enquiry data notice before sending.");
+      setError("Please confirm that you understand the email step.");
       return;
     }
-    setBusy(true);
-    const chime = prepareSuccessChime();
-    let playChime = false;
-    try {
-      const result = await submitBooking({
-        formType: "message",
-        fullName: form.fullName,
-        ...phoneDetails,
-        email: form.email,
-        contactMethod: form.contactMethod,
-        notes: form.notes,
-        agreedTerms: form.agreedTerms,
-        website: form.website,
-      });
-      if (!result.ok) setError(result.message);
-      else {
-        setEmailSent(result.emailSent);
-        setSent(true);
-        playChime = true;
-      }
-    } finally {
-      if (playChime) chime.play();
-      else chime.cancel();
-      setBusy(false);
-    }
+    const emailDraftUrl = createEmailDraft({
+      formType: "message",
+      fullName: form.fullName,
+      ...phoneDetails,
+      email: form.email,
+      contactMethod: form.contactMethod,
+      notes: form.notes,
+      agreedTerms: form.agreedTerms,
+    });
+    setEmailDraftUrl(emailDraftUrl);
+    window.location.href = emailDraftUrl;
   }
 
-  if (sent) {
+  if (emailDraftUrl) {
     return (
       <div className="glass-panel px-6 py-10 text-center sm:px-9" role="status" aria-live="polite">
-        <h3 className="heading-display text-2xl">Thank you for reaching out</h3>
+        <h3 className="heading-display text-2xl">Your email draft is ready</h3>
         <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          {emailSent
-            ? "Dia has received your enquiry and a confirmation email has been sent. She will contact you soon."
-            : "Your enquiry is saved. Dia will contact you soon; please call if you need a quick response."}
+          Your email app should open with your message addressed to Dia and all details filled in.
+          Tap Send in your email app to finish.
         </p>
+        <a className="btn-primary mt-5" href={emailDraftUrl}>
+          Open email draft again
+        </a>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="glass-panel space-y-4 p-5 sm:p-8">
-      <div className="sr-only" aria-hidden="true">
-        <label htmlFor="inquiry-website">Leave this field blank</label>
-        <input
-          id="inquiry-website"
-          tabIndex={-1}
-          autoComplete="off"
-          value={form.website ?? ""}
-          onChange={(event) => update({ website: event.target.value })}
-        />
-      </div>
       <div>
         <label className="field-label" htmlFor="inquiry-name">
           Your name *
@@ -171,8 +147,8 @@ export function InquiryForm() {
           onChange={(event) => update({ agreedTerms: event.target.checked })}
         />
         <span>
-          I agree that my details and message can be emailed to Dia and securely stored in Glam by
-          Dia's enquiry records so she can respond.
+          I understand this form opens a prefilled email to Dia, and I must tap Send for her to
+          receive my message.
         </span>
       </label>
       {error ? (
@@ -183,12 +159,8 @@ export function InquiryForm() {
           {error}
         </p>
       ) : null}
-      <button
-        type="submit"
-        disabled={busy}
-        className="btn-primary min-h-11 w-full disabled:opacity-60"
-      >
-        {busy ? "Sending…" : "Send your message"}
+      <button type="submit" className="btn-primary min-h-11 w-full">
+        Open email app
       </button>
       <p className="text-center text-xs text-muted-foreground">
         Your information is used to respond to your enquiry.
