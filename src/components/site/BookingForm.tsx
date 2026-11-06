@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { BookingInput } from "@/lib/booking.types";
 import { createEmailDraft } from "@/lib/email-draft";
+import { openEmailDraft } from "@/lib/email-handoff";
 import { HeartIcon } from "@/components/site/icons";
 import { InternationalPhoneInput } from "@/components/site/InternationalPhoneInput";
 import { SITE } from "@/lib/site";
@@ -137,7 +138,7 @@ export function BookingForm({
     };
     const emailDraftUrl = createEmailDraft(data);
     setEmailDraftUrl(emailDraftUrl);
-    window.location.href = emailDraftUrl;
+    openEmailDraft(emailDraftUrl);
   };
 
   if (emailDraftUrl) {
@@ -155,7 +156,14 @@ export function BookingForm({
           Your email app should open with your request details already filled in. Tap Send in your
           email app to submit it to Dia—the website cannot send or confirm the email for you.
         </p>
-        <a className="btn-primary mt-5" href={emailDraftUrl}>
+        <a
+          className="btn-primary mt-5"
+          href={emailDraftUrl}
+          onClick={(event) => {
+            event.preventDefault();
+            openEmailDraft(emailDraftUrl);
+          }}
+        >
           Open email draft again
         </a>
         <p className="mt-4 text-xs text-muted-foreground">

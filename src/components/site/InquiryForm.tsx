@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import type { CountryCode } from "libphonenumber-js";
 import type { BookingInput } from "@/lib/booking.types";
 import { createEmailDraft } from "@/lib/email-draft";
+import { openEmailDraft } from "@/lib/email-handoff";
 import { InternationalPhoneInput } from "@/components/site/InternationalPhoneInput";
 import { DEFAULT_PHONE_COUNTRY, getPhoneDetails } from "@/lib/phone";
 
@@ -52,7 +53,7 @@ export function InquiryForm() {
       agreedTerms: form.agreedTerms,
     });
     setEmailDraftUrl(emailDraftUrl);
-    window.location.href = emailDraftUrl;
+    openEmailDraft(emailDraftUrl);
   }
 
   if (emailDraftUrl) {
@@ -63,7 +64,14 @@ export function InquiryForm() {
           Your email app should open with your message addressed to Dia and all details filled in.
           Tap Send in your email app to finish.
         </p>
-        <a className="btn-primary mt-5" href={emailDraftUrl}>
+        <a
+          className="btn-primary mt-5"
+          href={emailDraftUrl}
+          onClick={(event) => {
+            event.preventDefault();
+            openEmailDraft(emailDraftUrl);
+          }}
+        >
           Open email draft again
         </a>
       </div>
