@@ -12,7 +12,7 @@ import {
   PinIcon,
   ShieldIcon,
 } from "@/components/site/icons";
-import { BRIDAL_BOOKING_SERVICES, SITE, TESTIMONIALS } from "@/lib/site";
+import { BOOKING_OPTIONS_PATH, BRIDAL_BOOKING_SERVICES, SITE, TESTIMONIALS } from "@/lib/site";
 
 import heroBride from "@/assets/hero-bride.webp";
 import aboutBride from "@/assets/about-bride.jpg";
@@ -192,7 +192,7 @@ function Hero() {
             />
           ))}
         </div>
-        <Link to="/book" className="btn-primary mt-5">
+        <Link to={BOOKING_OPTIONS_PATH} className="btn-primary mt-5">
           Book Now
           <ArrowRight />
         </Link>
@@ -230,7 +230,7 @@ function Hero() {
             <p className="mt-4 max-w-xs text-sm text-foreground/85 sm:max-w-none sm:text-base">
               Specialised in Bridal. Studio in Clayton South.
             </p>
-            <Link to="/book" className="btn-primary mt-7">
+            <Link to={BOOKING_OPTIONS_PATH} className="btn-primary mt-7">
               Book Now
               <ArrowRight />
             </Link>

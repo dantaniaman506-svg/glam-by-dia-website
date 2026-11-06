@@ -12,6 +12,8 @@ export const SITE = {
   instagramHandle: "www.instagram.com/glam_bydia",
 } as const;
 
+export const BOOKING_OPTIONS_PATH = "/booking-options";
+
 export const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },

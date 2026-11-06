@@ -5,11 +5,13 @@ import { Toaster } from "sonner";
 import Home from "@/routes";
 import About from "@/routes/about";
 import Book from "@/routes/book";
+import BookingOptions from "@/routes/booking-options";
 import Contact from "@/routes/contact";
 import Gallery from "@/routes/gallery";
 import Henna from "@/routes/henna";
 import SelfMakeupClass from "@/routes/self-makeup-class";
 import Services from "@/routes/services";
+import { BOOKING_OPTIONS_PATH } from "@/lib/site";
 
 const PAGE_TITLES: Record<string, string> = {
   "/": "Glam by Dia | Bridal Hair & Makeup Melbourne",
@@ -17,6 +19,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/services": "Bridal Services & Prices | Glam by Dia",
   "/gallery": "Bridal Gallery | Glam by Dia",
   "/book": "Book Bridal Hair & Makeup | Glam by Dia",
+  [BOOKING_OPTIONS_PATH]: "Choose a Beauty Service | Glam by Dia",
   "/henna": "Henna & Mehndi Artistry | Glam by Dia",
   "/self-makeup-class": "Self Makeup Class | Glam by Dia",
   "/contact": "Contact Glam by Dia | Clayton South",
@@ -40,7 +43,9 @@ function NotFound() {
       <div className="glass-panel max-w-md p-8 text-center">
         <h1 className="heading-display text-5xl">Oh, lovely</h1>
         <p className="mt-3 text-sm text-foreground/80">We couldn't find that page.</p>
-        <a href="/" className="btn-primary mt-6">Back to home</a>
+        <a href="/" className="btn-primary mt-6">
+          Back to home
+        </a>
       </div>
     </main>
   );
@@ -56,6 +61,7 @@ export function AppRoutes() {
         <Route path="/services" element={<Services />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/book" element={<Book />} />
+        <Route path={BOOKING_OPTIONS_PATH} element={<BookingOptions />} />
         <Route path="/henna" element={<Henna />} />
         <Route path="/self-makeup-class" element={<SelfMakeupClass />} />
         <Route path="/contact" element={<Contact />} />
