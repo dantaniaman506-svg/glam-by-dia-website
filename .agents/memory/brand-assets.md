@@ -9,11 +9,11 @@ Use the transparent logo supplied by the user for the site identity. For the fou
 
 **How to apply:** preserve these assets when updating the home header, footer, or quick-service shortcuts; use photos only in separate service and gallery sections.
 
-Use the latest supplied poster as the mobile homepage hero with rounded edges and no added overlay, shadow, or text. Keep the earlier photo-and-copy carousel on desktop. Do not show the poster's incorrect Gurgaon location; keep the real mobile booking button as a separate clickable link below the artwork.
+Use the supplied posters as the homepage hero: the square poster pair on mobile and the wide poster pair on desktop. Keep the artwork unobstructed, without added white washes or shadows. On desktop, make the first poster's printed Book Now button a clickable booking link; keep the mobile booking button as a separate clickable link below the artwork. Do not show the poster's incorrect Gurgaon location.
 
-**Why:** the user asked to keep the earlier desktop design and use the poster only on mobile; its location copy conflicts with the Clayton South, Melbourne business address.
+**Why:** the user asked to use supplied poster artwork on both screen sizes, while its Gurgaon location copy conflicts with the Clayton South, Melbourne business address.
 
-**How to apply:** preserve the supplied artwork on mobile, omit its incorrect location block, keep the CTA outside the image, and retain the previous desktop carousel.
+**How to apply:** preserve the supplied artwork on both screen sizes, omit incorrect location copy when composing text, and keep each visible booking action functional.
 
 Use the requested #F35B85-to-#E23F72 gradient for primary actions. Display the latest transparent logo fully in the header, slightly protruding without covering navigation. Prevent horizontal page overflow on mobile.
 

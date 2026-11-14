@@ -12,9 +12,8 @@ import {
   PinIcon,
   ShieldIcon,
 } from "@/components/site/icons";
-import { BOOKING_OPTIONS_PATH, BRIDAL_BOOKING_SERVICES, SITE, TESTIMONIALS } from "@/lib/site";
+import { BOOKING_OPTIONS_PATH, BRIDAL_BOOKING_SERVICES, TESTIMONIALS } from "@/lib/site";
 
-import heroBride from "@/assets/hero-bride.webp";
 import aboutBride from "@/assets/about-bride.jpg";
 import serviceHairDown from "@/assets/service-hair-down.webp";
 import serviceHairUp from "@/assets/service-hair-up.webp";
@@ -24,10 +23,16 @@ import galleryIndian from "@/assets/gallery-indian-bride.jpg";
 import galleryVeil from "@/assets/gallery-veil-bride.jpg";
 import galleryBunVeil from "@/assets/gallery-bun-veil.jpg";
 import galleryFlowerCrown from "@/assets/gallery-flower-crown.jpg";
-import bridalPortrait from "@/assets/bridal-portrait-open-hair.webp";
-import brideVeil from "@/assets/bride-veil-portrait.webp";
-
-const HERO_SLIDES = [bridalPortrait, brideVeil, heroBride];
+const DESKTOP_HERO_SLIDES = [
+  {
+    src: "/images/desktop-hero-poster-1.webp",
+    alt: "Glam by Dia bridal makeup and hair artistry with a Book Now button",
+  },
+  {
+    src: "/images/desktop-hero-poster-2.webp",
+    alt: "Bride in pink bridal makeup with cherry blossom details",
+  },
+];
 const MOBILE_HERO_SLIDES = [
   {
     src: "/images/hero-artwork.webp",
@@ -123,7 +128,7 @@ function Hero() {
       if (desktop.matches) {
         if (timer === undefined) {
           timer = window.setInterval(
-            () => setSlide((current) => (current + 1) % HERO_SLIDES.length),
+            () => setSlide((current) => (current + 1) % DESKTOP_HERO_SLIDES.length),
             5000,
           );
         }
@@ -199,45 +204,40 @@ function Hero() {
       </div>
 
       <div className="hidden sm:block">
-        <div className="relative mx-auto min-h-[480px] max-w-5xl overflow-hidden rounded-[2rem] shadow-[0_24px_60px_-30px_rgba(150,80,110,0.45)] ring-1 ring-white/60">
-          <div className="absolute inset-y-0 right-0 w-[62%]">
-            {HERO_SLIDES.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={i === slide ? "Glam by Dia bridal look" : ""}
-                width={1024}
-                height={1024}
-                loading="lazy"
-                fetchPriority={i === slide ? "high" : "low"}
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
-              />
+        <div className="mx-auto max-w-5xl">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
+            {DESKTOP_HERO_SLIDES.map((image, i) => (
+              <div
+                key={image.src}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  i === slide ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
+                aria-hidden={i !== slide}
+              >
+                <img
+                  src={image.src}
+                  alt={i === slide ? image.alt : ""}
+                  width={1672}
+                  height={941}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  fetchPriority={i === slide ? "high" : "low"}
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                {i === 0 && (
+                  <Link
+                    to={BOOKING_OPTIONS_PATH}
+                    aria-label="Book makeup and hair"
+                    tabIndex={slide === 0 ? 0 : -1}
+                    className="absolute left-[22.5%] top-[88%] z-10 h-[10%] w-[21%] rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E23F72]"
+                  />
+                )}
+              </div>
             ))}
-            <div className="hero-image-overlay absolute inset-0" />
-            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[oklch(0.973_0.015_20)] to-transparent" />
           </div>
 
-          <div className="relative z-10 px-6 py-14 sm:max-w-[55%] sm:px-12 sm:py-24">
-            <p className="eyebrow">Mobile Bridal Hair &amp; Makeup Artist</p>
-            <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3">
-              <span className="heading-display text-5xl sm:text-7xl">Glam</span>
-              <span className="text-script text-5xl sm:text-6xl">by Dia</span>
-            </h1>
-            <p className="mt-4 font-display text-lg italic text-plum sm:text-2xl">
-              {SITE.heroTagline}
-            </p>
-            <p className="mt-4 max-w-xs text-sm text-foreground/85 sm:max-w-none sm:text-base">
-              Specialised in Bridal. Studio in Clayton South.
-            </p>
-            <Link to={BOOKING_OPTIONS_PATH} className="btn-primary mt-7">
-              Book Now
-              <ArrowRight />
-            </Link>
-          </div>
-
-          <div className="absolute bottom-4 right-6 flex gap-2 sm:right-10">
-            {HERO_SLIDES.map((_, i) => (
+          <div className="mt-1 flex justify-center gap-1">
+            {DESKTOP_HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
                 aria-label={`Slide ${i + 1}`}
