@@ -188,7 +188,7 @@ function Hero() {
               decoding="async"
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out motion-reduce:transition-none ${
                 mobileSlide === index ? "opacity-100" : "opacity-0"
-              }`}
+              } ${index === 1 ? "scale-[1.12] translate-y-[9%]" : ""}`}
             />
           ))}
         </div>
