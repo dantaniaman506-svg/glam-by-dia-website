@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { BOOKING_OPTIONS_PATH, SITE } from "@/lib/site";
-import { BrandWordmark } from "@/components/site/BrandWordmark";
 
 const socials = [
   {
@@ -214,7 +213,13 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/60 bg-white/55 px-6 py-6 text-center backdrop-blur-sm">
-          <BrandWordmark />
+          <img
+            src="/images/brand-logo.webp"
+            alt="Glam by Dia"
+            width={523}
+            height={477}
+            className="mx-auto h-[5.5rem] w-24 object-contain saturate-[0.88] drop-shadow-sm"
+          />
           <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">
             {SITE.tagline}
           </p>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BOOKING_OPTIONS_PATH, NAV_LINKS, SITE } from "@/lib/site";
-import { BrandWordmark } from "@/components/site/BrandWordmark";
 
 function ArrowIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
@@ -52,9 +51,19 @@ export function Header() {
           </button>
 
           {/* Logo */}
-          <span className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-            <BrandWordmark compact />
-          </span>
+          <Link
+            to="/"
+            aria-label="Glam by Dia home"
+            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+          >
+            <img
+              src="/images/brand-logo.webp"
+              alt="Glam by Dia logo"
+              width={523}
+              height={477}
+              className="block h-[4.9rem] w-[5.4rem] object-contain saturate-[0.88] drop-shadow-[0_5px_10px_rgba(226,63,114,0.25)] sm:h-[5.8rem] sm:w-[6.3rem]"
+            />
+          </Link>
 
           {/* Book now */}
           <Link
@@ -80,7 +89,13 @@ export function Header() {
           className={`absolute left-0 top-0 flex h-full w-[300px] max-w-[85vw] flex-col gap-1 overflow-y-auto rounded-r-3xl bg-white/95 p-6 pt-8 shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="mb-4 flex items-center justify-between">
-            <BrandWordmark />
+            <img
+              src="/images/brand-logo.webp"
+              alt="Glam by Dia"
+              width={523}
+              height={477}
+              className="h-16 w-[70px] object-contain saturate-[0.88]"
+            />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"

@@ -80,6 +80,9 @@ export default function About() {
           <Reveal className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
             <p className="eyebrow">About Us</p>
             <h2 className="heading-display mt-2 text-2xl sm:text-3xl">Welcome to Glam by Dia!</h2>
+            <p className="mt-3 font-display text-2xl italic text-primary">
+              Every detail, perfected.
+            </p>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
               <p>
                 I’m Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising

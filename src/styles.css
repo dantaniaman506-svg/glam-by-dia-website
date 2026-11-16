@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Glam by Dia design system — understated blush with warm neutral surfaces.
+ * Glam by Dia design system — preserve the established romantic pink palette.
  */
 
 @theme inline {
@@ -50,11 +50,11 @@
   --brand-pink: #F35B85;
   --brand-pink-deep: #E23F72;
   --background: #fcdee3;
-  --foreground: #352e2d;
-  --card: #fff9f6;
-  --card-foreground: #352e2d;
-  --popover: #fff9f6;
-  --popover-foreground: #352e2d;
+  --foreground: oklch(0.38 0.055 356);
+  --card: oklch(0.992 0.008 20);
+  --card-foreground: oklch(0.38 0.055 356);
+  --popover: oklch(0.992 0.008 20);
+  --popover-foreground: oklch(0.38 0.055 356);
   --primary: var(--brand-pink-deep);
   --primary-foreground: oklch(0.995 0.008 20);
   --secondary: oklch(0.978 0.012 28);

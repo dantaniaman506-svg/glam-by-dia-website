@@ -8,7 +8,7 @@ export const SITE = {
   email: "glambydia.hmua@gmail.com",
   emailHref: "mailto:glambydia.hmua@gmail.com",
   address: "52 Oakes Avenue, Clayton South, 3169, Melbourne",
-  instagram: "https://www.instagram.com/glam_bydia",
+  instagram: "https://www.instagram.com/glam_bydia?psln=MWV3ZGdtMDlnbDU1aA==",
   instagramHandle: "@glam_bydia",
   directionsUrl:
     "https://www.google.com/maps/search/?api=1&query=52+Oakes+Avenue%2C+Clayton+South+VIC+3169",
