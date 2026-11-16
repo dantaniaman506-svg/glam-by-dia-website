@@ -30,9 +30,7 @@ describe("App routing", () => {
 
     fireEvent.click(makeupLink);
     expect(chime).toHaveBeenCalledOnce();
-    expect(
-      await screen.findByRole("heading", { name: /Book Makeup & Hair/ }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /Book Makeup & Hair/ })).toBeInTheDocument();
 
     chime.mockRestore();
     scrollTo.mockRestore();
@@ -45,10 +43,50 @@ describe("App routing", () => {
         <AppRoutes />
       </MemoryRouter>,
     );
-    expect(
-      await screen.findByRole("heading", { name: "Glam by Dia Studio" }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Glam by Dia Studio" })).toBeInTheDocument();
     scrollTo.mockRestore();
+  });
+
+  it("offers a Bridal shortcut that opens the bridal enquiry service", async () => {
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    const bridalShortcut = await screen.findByRole("link", { name: /Bridal Makeup & Hair/ });
+    expect(decodeURIComponent(bridalShortcut.getAttribute("href") ?? "")).toContain(
+      "Bridal Makeup and Hair (from $300) — Enquiry",
+    );
+    scrollTo.mockRestore();
+  });
+
+  it("keeps the home hero and Instagram image areas blank until approved photos arrive", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByRole("img", { name: "Reserved for a client-approved hero photo" }),
+    ).toBeInTheDocument();
+    expect(await screen.findAllByRole("img", { name: /Reserved for Instagram post/ })).toHaveLength(
+      6,
+    );
+  });
+
+  it("keeps six blank gallery slots for approved portfolio photos", async () => {
+    render(
+      <MemoryRouter initialEntries={["/gallery"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findAllByRole("img", { name: /Reserved for client-approved portfolio photo/ }),
+    ).toHaveLength(6);
   });
 
   it("selects a pricing service and smoothly brings the booking form into view", async () => {

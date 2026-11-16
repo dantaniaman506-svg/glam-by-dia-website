@@ -21,9 +21,17 @@ const REASONS = [
 
 const VALUES = [
   { Icon: ShieldIcon, title: "Experienced", text: "Over 10 years of industry experience." },
-  { Icon: HeartIcon, title: "Personalised", text: "Looks shaped around your features and preferences." },
+  {
+    Icon: HeartIcon,
+    title: "Personalised",
+    text: "Looks shaped around your features and preferences.",
+  },
   { Icon: PinIcon, title: "Mobile", text: "Convenient service at your home, hotel or venue." },
-  { Icon: UsersIcon, title: "A flexible team", text: "Artists available for individual and group bookings." },
+  {
+    Icon: UsersIcon,
+    title: "A flexible team",
+    text: "Artists available for individual and group bookings.",
+  },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -55,9 +63,27 @@ function FaqItem({ q, a }: { q: string; a: string }) {
           </svg>
         </span>
       </button>
-      <div className="grid transition-[grid-template-rows] duration-300" style={{ gridTemplateRows: open ? "1fr" : "0fr" }}>
+      <div
+        className="grid transition-[grid-template-rows] duration-300"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
         <div className="overflow-hidden">
-          <p className="px-5 pb-5 text-sm leading-relaxed text-foreground/80">{a}</p>
+          <div className="space-y-3 px-5 pb-5 text-sm leading-relaxed text-foreground/80">
+            {a.split("\n\n").map((paragraph, index) => {
+              const lines = paragraph.split("\n");
+              const isList = lines.every((line) => line.startsWith("• "));
+
+              return isList ? (
+                <ul key={index} className="list-disc space-y-1 pl-5">
+                  {lines.map((line) => (
+                    <li key={line}>{line.slice(2)}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p key={index}>{paragraph}</p>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -80,9 +106,7 @@ export default function About() {
           <Reveal className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
             <p className="eyebrow">About Us</p>
             <h2 className="heading-display mt-2 text-2xl sm:text-3xl">Welcome to Glam by Dia!</h2>
-            <p className="mt-3 font-display text-2xl italic text-primary">
-              Every detail, perfected.
-            </p>
+            <p className="text-script mt-3 text-3xl sm:text-4xl">Every detail, perfected.</p>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
               <p>
                 I’m Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising
@@ -129,7 +153,9 @@ export default function About() {
             <ul className="glass-panel mt-4 grid gap-2 p-5 text-sm text-foreground/80 sm:grid-cols-2 sm:p-7">
               {REASONS.map((reason) => (
                 <li key={reason} className="flex items-start gap-2.5">
-                  <span className="mt-1 text-primary" aria-hidden="true">•</span>
+                  <span className="mt-1 text-primary" aria-hidden="true">
+                    •
+                  </span>
                   <span>{reason}</span>
                 </li>
               ))}
@@ -167,7 +193,9 @@ export default function About() {
               {SITE.address}
               <ArrowRight className="h-4 w-4" />
             </a>
-            <p className="mt-3 text-xs text-muted-foreground">Tap the address for Google Maps directions.</p>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Tap the address for Google Maps directions.
+            </p>
           </div>
         </section>
 

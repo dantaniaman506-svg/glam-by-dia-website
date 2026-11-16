@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ArrowRight, CarIcon, HeartIcon, PinIcon, ShieldIcon } from "@/components/site/icons";
+import { BlankImageSlot } from "@/components/site/BlankImageSlot";
 import { Reveal } from "@/components/site/Reveal";
 import { BRIDAL_BOOKING_SERVICES, SERVICES, SITE } from "@/lib/site";
 
 const QUICK_SERVICES = [
+  { title: "Bridal Makeup & Hair", icon: Crown, service: BRIDAL_BOOKING_SERVICES.bridalMakeupHair },
   { title: "Makeup & Hair Down", icon: Brush, service: BRIDAL_BOOKING_SERVICES.hairDown },
   { title: "Makeup with Hair Up", icon: Crown, service: BRIDAL_BOOKING_SERVICES.hairUp },
   { title: "Makeup", icon: Sparkles, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
@@ -40,6 +42,10 @@ function Hero() {
           Studio in Clayton South · Mobile across Melbourne
         </p>
       </div>
+      <BlankImageSlot
+        label="Reserved for a client-approved hero photo"
+        className="mx-auto mt-8 aspect-[0.94] w-full max-w-[34rem] md:aspect-[2/1] md:max-w-5xl"
+      />
     </section>
   );
 }
@@ -49,16 +55,18 @@ function QuickServiceStrip() {
     <section className="px-3 pt-3 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow mb-3 text-center">Bridal &amp; Occasion Services</p>
-        <div className="glass-panel grid grid-cols-2 gap-y-2 p-4 sm:grid-cols-4 sm:p-5">
+        <div className="glass-panel grid grid-cols-2 gap-y-2 p-4 sm:grid-cols-3 sm:p-5 lg:grid-cols-5">
           {QUICK_SERVICES.map(({ title, icon: Icon, service }, index) => (
             <Link
               key={title}
               to={`/book?service=${encodeURIComponent(service)}`}
-              className={`group flex min-h-28 flex-col items-center justify-center gap-2 px-2 py-3 text-center transition hover:-translate-y-0.5 ${
-                index % 2 === 0 ? "border-r border-primary/15 sm:border-r" : ""
-              } ${index === 1 ? "max-sm:border-r-0" : ""} ${
-                index < 2 ? "max-sm:border-b max-sm:border-primary/15" : ""
-              } ${index < 3 ? "sm:border-r sm:border-primary/15" : ""}`}
+              className={`group flex min-h-28 flex-col items-center justify-center gap-2 border-primary/15 px-2 py-3 text-center transition hover:-translate-y-0.5 ${
+                index % 2 === 0 && index !== QUICK_SERVICES.length - 1 ? "max-sm:border-r" : ""
+              } ${index < 4 ? "max-sm:border-b" : ""} ${
+                index % 3 !== 2 && index < 4 ? "sm:border-r" : ""
+              } ${index < 3 ? "sm:border-b" : ""} ${
+                index < QUICK_SERVICES.length - 1 ? "lg:border-r" : ""
+              } max-sm:last:col-span-2 max-sm:last:mx-auto max-sm:last:w-1/2 lg:border-b-0`}
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-primary">
                 <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.6} />
@@ -88,14 +96,16 @@ function AboutSection() {
         </Reveal>
         <Reveal delay={100}>
           <div>
-            <p className="eyebrow">About Glam by Dia</p>
+            <p className="eyebrow">About Us</p>
             <h2 className="heading-display mt-3 text-3xl sm:text-4xl">
-              Beauty that feels
-              <span className="text-script ml-2">like you</span>
+              More Than Just
+              <span className="text-script ml-2">Makeup &amp; Hair</span>
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-              I’m Diya, founder of Glam by Dia. Our Melbourne team creates personalised makeup and
-              hairstyling for weddings, special celebrations and important milestones.
+              Glam by Dia is a Melbourne-based mobile bridal beauty team specialising in bridal
+              makeup and hair. With a studio in Clayton South, we travel across Melbourne and
+              surrounding suburbs to provide professional beauty services at your home, hotel or
+              wedding venue.
             </p>
             <Link to="/about" className="btn-outline mt-6">
               Meet the team
@@ -117,7 +127,9 @@ function ServicesSection() {
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
           <p className="eyebrow">Our Services</p>
-          <h2 className="heading-display mt-2 text-3xl sm:text-4xl">Bridal &amp; Occasion Beauty</h2>
+          <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+            Bridal &amp; Occasion Beauty
+          </h2>
         </div>
         <div className="mt-7 grid gap-4 sm:grid-cols-2">
           {services.map((service, index) => {
@@ -219,12 +231,16 @@ function ReviewsAndInstagram() {
           <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-foreground/75">
             Find the latest looks and updates directly on our Instagram profile.
           </p>
-          <a
-            href={SITE.instagram}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary mt-5"
-          >
+          <div className="mx-auto mt-5 grid w-full max-w-xs grid-cols-3 gap-1.5">
+            {Array.from({ length: 6 }, (_, index) => (
+              <BlankImageSlot
+                key={index}
+                label={`Reserved for Instagram post ${index + 1}`}
+                className="aspect-square rounded-lg"
+              />
+            ))}
+          </div>
+          <a href={SITE.instagram} target="_blank" rel="noreferrer" className="btn-primary mt-5">
             Follow {SITE.instagramHandle}
             <ArrowRight />
           </a>

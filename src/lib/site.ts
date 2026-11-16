@@ -63,8 +63,7 @@ export const SERVICES = [
     slug: "makeup-only",
     title: "Makeup",
     price: "$110",
-    description:
-      "Professional makeup application tailored to your features and the occasion.",
+    description: "Professional makeup application tailored to your features and the occasion.",
     bookingService: BRIDAL_BOOKING_SERVICES.makeupOnly,
     bookingType: "direct",
   },
@@ -99,8 +98,7 @@ export const SERVICES = [
     slug: "groom-touchup",
     title: "Groom’s Touch Up",
     price: "$150",
-    description:
-      "A polished finishing touch for the groom. Enquiry required.",
+    description: "A polished finishing touch for the groom. Enquiry required.",
     bookingService: BRIDAL_BOOKING_SERVICES.groomTouchUp,
     bookingType: "enquiry",
   },
@@ -159,54 +157,54 @@ export const PROCESS_STEPS = [
 export const FAQS = [
   {
     q: "How long does the service take?",
-    a: "A single service, such as makeup or hairstyling, typically takes approximately 1 hour. If you book both makeup and hairstyling, allow at least 1.5–2 hours so we can perfect your look without rushing.",
+    a: "A single service, such as makeup or hairstyling, typically takes approximately 1 hour. If you're booking both makeup and hairstyling, we recommend allowing at least 1.5–2 hours to ensure we have enough time to perfect your look without rushing.",
   },
   {
-    q: "What products does the Glam by Dia team use?",
-    a: "The team uses professional brands including Dior, Armani, Charlotte Tilbury, MAC, Rare Beauty, Huda Beauty, Fenty Beauty, Too Faced and NARS.",
+    q: "What products do Glam by Dia artists use?",
+    a: "The Glam by Dia team only use top-end professional brands such as Dior, Armani, Charlotte Tilbury, MAC, Rare Beauty, Huda Beauty, Fenty Beauty, Too Faced and NARS.",
   },
   {
-    q: "Is a bridal trial necessary, and how does it work?",
-    a: "A bridal trial is not compulsory, but we highly recommend one to help you feel confident and prepared. You’ll meet your artist, discuss your preferred style, try your desired makeup and hairstyle, share inspiration and make adjustments. If you’re unsure what suits you, the team will recommend a look that complements your features, outfit and personal style.",
+    q: "Is a Bridal Trial Necessary & How Does It Work?",
+    a: "While a bridal trial is not compulsory, we highly recommend it to help you feel confident and prepared for your wedding day.\n\nA trial gives you the opportunity to meet your artist, discuss your preferred style and try out your desired makeup and hairstyle before the big day. It's also the perfect time to share inspiration photos, discuss your preferences and make any adjustments to achieve your desired look.\n\nNot sure what style you want? No worries! Our experienced artists will guide you through the process, offer professional recommendations and help you find a look that complements your features, outfit and personal style.\n\nOur goal is to ensure you feel comfortable, confident and beautiful on your special day.",
   },
   {
     q: "Do you offer touch-up services during the event?",
-    a: "Yes. Touch-ups are available at an additional cost. If you would like your artist to stay at the event, tell us when enquiring. We’ll discuss your needs and provide a personalised quote.",
+    a: "Yes! We offer touch-up services at an additional cost. If you would like your artist to stay on-site throughout your event to maintain your makeup and hairstyle, please let us know when making your booking.\n\nWe can discuss your requirements and provide a personalised quote based on the duration and services required.",
   },
   {
     q: "Do you offer mobile service or studio service?",
-    a: "Both. The studio is in Clayton South, Melbourne, and the team can travel to your preferred location across Melbourne and surrounding areas. Travel arrangements are available for bookings elsewhere in Australia.",
+    a: "Yes! We offer both mobile and studio appointments for your convenience. Our studio is located in Clayton South, Melbourne, and our team can travel to your preferred location.\n\nWe provide mobile beauty services across Melbourne and surrounding areas, with travel arrangements available for bookings anywhere across Australia.\n\nWhether you prefer visiting our studio or having our artists come to you, we're happy to accommodate your needs.",
   },
   {
     q: "How much is the travel fee?",
-    a: "Travel within Melbourne is a flat $50 call-out fee, including the first 30 kilometres calculated from Melbourne CBD or the relevant regional hub. Additional distance is $2 per kilometre, plus GST. Rural or long-distance bookings may also require artist accommodation. All extra travel and accommodation costs will be discussed and confirmed before booking.",
+    a: "We charge a flat travel fee of $50 for bookings within Melbourne. The travel fee includes the initial call-out fee and the first 30 kilometres of travel, calculated from the Melbourne CBD or the relevant regional hub. Any additional distance is charged at $2 per kilometre, plus GST.\n\nFor rural or long-distance bookings where same-day travel is not practical, clients may also be required to cover the artist's accommodation expenses. Any additional travel and accommodation costs will be discussed and confirmed before booking.",
   },
   {
-    q: "Can I schedule a service at any time?",
-    a: "The team operates 365 days a year. A $50 after-hours fee per artist applies to appointments before 7:00 AM or after 7:00 PM.",
+    q: "Can I schedule my service for any time day or night?",
+    a: "We operate 365 days a year to deliver a 5-star hair and makeup experience from anywhere. If you wish to schedule one of our expert artists before 7 AM or after 7 PM, we require a $50 after-hours fee for our artist.",
   },
   {
-    q: "Is there an early morning fee?",
-    a: "Yes. A $50 early morning fee per artist applies to appointments before 6:00 AM. Applicable fees will be confirmed before booking.",
+    q: "Do You Charge an Early Morning Fee?",
+    a: "Yes! An early morning fee of $50 per artist applies to appointments scheduled before 6:00 AM. This helps cover the additional arrangements required for early morning bookings.",
   },
   {
-    q: "Do I need to pay a deposit?",
-    a: "Yes. A deposit is required to secure your booking. Your appointment is officially confirmed once the deposit has been received. The remaining balance is due closer to your appointment, as outlined in your booking confirmation.",
+    q: "Do I Need to Pay a Deposit?",
+    a: "Yes! A deposit is required to secure your booking. Your appointment will only be officially confirmed once the deposit has been received.\n\nThe remaining balance can be paid closer to your appointment, as outlined in your booking confirmation.",
   },
   {
-    q: "Can you accommodate large bridal parties or group bookings?",
-    a: "Absolutely. The team can accommodate bridal parties, wedding guests and special occasion groups. For larger bookings, contact us as early as possible so we can allocate artists, coordinate schedules and help everyone get ready on time.",
+    q: "Can Glam by Dia accommodate large bridal parties or group bookings?",
+    a: "Absolutely! We welcome group bookings and can accommodate large bridal parties, wedding guests and special occasion groups.\n\nOur team of experienced makeup artists and hairstylists can work together to ensure everyone is ready on time.\n\nFor larger bookings, we recommend contacting us as early as possible so we can allocate the right number of artists, coordinate schedules and ensure a smooth and enjoyable experience for everyone.",
   },
   {
-    q: "What is your cancellation policy?",
-    a: "Your booking is confirmed once the deposit has been received. Deposits are non-refundable for cancellations made within 14 days of the appointment. The remaining balance must be paid at least 7 days before your booking date.",
+    q: "What Is Your Cancellation Policy?",
+    a: "• Your booking is confirmed once the deposit has been received.\n• Deposits are non-refundable for cancellations made within 14 days of the appointment.\n• The remaining balance must be paid at least 7 days before your booking date.",
   },
   {
-    q: "Will lead artist Diya be at my booking?",
-    a: "We always aim for lead artist Diya to attend. If she is unavailable, your booking may be assigned to one of the team’s experienced artists in consultation with you, with the same professional service and quality.",
+    q: "Will My Booking Be Covered by Lead Artist Diya?",
+    a: "We always aim to have our lead artist, Diya, personally attend your booking. However, if she is unavailable, don't worry! Your booking will be assigned to one of our highly talented and experienced artists, in consultation with you, to ensure you receive the same professional service and quality you expect from Glam by Dia.",
   },
   {
-    q: "Why should I choose Glam by Dia?",
-    a: "Glam by Dia brings over 10 years of industry experience, personalised makeup and hairstyling, mobile convenience across Melbourne and Australia, consistent professional standards, a flexible team for individual or group bookings, and clear communication from your first enquiry to your special day. Our goal is to help you look beautiful, feel confident and enjoy every moment.",
+    q: "Why Should I Choose Glam by Dia?",
+    a: "At Glam by Dia, we combine professional expertise, creativity and personalised service to make every beauty experience special.\n\n• Experienced Artists: A talented team with over 10 years of industry experience.\n• Personalised Looks: Makeup and hairstyling tailored to your features, preferences and occasion.\n• Mobile Convenience: We travel to your preferred location across Melbourne and Australia.\n• Quality & Attention to Detail: We focus on delivering beautiful, polished and consistent results.\n• Flexible Team: Multiple artists are available to accommodate individual and large group bookings.\n• Client-Focused Service: From your first enquiry to your special day, we prioritise clear communication and a seamless experience.\n\nAt Glam by Dia, our goal is simple: to make you look beautiful, feel confident and enjoy every moment of your special occasion.",
   },
 ] as const;

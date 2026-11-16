@@ -154,7 +154,10 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer links" className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+          <nav
+            aria-label="Footer links"
+            className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm"
+          >
             <Link className="text-plum/80 underline-offset-4 hover:underline" to="/services">
               Services
             </Link>
@@ -218,7 +221,7 @@ export function Footer() {
             alt="Glam by Dia"
             width={523}
             height={477}
-            className="mx-auto h-[5.5rem] w-24 object-contain saturate-[0.88] drop-shadow-sm"
+            className="mx-auto h-[5.5rem] w-24 object-contain saturate-[0.7] drop-shadow-sm"
           />
           <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">
             {SITE.tagline}

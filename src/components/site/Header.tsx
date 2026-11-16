@@ -61,7 +61,7 @@ export function Header() {
               alt="Glam by Dia logo"
               width={523}
               height={477}
-              className="block h-[4.9rem] w-[5.4rem] object-contain saturate-[0.88] drop-shadow-[0_5px_10px_rgba(226,63,114,0.25)] sm:h-[5.8rem] sm:w-[6.3rem]"
+              className="block h-[4.9rem] w-[5.4rem] object-contain saturate-[0.7] drop-shadow-[0_3px_8px_rgba(95,64,75,0.16)] sm:h-[5.8rem] sm:w-[6.3rem]"
             />
           </Link>
 
@@ -94,7 +94,7 @@ export function Header() {
               alt="Glam by Dia"
               width={523}
               height={477}
-              className="h-16 w-[70px] object-contain saturate-[0.88]"
+              className="h-16 w-[70px] object-contain saturate-[0.7]"
             />
             <button
               onClick={() => setOpen(false)}

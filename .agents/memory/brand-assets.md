@@ -9,11 +9,11 @@ Preserve the established pink palette and illustrated logo. Make only the change
 
 **How to apply:** keep the previous palette, logo, typography and layout unless the PDF explicitly calls for a change.
 
-Do not display AI-generated or stock imagery as Glam by Dia portfolio work. Use only client-approved real portfolio photos; until those are supplied, use image-free layouts and an honest gallery placeholder.
+Do not display AI-generated or stock imagery as Glam by Dia portfolio work. Use only client-approved real portfolio photos. Until approved images are supplied, preserve the existing image slots and surrounding layout as blank placeholders instead of deleting those sections.
 
 **Why:** the client requested that all AI pictures be updated, and the project does not yet contain verified real client portfolio photos.
 
-**How to apply:** avoid generated and unrelated third-party images in public-facing pages, especially where visitors could mistake them for actual Glam by Dia work.
+**How to apply:** keep hero, gallery, and social-feed image spaces available for later approved assets; do not add generated or unrelated third-party images, or remove the surrounding page context.
 
 Use a flat #fcdee3 site background with no floral or watercolor decoration, while keeping the existing pink colors for text, buttons and other controls.
 
