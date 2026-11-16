@@ -35,8 +35,8 @@ export default function Services() {
                   <Reveal key={service.slug} delay={index * 70}>
                     <article className="glass-panel h-full p-5 sm:p-7">
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                          <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.6} />
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm">
+                          <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
                         </span>
                         <span className="font-display text-xl font-semibold text-plum">
                           {service.price}
@@ -66,7 +66,11 @@ export default function Services() {
 
         <section className="px-3 pt-14 sm:px-6">
           <div className="mx-auto max-w-5xl">
-            <SectionTitle eyebrow="Enquire for bridal bookings" title="Wedding Day" script="Services" />
+            <SectionTitle
+              eyebrow="Enquire for bridal bookings"
+              title="Wedding Day"
+              script="Services"
+            />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {enquiryServices.map((service, index) => {
                 const Icon = serviceIcons[index + directServices.length] ?? Sparkles;
@@ -74,8 +78,8 @@ export default function Services() {
                   <Reveal key={service.slug} delay={index * 70}>
                     <article className="glass-panel h-full p-5 sm:p-7">
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                          <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.6} />
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm">
+                          <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
                         </span>
                         <span className="font-display text-lg font-semibold text-plum">
                           {service.price}
@@ -98,13 +102,15 @@ export default function Services() {
               })}
             </div>
             <p className="mt-4 text-center text-xs text-muted-foreground">
-              Bridal services are quoted by enquiry. The team will confirm your date and personalised quote.
+              Bridal services are quoted by enquiry. The team will confirm your date and
+              personalised quote.
             </p>
           </div>
         </section>
 
         <CtaBanner>
-          Booking for a group? Tell us how many people need makeup or hairstyling and we’ll plan the timing with you.
+          Booking for a group? Tell us how many people need makeup or hairstyling and we’ll plan the
+          timing with you.
         </CtaBanner>
       </main>
       <Footer />

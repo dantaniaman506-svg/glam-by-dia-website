@@ -68,8 +68,8 @@ function QuickServiceStrip() {
                 index < QUICK_SERVICES.length - 1 ? "lg:border-r" : ""
               } max-sm:last:col-span-2 max-sm:last:mx-auto max-sm:last:w-1/2 lg:border-b-0`}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-primary">
-                <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.6} />
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm transition-colors group-hover:bg-[#d8d2d5]">
+                <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <span className="text-sm font-medium text-foreground/90">{title}</span>
               <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />

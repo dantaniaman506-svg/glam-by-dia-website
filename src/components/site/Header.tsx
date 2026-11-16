@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Instagram } from "lucide-react";
 import { BOOKING_OPTIONS_PATH, NAV_LINKS, SITE } from "@/lib/site";
 
 function ArrowIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -130,8 +131,15 @@ export function Header() {
             <a href={SITE.emailHref} className="block break-all py-1">
               {SITE.email}
             </a>
-            <a href={SITE.instagram} target="_blank" rel="noreferrer" className="block py-1">
-              {SITE.instagramHandle}
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram profile"
+              className="flex min-h-10 items-center gap-2 rounded-lg px-1 py-1"
+            >
+              <Instagram aria-hidden="true" className="h-4 w-4 shrink-0 text-primary" />
+              <span>{SITE.instagramHandle}</span>
             </a>
           </div>
         </aside>

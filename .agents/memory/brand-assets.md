@@ -9,11 +9,11 @@ Preserve the established pink palette and illustrated logo. Make only the change
 
 **How to apply:** keep the previous palette, logo, typography and layout unless the PDF explicitly calls for a change.
 
-Do not display AI-generated or stock imagery as Glam by Dia portfolio work. Use only client-approved real portfolio photos. Until approved images are supplied, preserve the existing image slots and surrounding layout as blank placeholders instead of deleting those sections.
+Do not display AI-generated or stock imagery as Glam by Dia portfolio work. Use only client-approved real portfolio photos. Until approved images are supplied, preserve the existing image slots and surrounding layout as plain white placeholders instead of deleting those sections. Service shortcuts should use simple dark-grey circular line icons, not photos.
 
-**Why:** the client requested that all AI pictures be updated, and the project does not yet contain verified real client portfolio photos.
+**Why:** the client requested that all AI pictures be updated, and the project does not yet contain verified real client portfolio photos. The user also explicitly chose white image spaces and grey circular icons in November 2026.
 
-**How to apply:** keep hero, gallery, and social-feed image spaces available for later approved assets; do not add generated or unrelated third-party images, or remove the surrounding page context.
+**How to apply:** keep hero, gallery, and social-feed image spaces available for later approved assets; do not add generated or unrelated third-party images, or remove the surrounding page context. Keep service icons as grey circles until approved image assets arrive.
 
 Use a flat #fcdee3 site background with no floral or watercolor decoration, while keeping the existing pink colors for text, buttons and other controls.
 

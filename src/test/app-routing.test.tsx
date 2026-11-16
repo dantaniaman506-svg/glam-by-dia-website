@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { AppRoutes } from "@/App";
 import * as bridalChime from "@/lib/bridal-chime";
+import { SITE } from "@/lib/site";
 
 describe("App routing", () => {
   it("offers makeup, self-makeup and gift card options", async () => {
@@ -62,7 +63,7 @@ describe("App routing", () => {
     scrollTo.mockRestore();
   });
 
-  it("keeps the home hero and Instagram image areas blank until approved photos arrive", async () => {
+  it("keeps the home hero and Instagram image areas white until approved photos arrive", async () => {
     render(
       <MemoryRouter initialEntries={["/"]}>
         <AppRoutes />
@@ -71,22 +72,67 @@ describe("App routing", () => {
 
     expect(
       await screen.findByRole("img", { name: "Reserved for a client-approved hero photo" }),
-    ).toBeInTheDocument();
-    expect(await screen.findAllByRole("img", { name: /Reserved for Instagram post/ })).toHaveLength(
-      6,
-    );
+    ).toHaveClass("bg-white");
+    const instagramSlots = await screen.findAllByRole("img", {
+      name: /Reserved for Instagram post/,
+    });
+    expect(instagramSlots).toHaveLength(6);
+    expect(instagramSlots[0]).toHaveClass("bg-white");
   });
 
-  it("keeps six blank gallery slots for approved portfolio photos", async () => {
+  it("keeps six white gallery slots for approved portfolio photos", async () => {
     render(
       <MemoryRouter initialEntries={["/gallery"]}>
         <AppRoutes />
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findAllByRole("img", { name: /Reserved for client-approved portfolio photo/ }),
-    ).toHaveLength(6);
+    const gallerySlots = await screen.findAllByRole("img", {
+      name: /Reserved for client-approved portfolio photo/,
+    });
+    expect(gallerySlots).toHaveLength(6);
+    expect(gallerySlots[0]).toHaveClass("bg-white");
+  });
+
+  it("shows compact footer links for Instagram, maps, phone, and email", async () => {
+    render(
+      <MemoryRouter initialEntries={["/contact"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    const footerLinks = within(
+      screen.getByRole("navigation", { name: "Footer quick contact links" }),
+    );
+    expect(footerLinks.getByRole("link", { name: "Footer Instagram" })).toHaveAttribute(
+      "href",
+      SITE.instagram,
+    );
+    expect(footerLinks.getByRole("link", { name: "Footer Location" })).toHaveAttribute(
+      "href",
+      SITE.directionsUrl,
+    );
+    expect(footerLinks.getByRole("link", { name: "Footer Phone" })).toHaveAttribute(
+      "href",
+      SITE.phoneHref,
+    );
+    expect(footerLinks.getByRole("link", { name: "Footer Email" })).toHaveAttribute(
+      "href",
+      SITE.emailHref,
+    );
+  });
+
+  it("shows an Instagram icon link in the navigation menu", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    const instagramLink = await screen.findByRole("link", { name: "Instagram profile" });
+    expect(instagramLink).toHaveAttribute("href", SITE.instagram);
+    expect(instagramLink.querySelector("svg")).toBeInTheDocument();
   });
 
   it("selects a pricing service and smoothly brings the booking form into view", async () => {

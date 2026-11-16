@@ -1,18 +1,12 @@
 import { Link } from "react-router-dom";
+import { CalendarDays, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { BOOKING_OPTIONS_PATH, SITE } from "@/lib/site";
 
-const socials = [
-  {
-    label: "Instagram",
-    href: SITE.instagram,
-    path: (
-      <>
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
-      </>
-    ),
-  },
+const quickLinks = [
+  { label: "Instagram", href: SITE.instagram, Icon: Instagram, external: true },
+  { label: "Location", href: SITE.directionsUrl, Icon: MapPin, external: true },
+  { label: "Phone", href: SITE.phoneHref, Icon: Phone, external: false },
+  { label: "Email", href: SITE.emailHref, Icon: Mail, external: false },
 ];
 
 function ContactRow({
@@ -25,19 +19,21 @@ function ContactRow({
   href?: string;
 }) {
   const content = (
-    <span className="flex min-w-0 items-center gap-2.5">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+    <span className="flex min-w-0 items-start gap-2.5">
+      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
         {icon}
       </span>
-      <span className="truncate text-[0.86rem] text-plum/85">{children}</span>
+      <span className="min-w-0 flex-1 break-words pt-1 text-left text-[0.82rem] leading-5 text-plum/85 [overflow-wrap:anywhere]">
+        {children}
+      </span>
     </span>
   );
   return href ? (
     <a
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
-      rel="noreferrer"
-      className="block hover:opacity-80"
+      rel={href.startsWith("http") ? "noreferrer" : undefined}
+      className="block min-w-0 rounded-xl px-2 py-1.5 transition hover:bg-white/50 hover:opacity-90"
     >
       {content}
     </a>
@@ -48,9 +44,9 @@ function ContactRow({
 
 export function Footer() {
   return (
-    <footer className="mt-16 px-3 pb-10 sm:px-6">
+    <footer className="mt-12 px-3 pb-8 sm:mt-16 sm:px-6 sm:pb-10">
       <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-gradient-to-b from-blush/90 via-secondary/80 to-primary/30 shadow-[0_20px_50px_-24px_rgba(150,80,110,0.5)] ring-1 ring-white/60 backdrop-blur-sm">
-        <div className="relative px-6 py-10 sm:px-10">
+        <div className="relative px-4 py-7 sm:px-10 sm:py-9">
           {/* decorative hearts */}
           <span
             aria-hidden
@@ -67,15 +63,15 @@ export function Footer() {
             </svg>
           </span>
 
-          <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center">
+          <div className="grid min-w-0 gap-5 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] sm:items-center sm:gap-7">
             <div className="flex items-center justify-center sm:justify-start">
-              <p className="text-script text-3xl sm:text-4xl">
+              <p className="text-center text-script text-3xl sm:text-left sm:text-4xl">
                 Let's Make
                 <br />
                 Your Day Special
               </p>
             </div>
-            <div className="grid justify-items-center gap-2.5 sm:justify-items-start">
+            <div className="grid min-w-0 grid-cols-1 gap-1 min-[380px]:grid-cols-2 sm:gap-2">
               <ContactRow
                 href={SITE.phoneHref}
                 icon={
@@ -156,7 +152,7 @@ export function Footer() {
 
           <nav
             aria-label="Footer links"
-            className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm"
+            className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm sm:mt-7"
           >
             <Link className="text-plum/80 underline-offset-4 hover:underline" to="/services">
               Services
@@ -169,63 +165,44 @@ export function Footer() {
             </Link>
           </nav>
 
-          <div className="mt-9 flex justify-center">
+          <div className="mt-6 flex justify-center sm:mt-8">
             <Link
               to={BOOKING_OPTIONS_PATH}
-              className="btn-primary w-full max-w-md !py-3.5 sm:w-auto"
+              className="btn-primary w-full max-w-md !py-3 sm:w-auto sm:!py-3.5"
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-4.5 w-4.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-              >
-                <rect x="3" y="5" width="18" height="16" rx="3" />
-                <path d="M8 3v4M16 3v4M3 10h18" />
-              </svg>
+              <CalendarDays aria-hidden="true" className="h-4.5 w-4.5" />
               Book Your Appointment
             </Link>
           </div>
 
-          <div className="mt-8 flex justify-center gap-3">
-            {socials.map((s) => (
+          <nav
+            aria-label="Footer quick contact links"
+            className="mt-5 flex justify-center gap-2.5 sm:mt-6 sm:gap-3"
+          >
+            {quickLinks.map(({ label, href, Icon, external }) => (
               <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={s.label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/30 bg-white/80 text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
+                key={label}
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noreferrer" : undefined}
+                aria-label={`Footer ${label}`}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 bg-white/80 text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground sm:h-11 sm:w-11"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {s.path}
-                </svg>
+                <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
               </a>
             ))}
-          </div>
+          </nav>
         </div>
 
-        <div className="border-t border-white/60 bg-white/55 px-6 py-6 text-center backdrop-blur-sm">
+        <div className="border-t border-white/60 bg-white/55 px-5 py-4 text-center backdrop-blur-sm sm:px-6 sm:py-5">
           <img
             src="/images/brand-logo.webp"
             alt="Glam by Dia"
             width={523}
             height={477}
-            className="mx-auto h-[5.5rem] w-24 object-contain saturate-[0.7] drop-shadow-sm"
+            className="mx-auto h-[4.5rem] w-20 object-contain saturate-[0.7] drop-shadow-sm sm:h-[5rem] sm:w-24"
           />
-          <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">
-            {SITE.tagline}
-          </p>
+          <p className="mt-1 text-[0.7rem] tracking-wide text-muted-foreground">{SITE.tagline}</p>
         </div>
       </div>
     </footer>
