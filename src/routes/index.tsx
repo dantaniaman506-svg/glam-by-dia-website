@@ -2,6 +2,7 @@ import { Brush, Crown, Scissors, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { Footer } from "@/components/site/Footer";
+import { GoogleReviewsMarquee } from "@/components/site/GoogleReviewsMarquee";
 import { Header } from "@/components/site/Header";
 import { ArrowRight, CarIcon, HeartIcon, PinIcon, ShieldIcon } from "@/components/site/icons";
 import { BlankImageSlot } from "@/components/site/BlankImageSlot";
@@ -208,24 +209,9 @@ function FeaturesStrip() {
 function ReviewsAndInstagram() {
   return (
     <section className="px-3 pt-14 sm:px-6 sm:pt-20">
-      <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
-        <article className="glass-panel p-6 text-center sm:p-8">
-          <p className="eyebrow">Client feedback</p>
-          <h2 className="heading-display mt-2 text-2xl">Read our latest Google reviews</h2>
-          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-foreground/75">
-            Visit Google to see the most recent feedback and ratings.
-          </p>
-          <a
-            href={SITE.googleReviewsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-outline mt-5"
-          >
-            View Google reviews
-            <ArrowRight />
-          </a>
-        </article>
-        <article className="glass-panel p-6 text-center sm:p-8">
+      <div className="mx-auto max-w-5xl">
+        <GoogleReviewsMarquee />
+        <article className="glass-panel mt-4 p-6 text-center sm:p-8">
           <p className="eyebrow">Follow for the latest</p>
           <h2 className="heading-display mt-2 text-2xl">Glam by Dia on Instagram</h2>
           <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-foreground/75">
@@ -246,9 +232,6 @@ function ReviewsAndInstagram() {
           </a>
         </article>
       </div>
-      <p className="mx-auto mt-3 max-w-3xl text-center text-xs leading-relaxed text-muted-foreground">
-        Latest Google reviews and Instagram posts open on their respective platforms.
-      </p>
     </section>
   );
 }

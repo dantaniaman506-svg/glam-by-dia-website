@@ -47,8 +47,8 @@
 
 :root {
   --radius: 1rem;
-  --brand-pink: #F35B85;
-  --brand-pink-deep: #E23F72;
+  --brand-pink: #f35b85;
+  --brand-pink-deep: #e23f72;
   --background: #fcdee3;
   --foreground: oklch(0.38 0.055 356);
   --card: oklch(0.992 0.008 20);
@@ -147,7 +147,10 @@
   color: var(--color-primary-foreground);
   background-image: linear-gradient(135deg, var(--brand-pink), var(--brand-pink-deep));
   box-shadow: 0 10px 24px -10px rgb(226 63 114 / 0.42);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -169,7 +172,9 @@
   color: var(--color-secondary-foreground);
   background-color: oklch(0.99 0.01 20 / 0.75);
   border: 1px solid var(--color-primary);
-  transition: background-color 0.25s ease, transform 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
 
   &:hover {
     background-color: var(--color-secondary);
@@ -187,7 +192,12 @@
 }
 
 @utility blush-blob {
-  background-image: radial-gradient(circle at 35% 35%, oklch(0.93 0.05 15), oklch(0.96 0.03 18) 60%, transparent 75%);
+  background-image: radial-gradient(
+    circle at 35% 35%,
+    oklch(0.93 0.05 15),
+    oklch(0.96 0.03 18) 60%,
+    transparent 75%
+  );
   border-radius: 2rem;
 }
 
@@ -212,7 +222,9 @@
   font-size: 0.92rem;
   color: var(--color-foreground);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 
   &::placeholder {
     color: oklch(0.62 0.04 350);
@@ -249,6 +261,58 @@
   }
 }
 
+@keyframes glam-review-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.review-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, black 3%, black 97%, transparent 100%);
+}
+
+.review-track {
+  display: flex;
+  width: max-content;
+  animation: glam-review-drift 78s linear infinite;
+  will-change: transform;
+}
+
+.review-track-group {
+  display: flex;
+  flex: none;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.review-track:hover,
+.review-track:focus-within,
+.review-track:active {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    scrollbar-width: none;
+  }
+
+  .review-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-track {
+    animation: none;
+    will-change: auto;
+  }
+
+  .review-track-copy {
+    display: none;
+  }
+}
+
 /* soft float animation for decorative elements */
 @keyframes floaty {
   0%,
@@ -268,7 +332,9 @@
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 

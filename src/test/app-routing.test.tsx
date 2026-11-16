@@ -94,6 +94,31 @@ describe("App routing", () => {
     expect(gallerySlots[0]).toHaveClass("bg-white");
   });
 
+  it("shows only supplied Google review excerpts and links every card to Maps", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    const reviewsRegion = await screen.findByRole("region", {
+      name: /Google review excerpts/,
+    });
+    const reviewLinks = within(reviewsRegion).getAllByRole("link", {
+      name: /Google review from/,
+    });
+
+    expect(reviewLinks).toHaveLength(6);
+    expect(reviewLinks[0]).toHaveAttribute("href", SITE.googleReviewsUrl);
+    expect(reviewLinks[0]).toHaveTextContent(/comfortable throughout the whole appointment/);
+    expect(reviewLinks[1]).toHaveTextContent(/amazing job doing my make up/);
+    expect(reviewLinks[2]).toHaveTextContent(/40th birthday/);
+    expect(reviewLinks[3]).toHaveTextContent(/very natural, fresh/);
+    expect(reviewLinks[4]).toHaveTextContent(/Absolute perfection/);
+    expect(reviewLinks[5]).toHaveTextContent(/went above and beyond/);
+    expect(reviewLinks.some((link) => link.textContent?.includes("Thank you so much"))).toBe(false);
+  });
+
   it("shows compact footer links for Instagram, maps, phone, and email", async () => {
     render(
       <MemoryRouter initialEntries={["/contact"]}>
