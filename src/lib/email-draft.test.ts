@@ -10,7 +10,7 @@ const sample: BookingInput = {
   phoneCallingCode: "+61",
   email: "asha@example.com",
   contactMethod: "Email",
-  service: "Makeup with hair up ($210)",
+  service: "Makeup with Hair Up ($220)",
   preferredDate: "2027-02-10",
   preferredTime: "Morning",
   locationPreference: "Mobile",
@@ -35,7 +35,7 @@ describe("email drafts", () => {
     expect(url).toMatch(/^mailto:dantaniaman506@gmail\.com\?/);
     expect(decodeMailtoPart(url, "subject")).toContain("Booking request from Asha Patel");
     expect(body).toContain("Phone: +61400123456 — Australia (+61)");
-    expect(body).toContain("Service selected: Makeup with hair up ($210)");
+    expect(body).toContain("Service selected: Makeup with Hair Up ($220)");
     expect(body).toContain("Skin allergies or conditions: Sensitive skin");
     expect(body).toContain("Special notes: Please call after 5pm");
     expect(url).not.toContain("+");

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BOOKING_OPTIONS_PATH, SITE } from "@/lib/site";
+import { BrandWordmark } from "@/components/site/BrandWordmark";
 
 const socials = [
   {
@@ -10,39 +11,6 @@ const socials = [
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
-      </>
-    ),
-  },
-  {
-    label: "TikTok",
-    href: SITE.instagram,
-    path: <path d="M14 4v9.5a3.5 3.5 0 1 1-3.5-3.5M14 4c.4 2.6 2.2 4.4 5 4.7" />,
-  },
-  {
-    label: "Facebook",
-    href: SITE.instagram,
-    path: (
-      <path d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8v3.5h3V21h3.5v-6.5H17L17.5 11h-3V9.5a1 1 0 0 1 1-1Z" />
-    ),
-  },
-  {
-    label: "Pinterest",
-    href: SITE.instagram,
-    path: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M10.5 20c.7-2.6 1.7-6.6 1.7-6.6" />
-        <path d="M9.6 10.8A3 3 0 1 1 12.7 14c-1 0-1.9-.5-2.1-1.4" />
-      </>
-    ),
-  },
-  {
-    label: "YouTube",
-    href: SITE.instagram,
-    path: (
-      <>
-        <rect x="3" y="6" width="18" height="12" rx="4" />
-        <path d="m10.5 9.5 4.5 2.5-4.5 2.5Z" fill="currentColor" stroke="none" />
       </>
     ),
   },
@@ -147,6 +115,7 @@ export function Footer() {
                 {SITE.email}
               </ContactRow>
               <ContactRow
+                href={SITE.directionsUrl}
                 icon={
                   <svg
                     viewBox="0 0 24 24"
@@ -185,6 +154,18 @@ export function Footer() {
               </ContactRow>
             </div>
           </div>
+
+          <nav aria-label="Footer links" className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+            <Link className="text-plum/80 underline-offset-4 hover:underline" to="/services">
+              Services
+            </Link>
+            <Link className="text-plum/80 underline-offset-4 hover:underline" to="/gift-cards">
+              Gift cards
+            </Link>
+            <Link className="text-plum/80 underline-offset-4 hover:underline" to="/about#faqs">
+              FAQs
+            </Link>
+          </nav>
 
           <div className="mt-9 flex justify-center">
             <Link
@@ -233,13 +214,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/60 bg-white/55 px-6 py-6 text-center backdrop-blur-sm">
-          <img
-            src="/images/brand-logo.webp"
-            alt="Glam by Dia"
-            width={523}
-            height={477}
-            className="mx-auto h-[5.5rem] w-24 object-contain drop-shadow-sm"
-          />
+          <BrandWordmark />
           <p className="mt-0.5 text-[0.72rem] tracking-wide text-muted-foreground">
             {SITE.tagline}
           </p>

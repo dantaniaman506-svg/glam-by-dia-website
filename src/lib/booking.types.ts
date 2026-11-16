@@ -1,4 +1,4 @@
-export type BookingFormType = "beauty" | "henna" | "class" | "message";
+export type BookingFormType = "beauty" | "class" | "message";
 
 export type BookingInput = {
   formType: BookingFormType;
@@ -20,4 +20,6 @@ export type BookingInput = {
   agreedTerms?: boolean | undefined;
   wantsPromotions?: boolean | undefined;
   skillsRequested?: string | undefined;
+  wantsAdditionalPeople?: boolean | undefined;
+  additionalPeopleCount?: number | undefined;
 };

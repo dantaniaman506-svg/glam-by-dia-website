@@ -7,8 +7,6 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/lib/site";
 
-const directionsUrl = "https://www.google.com/maps/search/?api=1&query=52+Oakes+Avenue%2C+Clayton+South+VIC+3169";
-
 export default function Contact() {
   return (
     <div className="min-h-screen pb-6">
@@ -26,9 +24,9 @@ export default function Contact() {
                     <a className="flex min-h-11 items-center gap-3 rounded-xl px-2 hover:bg-blush/70" href="tel:+61478666466"><span className="text-primary">☎</span><span>{SITE.phoneDisplay}</span></a>
                     <a className="flex min-h-11 items-center gap-3 rounded-xl px-2 hover:bg-blush/70" href={`mailto:${SITE.email}`}><span className="text-primary">✉</span><span className="break-all">{SITE.email}</span></a>
                     <a className="flex min-h-11 items-center gap-3 rounded-xl px-2 hover:bg-blush/70" href={SITE.instagram} target="_blank" rel="noreferrer"><span className="text-primary">◎</span><span>@glam_bydia</span></a>
-                    <a className="flex min-h-11 items-start gap-3 rounded-xl px-2 py-2 hover:bg-blush/70" href={directionsUrl} target="_blank" rel="noreferrer"><PinIcon className="mt-0.5 h-5 w-5 shrink-0" /><span>52 Oakes Avenue, Clayton South, 3169, Melbourne</span></a>
+                    <a className="flex min-h-11 items-start gap-3 rounded-xl px-2 py-2 hover:bg-blush/70" href={SITE.directionsUrl} target="_blank" rel="noreferrer"><PinIcon className="mt-0.5 h-5 w-5 shrink-0" /><span>{SITE.address}</span></a>
                   </div>
-                  <a href={directionsUrl} target="_blank" rel="noreferrer" className="btn-outline mt-6 min-h-11 w-full">
+                  <a href={SITE.directionsUrl} target="_blank" rel="noreferrer" className="btn-outline mt-6 min-h-11 w-full">
                     Get directions <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>

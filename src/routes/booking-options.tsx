@@ -1,4 +1,4 @@
-import { Brush, Flower2, GraduationCap } from "lucide-react";
+import { Brush, Gift, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
@@ -15,18 +15,18 @@ const bookingOptions = [
     Icon: Brush,
   },
   {
-    title: "Henna Service",
-    eyebrow: "Henna & mehndi",
-    description: "Traditional bridal and party henna, designed just for you.",
-    to: "/henna",
-    Icon: Flower2,
-  },
-  {
     title: "Self-Makeup Class",
     eyebrow: "Learn with Dia",
     description: "Personal makeup lessons to help you create looks with confidence.",
     to: "/self-makeup-class",
     Icon: GraduationCap,
+  },
+  {
+    title: "Gift Cards",
+    eyebrow: "A thoughtful gift",
+    description: "Send a beauty experience to someone special. Enquire about a gift card.",
+    to: "/gift-cards",
+    Icon: Gift,
   },
 ] as const;
 
@@ -55,7 +55,7 @@ export default function BookingOptions() {
                   aria-hidden="true"
                   className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition group-hover:bg-primary/15"
                 />
-                <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#F35B85]/15 to-[#E23F72]/25 text-[#E23F72] ring-1 ring-white/80">
+                <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-primary ring-1 ring-primary/10">
                   <Icon aria-hidden="true" className="h-7 w-7" strokeWidth={1.7} />
                 </span>
                 <span className="relative mt-6">

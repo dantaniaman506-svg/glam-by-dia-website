@@ -5,8 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Glam by Dia design system — soft romantic bridal pink.
- * Watercolor backgrounds are served from the CDN asset pointers.
+ * Glam by Dia design system — understated blush with warm neutral surfaces.
  */
 
 @theme inline {
@@ -50,12 +49,12 @@
   --radius: 1rem;
   --brand-pink: #F35B85;
   --brand-pink-deep: #E23F72;
-  --background: oklch(0.973 0.015 20);
-  --foreground: oklch(0.38 0.055 356);
-  --card: oklch(0.992 0.008 20);
-  --card-foreground: oklch(0.38 0.055 356);
-  --popover: oklch(0.992 0.008 20);
-  --popover-foreground: oklch(0.38 0.055 356);
+  --background: #fcdee3;
+  --foreground: #352e2d;
+  --card: #fff9f6;
+  --card-foreground: #352e2d;
+  --popover: #fff9f6;
+  --popover-foreground: #352e2d;
   --primary: var(--brand-pink-deep);
   --primary-foreground: oklch(0.995 0.008 20);
   --secondary: oklch(0.978 0.012 28);
@@ -103,24 +102,13 @@
   }
 }
 
-/* ---------- Romantic watercolor site background ---------- */
+/* ---------- Flat blush site background ---------- */
 .site-bg {
   position: fixed;
   inset: 0;
   z-index: -10;
   pointer-events: none;
-  background-color: var(--color-background);
-  background-image: url("/images/background-mobile.webp");
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 768px) {
-  .site-bg {
-    background-image: url("/images/background-desktop.webp");
-    background-attachment: fixed;
-  }
+  background: #fcdee3;
 }
 
 /* ---------- Shared type styles ---------- */

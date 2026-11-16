@@ -2,3 +2,4 @@
 - [GitHub sync](github-sync.md) — after verified project changes, push them to the configured GitHub main branch.
 - [Brand assets](brand-assets.md) — use Dia's supplied logo and cropped illustrations in the home service shortcuts, not photos.
 - [Website email submission](email-submission.md) — use prefilled mailto drafts; the visitor must send them, with no server-side storage.
+- [Route loading tests](route-loading-tests.md) — test React route splitting with the actual Vite/Vitest harness before keeping lazy imports; route tests may remain on Suspense fallback.

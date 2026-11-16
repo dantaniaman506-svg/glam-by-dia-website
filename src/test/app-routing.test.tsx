@@ -5,7 +5,7 @@ import { AppRoutes } from "@/App";
 import * as bridalChime from "@/lib/bridal-chime";
 
 describe("App routing", () => {
-  it("offers the three booking types and chimes before opening the chosen form", () => {
+  it("offers makeup, self-makeup and gift card options", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     const chime = vi.spyOn(bridalChime, "playBridalChime").mockImplementation(() => {});
     render(
@@ -13,14 +13,16 @@ describe("App routing", () => {
         <AppRoutes />
       </MemoryRouter>,
     );
-
-    expect(screen.getByRole("heading", { name: "Choose your beauty service" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Choose your beauty service" }),
+    ).toBeInTheDocument();
     expect(
       within(screen.getByRole("banner")).getByRole("link", { name: /Book Now/ }),
     ).toHaveAttribute("href", "/booking-options");
     const makeupLink = screen.getByRole("link", { name: /Book Makeup & Hair/ });
     expect(makeupLink).toHaveAttribute("href", "/book");
-    expect(screen.getByRole("link", { name: /Henna Service/ })).toHaveAttribute("href", "/henna");
+    expect(screen.queryByRole("link", { name: /Henna Service/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Gift Cards/ })).toHaveAttribute("href", "/gift-cards");
     expect(screen.getByRole("link", { name: /Self-Makeup Class/ })).toHaveAttribute(
       "href",
       "/self-makeup-class",
@@ -28,24 +30,28 @@ describe("App routing", () => {
 
     fireEvent.click(makeupLink);
     expect(chime).toHaveBeenCalledOnce();
-    expect(screen.getByRole("heading", { name: /Book Your Bridal Glam/ })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: /Book Makeup & Hair/ }),
+    ).toBeInTheDocument();
 
     chime.mockRestore();
     scrollTo.mockRestore();
   });
 
-  it("renders the contact page from a direct route entry", () => {
+  it("renders the contact page from a direct route entry", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     render(
       <MemoryRouter initialEntries={["/contact"]}>
         <AppRoutes />
       </MemoryRouter>,
     );
-    expect(screen.getByRole("heading", { name: "Glam by Dia Studio" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Glam by Dia Studio" }),
+    ).toBeInTheDocument();
     scrollTo.mockRestore();
   });
 
-  it("selects a pricing service and smoothly brings the booking form into view", () => {
+  it("selects a pricing service and smoothly brings the booking form into view", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     const scrollIntoView = vi.fn();
     const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
@@ -59,11 +65,12 @@ describe("App routing", () => {
         <AppRoutes />
       </MemoryRouter>,
     );
-
-    fireEvent.click(screen.getByRole("button", { name: "Choose Makeup with hair down ($170)" }));
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Choose Makeup & Hair Down ($200)" }),
+    );
 
     expect(screen.getByRole("combobox", { name: "Which service would you like?" })).toHaveValue(
-      "Makeup with hair down ($170)",
+      "Makeup & Hair Down ($200)",
     );
     expect(scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",
@@ -98,15 +105,14 @@ describe("App routing", () => {
 
     render(
       <MemoryRouter
-        initialEntries={[`/book?service=${encodeURIComponent("Makeup with hair up ($210)")}`]}
+        initialEntries={[`/book?service=${encodeURIComponent("Makeup with Hair Up ($220)")}`]}
       >
         <AppRoutes />
       </MemoryRouter>,
     );
-
     await waitFor(() =>
       expect(screen.getByRole("combobox", { name: "Which service would you like?" })).toHaveValue(
-        "Makeup with hair up ($210)",
+        "Makeup with Hair Up ($220)",
       ),
     );
     expect(scrollIntoView).toHaveBeenCalledWith({

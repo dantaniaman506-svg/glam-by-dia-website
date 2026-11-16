@@ -10,11 +10,12 @@ import { DEFAULT_PHONE_COUNTRY, getPhoneDetails } from "@/lib/phone";
 type Pill = { value: string; label: string };
 
 export type BookingFormConfig = {
-  formType: "beauty" | "henna" | "class";
+  formType: "beauty" | "class";
   services: string[];
   customerTypes?: Pill[];
   skinQuestion?: boolean;
   skillsQuestion?: string;
+  askAdditionalPeople?: boolean;
 };
 
 const CONTACT_METHODS: Pill[] = [
@@ -135,6 +136,8 @@ export function BookingForm({
       agreedTerms: state.agreedTerms,
       wantsPromotions: state.wantsPromotions,
       skillsRequested: state.skillsRequested,
+      wantsAdditionalPeople: state.wantsAdditionalPeople,
+      additionalPeopleCount: state.additionalPeopleCount,
     };
     const emailDraftUrl = createEmailDraft(data);
     setEmailDraftUrl(emailDraftUrl);
@@ -331,6 +334,53 @@ export function BookingForm({
             onChange={(e) => set({ skillsRequested: e.target.value })}
           />
         </Field>
+      ) : null}
+
+      {config.askAdditionalPeople ? (
+        <div className="mb-5">
+          <span className={labelCls}>Would you like to add more people to the booking?</span>
+          <Pills
+            options={[
+              { value: "no", label: "No" },
+              { value: "yes", label: "Yes" },
+            ]}
+            value={
+              state.wantsAdditionalPeople === undefined
+                ? ""
+                : state.wantsAdditionalPeople
+                  ? "yes"
+                  : "no"
+            }
+            onChange={(value) => {
+              const wantsAdditionalPeople = value === "yes";
+              set({
+                wantsAdditionalPeople,
+                additionalPeopleCount: wantsAdditionalPeople
+                  ? state.additionalPeopleCount
+                  : undefined,
+              });
+            }}
+          />
+          {state.wantsAdditionalPeople ? (
+            <Field label="How many additional people?" className="mt-3">
+              <input
+                type="number"
+                min={1}
+                step={1}
+                inputMode="numeric"
+                className={inputCls}
+                value={state.additionalPeopleCount ?? ""}
+                onChange={(event) =>
+                  set({
+                    additionalPeopleCount: event.target.value
+                      ? Number(event.target.value)
+                      : undefined,
+                  })
+                }
+              />
+            </Field>
+          ) : null}
+        </div>
       ) : null}
 
       <Field label="Anything else we should know?" className="mb-6">

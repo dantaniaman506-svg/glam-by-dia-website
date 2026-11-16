@@ -5,7 +5,6 @@ const FORM_RECIPIENT = "dantaniaman506@gmail.com";
 
 const FORM_LABELS: Record<BookingInput["formType"], string> = {
   beauty: "Bridal Makeup & Hair",
-  henna: "Henna / Mehndi",
   class: "Self Makeup Class",
   message: "Contact Enquiry",
 };
@@ -50,6 +49,20 @@ export function createEmailDraft(data: BookingInput): string {
     `Location: ${location}`,
     `Skin allergies or conditions: ${skinDetails}`,
     `Skills to learn: ${value(data.skillsRequested)}`,
+    `Would like to add more people: ${
+      data.wantsAdditionalPeople === undefined
+        ? "Not answered"
+        : data.wantsAdditionalPeople
+          ? "Yes"
+          : "No"
+    }`,
+    `Additional people: ${
+      data.wantsAdditionalPeople
+        ? data.additionalPeopleCount
+          ? String(data.additionalPeopleCount)
+          : "Not provided"
+        : "None"
+    }`,
     `Special notes: ${value(data.notes)}`,
     `Offer updates: ${data.wantsPromotions ? "Yes" : "No"}`,
     "",
