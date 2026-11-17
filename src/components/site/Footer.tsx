@@ -157,9 +157,6 @@ export function Footer() {
             <Link className="text-plum/80 underline-offset-4 hover:underline" to="/services">
               Services
             </Link>
-            <Link className="text-plum/80 underline-offset-4 hover:underline" to="/gift-cards">
-              Gift cards
-            </Link>
             <Link className="text-plum/80 underline-offset-4 hover:underline" to="/about#faqs">
               FAQs
             </Link>

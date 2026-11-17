@@ -6,7 +6,7 @@ import * as bridalChime from "@/lib/bridal-chime";
 import { SITE } from "@/lib/site";
 
 describe("App routing", () => {
-  it("offers makeup, self-makeup and gift card options", async () => {
+  it("offers makeup and self-makeup options", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     const chime = vi.spyOn(bridalChime, "playBridalChime").mockImplementation(() => {});
     render(
@@ -23,7 +23,7 @@ describe("App routing", () => {
     const makeupLink = screen.getByRole("link", { name: /Book Makeup & Hair/ });
     expect(makeupLink).toHaveAttribute("href", "/book");
     expect(screen.queryByRole("link", { name: /Henna Service/ })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Gift Cards/ })).toHaveAttribute("href", "/gift-cards");
+    expect(screen.queryByRole("link", { name: /Gift Cards/ })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Self-Makeup Class/ })).toHaveAttribute(
       "href",
       "/self-makeup-class",
@@ -46,6 +46,17 @@ describe("App routing", () => {
     );
     expect(await screen.findByRole("heading", { name: "Glam by Dia Studio" })).toBeInTheDocument();
     scrollTo.mockRestore();
+  });
+
+  it("keeps the temporarily disabled gift card page unavailable", async () => {
+    render(
+      <MemoryRouter initialEntries={["/gift-cards"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: "Oh, lovely" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to home" })).toHaveAttribute("href", "/");
   });
 
   it("shows four homepage service shortcuts and reveals additional services on demand", async () => {
@@ -271,6 +282,7 @@ describe("App routing", () => {
     const footerLinks = within(
       screen.getByRole("navigation", { name: "Footer quick contact links" }),
     );
+    expect(screen.queryByRole("link", { name: /Gift cards/i })).not.toBeInTheDocument();
     expect(footerLinks.getByRole("link", { name: "Footer Instagram" })).toHaveAttribute(
       "href",
       SITE.instagram,

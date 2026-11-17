@@ -7,7 +7,6 @@ import About from "@/routes/about";
 import Book from "@/routes/book";
 import BookingOptions from "@/routes/booking-options";
 import Contact from "@/routes/contact";
-import GiftCards from "@/routes/gift-cards";
 import Gallery from "@/routes/gallery";
 import SelfMakeupClass from "@/routes/self-makeup-class";
 import Services from "@/routes/services";
@@ -22,7 +21,6 @@ const PAGE_TITLES: Record<string, string> = {
   [BOOKING_OPTIONS_PATH]: "Choose a Beauty Service | Glam by Dia",
   "/self-makeup-class": "Self Makeup Class | Glam by Dia",
   "/contact": "Contact Glam by Dia | Clayton South",
-  "/gift-cards": "Glam by Dia Gift Cards | Melbourne",
 };
 
 function RouteEffects() {
@@ -63,7 +61,6 @@ export function AppRoutes() {
         <Route path="/book" element={<Book />} />
         <Route path={BOOKING_OPTIONS_PATH} element={<BookingOptions />} />
         <Route path="/self-makeup-class" element={<SelfMakeupClass />} />
-        <Route path="/gift-cards" element={<GiftCards />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

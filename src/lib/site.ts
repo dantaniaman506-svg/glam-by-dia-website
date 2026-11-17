@@ -25,7 +25,6 @@ export const NAV_LINKS = [
   { to: "/gallery", label: "Gallery" },
   { to: "/book", label: "Book Makeup & Hair" },
   { to: "/self-makeup-class", label: "Self-Makeup Class" },
-  { to: "/gift-cards", label: "Gift Cards" },
   { to: "/contact", label: "Contact" },
 ] as const;
 

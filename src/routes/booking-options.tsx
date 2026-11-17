@@ -1,4 +1,4 @@
-import { Brush, Gift, GraduationCap } from "lucide-react";
+import { Brush, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
@@ -20,13 +20,6 @@ const bookingOptions = [
     description: "Personal makeup lessons to help you create looks with confidence.",
     to: "/self-makeup-class",
     Icon: GraduationCap,
-  },
-  {
-    title: "Gift Cards",
-    eyebrow: "A thoughtful gift",
-    description: "Send a beauty experience to someone special. Enquire about a gift card.",
-    to: "/gift-cards",
-    Icon: Gift,
   },
 ] as const;
 
