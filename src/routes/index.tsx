@@ -71,10 +71,10 @@ function QuickServiceStrip() {
               <BlankImageSlot
                 label={`Reserved for ${title} photo`}
                 tone="lightGrey"
-                className="aspect-[1.08] w-full rounded-none border-0 lg:aspect-[1.55]"
+                className="aspect-[1.55] w-full rounded-none border-0"
               />
-              <span className="flex min-h-[6.5rem] items-center justify-center gap-2 px-3 py-4 lg:min-h-[4.25rem] lg:px-2 lg:py-3">
-                <span className="text-sm font-medium leading-snug text-foreground/90 lg:text-[0.8rem]">
+              <span className="flex min-h-[3.5rem] items-center justify-center gap-1.5 px-2 py-2 lg:min-h-[4.25rem] lg:gap-2 lg:px-2 lg:py-3">
+                <span className="text-[0.8rem] font-medium leading-snug text-foreground/90 lg:text-[0.8rem]">
                   {title}
                 </span>
                 <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
