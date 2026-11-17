@@ -56,7 +56,7 @@ function QuickServiceStrip() {
     <section className="px-3 pt-3 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow mb-3 text-center">Bridal &amp; Occasion Services</p>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 lg:gap-3">
           {QUICK_SERVICES.map(({ title, service }, index) => (
             <Link
               key={title}
@@ -64,17 +64,19 @@ function QuickServiceStrip() {
               aria-label={`View ${title} service`}
               className={`group overflow-hidden rounded-[1.8rem] border border-white/80 bg-white/75 text-center shadow-[0_16px_38px_-25px_rgba(120,58,82,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_42px_-24px_rgba(120,58,82,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                 index === QUICK_SERVICES.length - 1
-                  ? "max-sm:col-span-2 max-sm:mx-auto max-sm:w-1/2 lg:col-span-2 lg:col-start-2 lg:mx-auto lg:w-1/2"
+                  ? "max-sm:col-span-2 max-sm:mx-auto max-sm:w-1/2"
                   : ""
               }`}
             >
               <BlankImageSlot
                 label={`Reserved for ${title} photo`}
                 tone="lightGrey"
-                className="aspect-[1.08] w-full rounded-none border-0"
+                className="aspect-[1.08] w-full rounded-none border-0 lg:aspect-[1.55]"
               />
-              <span className="flex min-h-[6.5rem] items-center justify-center gap-2 px-3 py-4">
-                <span className="text-sm font-medium leading-snug text-foreground/90">{title}</span>
+              <span className="flex min-h-[6.5rem] items-center justify-center gap-2 px-3 py-4 lg:min-h-[4.25rem] lg:px-2 lg:py-3">
+                <span className="text-sm font-medium leading-snug text-foreground/90 lg:text-[0.8rem]">
+                  {title}
+                </span>
                 <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
