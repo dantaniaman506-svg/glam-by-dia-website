@@ -35,7 +35,7 @@ export default function Services() {
                   <Reveal key={service.slug} delay={index * 70}>
                     <article className="glass-panel h-full p-5 sm:p-7">
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm">
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary text-primary ring-1 ring-primary/10 shadow-sm">
                           <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
                         </span>
                         <span className="font-display text-xl font-semibold text-plum">
@@ -78,7 +78,7 @@ export default function Services() {
                   <Reveal key={service.slug} delay={index * 70}>
                     <article className="glass-panel h-full p-5 sm:p-7">
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm">
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary text-primary ring-1 ring-primary/10 shadow-sm">
                           <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
                         </span>
                         <span className="font-display text-lg font-semibold text-plum">

@@ -48,6 +48,20 @@ describe("App routing", () => {
     scrollTo.mockRestore();
   });
 
+  it("uses the site's pink colors for service page icons", async () => {
+    render(
+      <MemoryRouter initialEntries={["/services"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    const serviceHeading = await screen.findByRole("heading", {
+      name: "Makeup & Hair Down",
+    });
+    const iconBadge = serviceHeading.closest("article")?.querySelector("span.rounded-full");
+    expect(iconBadge).toHaveClass("bg-secondary", "text-primary");
+  });
+
   it("keeps the temporarily disabled gift card page unavailable", async () => {
     render(
       <MemoryRouter initialEntries={["/gift-cards"]}>
