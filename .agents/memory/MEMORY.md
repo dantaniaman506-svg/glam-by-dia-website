@@ -4,3 +4,4 @@
 - [Website email submission](email-submission.md) — use prefilled mailto drafts; the visitor must send them, with no server-side storage.
 - [Route loading tests](route-loading-tests.md) — test React route splitting with the actual Vite/Vitest harness before keeping lazy imports; route tests may remain on Suspense fallback.
 - [Google review excerpts](google-reviews.md) — show only complete text supplied by the user, never guess truncated review endings or include business replies.
+- [White image placeholders](white-image-placeholders.md) — when approved photos are missing, keep each image area and show a solid white image instead of removing or leaving it empty.

@@ -70,14 +70,24 @@ describe("App routing", () => {
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByRole("img", { name: "Reserved for a client-approved hero photo" }),
-    ).toHaveClass("bg-white");
+    const heroSlot = await screen.findByRole("img", {
+      name: "Reserved for a client-approved hero photo",
+    });
+    expect(heroSlot).toHaveClass("bg-white");
+    expect(heroSlot.querySelector("img")).toHaveAttribute(
+      "src",
+      "/images/white-image-placeholder.svg",
+    );
     const instagramSlots = await screen.findAllByRole("img", {
       name: /Reserved for Instagram post/,
     });
     expect(instagramSlots).toHaveLength(6);
-    expect(instagramSlots[0]).toHaveClass("bg-white");
+    const firstInstagramSlot = instagramSlots[0];
+    expect(firstInstagramSlot).toHaveClass("bg-white");
+    expect(firstInstagramSlot?.querySelector("img")).toHaveAttribute(
+      "src",
+      "/images/white-image-placeholder.svg",
+    );
   });
 
   it("keeps six white gallery slots for approved portfolio photos", async () => {
@@ -91,7 +101,12 @@ describe("App routing", () => {
       name: /Reserved for client-approved portfolio photo/,
     });
     expect(gallerySlots).toHaveLength(6);
-    expect(gallerySlots[0]).toHaveClass("bg-white");
+    const firstGallerySlot = gallerySlots[0];
+    expect(firstGallerySlot).toHaveClass("bg-white");
+    expect(firstGallerySlot?.querySelector("img")).toHaveAttribute(
+      "src",
+      "/images/white-image-placeholder.svg",
+    );
   });
 
   it("shows only supplied Google review excerpts and links every card to Maps", async () => {
