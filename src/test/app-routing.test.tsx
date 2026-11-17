@@ -48,7 +48,7 @@ describe("App routing", () => {
     scrollTo.mockRestore();
   });
 
-  it("offers a Bridal shortcut that opens the bridal enquiry service", async () => {
+  it("shows image-card service shortcuts including the Bridal enquiry", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     render(
       <MemoryRouter initialEntries={["/"]}>
@@ -56,9 +56,26 @@ describe("App routing", () => {
       </MemoryRouter>,
     );
 
-    const bridalShortcut = await screen.findByRole("link", { name: /Bridal Makeup & Hair/ });
+    const bridalShortcut = await screen.findByRole("link", {
+      name: "View Bridal Makeup & Hair service",
+    });
     expect(decodeURIComponent(bridalShortcut.getAttribute("href") ?? "")).toContain(
       "Bridal Makeup and Hair (from $300) — Enquiry",
+    );
+    expect(
+      await screen.findByRole("link", { name: "View Makeup with hair down service" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "View Makeup with hair up service" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View Makeup only service" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View Hairstyle only service" })).toBeInTheDocument();
+    const bridalImage = screen.getByRole("img", {
+      name: "Reserved for Bridal Makeup & Hair photo",
+    });
+    expect(bridalImage.querySelector("img")).toHaveAttribute(
+      "src",
+      "/images/light-grey-image-placeholder.svg",
     );
     scrollTo.mockRestore();
   });

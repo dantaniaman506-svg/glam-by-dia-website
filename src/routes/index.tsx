@@ -10,11 +10,11 @@ import { Reveal } from "@/components/site/Reveal";
 import { BRIDAL_BOOKING_SERVICES, SERVICES, SITE } from "@/lib/site";
 
 const QUICK_SERVICES = [
-  { title: "Bridal Makeup & Hair", icon: Crown, service: BRIDAL_BOOKING_SERVICES.bridalMakeupHair },
-  { title: "Makeup & Hair Down", icon: Brush, service: BRIDAL_BOOKING_SERVICES.hairDown },
-  { title: "Makeup with Hair Up", icon: Crown, service: BRIDAL_BOOKING_SERVICES.hairUp },
-  { title: "Makeup", icon: Sparkles, service: BRIDAL_BOOKING_SERVICES.makeupOnly },
-  { title: "Hairstyle", icon: Scissors, service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
+  { title: "Makeup with hair down", service: BRIDAL_BOOKING_SERVICES.hairDown },
+  { title: "Makeup with hair up", service: BRIDAL_BOOKING_SERVICES.hairUp },
+  { title: "Makeup only", service: BRIDAL_BOOKING_SERVICES.makeupOnly },
+  { title: "Hairstyle only", service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
+  { title: "Bridal Makeup & Hair", service: BRIDAL_BOOKING_SERVICES.bridalMakeupHair },
 ];
 
 const FEATURES = [
@@ -56,24 +56,27 @@ function QuickServiceStrip() {
     <section className="px-3 pt-3 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow mb-3 text-center">Bridal &amp; Occasion Services</p>
-        <div className="glass-panel grid grid-cols-2 gap-y-2 p-4 sm:grid-cols-3 sm:p-5 lg:grid-cols-5">
-          {QUICK_SERVICES.map(({ title, icon: Icon, service }, index) => (
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {QUICK_SERVICES.map(({ title, service }, index) => (
             <Link
               key={title}
               to={`/book?service=${encodeURIComponent(service)}`}
-              className={`group flex min-h-28 flex-col items-center justify-center gap-2 border-primary/15 px-2 py-3 text-center transition hover:-translate-y-0.5 ${
-                index % 2 === 0 && index !== QUICK_SERVICES.length - 1 ? "max-sm:border-r" : ""
-              } ${index < 4 ? "max-sm:border-b" : ""} ${
-                index % 3 !== 2 && index < 4 ? "sm:border-r" : ""
-              } ${index < 3 ? "sm:border-b" : ""} ${
-                index < QUICK_SERVICES.length - 1 ? "lg:border-r" : ""
-              } max-sm:last:col-span-2 max-sm:last:mx-auto max-sm:last:w-1/2 lg:border-b-0`}
+              aria-label={`View ${title} service`}
+              className={`group overflow-hidden rounded-[1.8rem] border border-white/80 bg-white/75 text-center shadow-[0_16px_38px_-25px_rgba(120,58,82,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_42px_-24px_rgba(120,58,82,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                index === QUICK_SERVICES.length - 1
+                  ? "max-sm:col-span-2 max-sm:mx-auto max-sm:w-1/2 lg:col-span-2 lg:col-start-2 lg:mx-auto lg:w-1/2"
+                  : ""
+              }`}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e3dfe1] text-[#62595d] ring-1 ring-[#c8bec2] shadow-sm transition-colors group-hover:bg-[#d8d2d5]">
-                <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
+              <BlankImageSlot
+                label={`Reserved for ${title} photo`}
+                tone="lightGrey"
+                className="aspect-[1.08] w-full rounded-none border-0"
+              />
+              <span className="flex min-h-[6.5rem] items-center justify-center gap-2 px-3 py-4">
+                <span className="text-sm font-medium leading-snug text-foreground/90">{title}</span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
               </span>
-              <span className="text-sm font-medium text-foreground/90">{title}</span>
-              <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
             </Link>
           ))}
         </div>
