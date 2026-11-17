@@ -26,8 +26,12 @@ const FEATURES = [
 
 function Hero() {
   return (
-    <section className="px-4 pb-6 pt-14 text-center sm:px-6 sm:pb-10 sm:pt-20">
-      <div className="mx-auto max-w-4xl">
+    <section className="px-4 pb-6 pt-5 text-center sm:px-6 sm:pb-10 sm:pt-8">
+      <BlankImageSlot
+        label="Reserved for a client-approved hero photo"
+        className="mx-auto aspect-[0.94] w-full max-w-[34rem] md:aspect-[2/1] md:max-w-5xl"
+      />
+      <div className="mx-auto mt-8 max-w-4xl">
         <p className="eyebrow">Melbourne bridal and special occasion beauty</p>
         <h1 className="heading-display mt-5 text-4xl sm:text-6xl">
           Glam by Dia
@@ -43,10 +47,6 @@ function Hero() {
           Studio in Clayton South · Mobile across Melbourne
         </p>
       </div>
-      <BlankImageSlot
-        label="Reserved for a client-approved hero photo"
-        className="mx-auto mt-8 aspect-[0.94] w-full max-w-[34rem] md:aspect-[2/1] md:max-w-5xl"
-      />
     </section>
   );
 }
