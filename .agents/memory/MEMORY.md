@@ -5,3 +5,4 @@
 - [Route loading tests](route-loading-tests.md) — test React route splitting with the actual Vite/Vitest harness before keeping lazy imports; route tests may remain on Suspense fallback.
 - [Google review excerpts](google-reviews.md) — show only complete text supplied by the user, never guess truncated review endings or include business replies.
 - [Image placeholders](white-image-placeholders.md) — preserve photo areas with solid placeholders: white generally, light grey for homepage service cards.
+- [Header booking button](header-booking-button.md) — keep booking CTAs out of the sticky header; retain the CTA beneath service listings.

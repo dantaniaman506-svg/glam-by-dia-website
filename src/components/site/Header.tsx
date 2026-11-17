@@ -1,24 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Instagram } from "lucide-react";
-import { BOOKING_OPTIONS_PATH, NAV_LINKS, SITE } from "@/lib/site";
-
-function ArrowIcon({ className = "h-4 w-4" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="m13 6 6 6-6 6" />
-    </svg>
-  );
-}
+import { NAV_LINKS, SITE } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -64,15 +47,6 @@ export function Header() {
               height={477}
               className="block h-[4.9rem] w-[5.4rem] object-contain saturate-[0.7] drop-shadow-[0_3px_8px_rgba(95,64,75,0.16)] sm:h-[5.8rem] sm:w-[6.3rem]"
             />
-          </Link>
-
-          {/* Book now */}
-          <Link
-            to={BOOKING_OPTIONS_PATH}
-            className="btn-primary !px-4 !py-2 !text-xs sm:!px-6 sm:!py-2.5 sm:!text-sm"
-          >
-            Book Now
-            <ArrowIcon className="h-3.5 w-3.5" />
           </Link>
         </div>
       </header>

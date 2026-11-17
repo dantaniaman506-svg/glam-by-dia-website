@@ -18,8 +18,8 @@ describe("App routing", () => {
       await screen.findByRole("heading", { name: "Choose your beauty service" }),
     ).toBeInTheDocument();
     expect(
-      within(screen.getByRole("banner")).getByRole("link", { name: /Book Now/ }),
-    ).toHaveAttribute("href", "/booking-options");
+      within(screen.getByRole("banner")).queryByRole("link", { name: /Book Now/ }),
+    ).not.toBeInTheDocument();
     const makeupLink = screen.getByRole("link", { name: /Book Makeup & Hair/ });
     expect(makeupLink).toHaveAttribute("href", "/book");
     expect(screen.queryByRole("link", { name: /Henna Service/ })).not.toBeInTheDocument();
@@ -98,6 +98,13 @@ describe("App routing", () => {
     expect(screen.getByRole("link", { name: "Show more services" })).toHaveAttribute(
       "href",
       "/services",
+    );
+    const serviceSection = screen
+      .getByRole("heading", { name: "Bridal & Occasion Beauty" })
+      .closest("section");
+    expect(within(serviceSection!).getByRole("link", { name: "Book Now" })).toHaveAttribute(
+      "href",
+      "/book",
     );
     scrollTo.mockRestore();
   });
