@@ -129,6 +129,8 @@ describe("App routing", () => {
         "I'm Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising in bridal and special occasion makeup and hairstyling.",
       ),
     ).toBeInTheDocument();
+    expect(screen.queryByText("Feel like yourself")).not.toBeInTheDocument();
+    expect(screen.getByText("Just a little more unforgettable.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Show more" })).toHaveAttribute("href", "/about");
   });
 

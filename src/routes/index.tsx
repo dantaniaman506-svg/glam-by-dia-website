@@ -107,7 +107,6 @@ function AboutSection() {
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-primary">
               <HeartIcon className="h-7 w-7" />
             </span>
-            <p className="text-script mt-4 text-3xl sm:text-4xl">Feel like yourself</p>
             <p className="mt-2 text-sm text-muted-foreground">Just a little more unforgettable.</p>
           </div>
         </Reveal>
