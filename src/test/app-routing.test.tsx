@@ -59,7 +59,7 @@ describe("App routing", () => {
     expect(screen.getByRole("link", { name: "Back to home" })).toHaveAttribute("href", "/");
   });
 
-  it("shows four homepage service shortcuts and reveals additional services on demand", async () => {
+  it("shows four homepage service shortcuts and links to all services", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     render(
       <MemoryRouter initialEntries={["/"]}>
@@ -78,27 +78,12 @@ describe("App routing", () => {
     expect(
       screen.queryByRole("link", { name: "View Bridal Makeup & Hair service" }),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Show more" })).toHaveAttribute(
-      "aria-expanded",
-      "false",
-    );
-
-    fireEvent.click(screen.getByRole("button", { name: "Show more" }));
-    expect(
-      screen.getByRole("link", { name: "View Bridal Makeup & Hair service" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "View Bridal Trial service" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Show less" })).toHaveAttribute(
-      "aria-expanded",
-      "true",
-    );
-    fireEvent.click(screen.getByRole("button", { name: "Show less" }));
     expect(
       screen.queryByRole("link", { name: "View Bridal Makeup & Hair service" }),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Show more" })).toHaveAttribute(
-      "aria-expanded",
-      "false",
+    expect(screen.getByRole("link", { name: "Show more services" })).toHaveAttribute(
+      "href",
+      "/services",
     );
     scrollTo.mockRestore();
   });

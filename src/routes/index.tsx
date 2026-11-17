@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Brush, Crown, Scissors, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -56,15 +55,12 @@ function Hero() {
 }
 
 function QuickServiceStrip() {
-  const [showAll, setShowAll] = useState(false);
-  const visibleServices = showAll ? QUICK_SERVICES : QUICK_SERVICES.slice(0, 4);
-
   return (
     <section className="px-3 pt-3 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow mb-3 text-center">Bridal &amp; Occasion Services</p>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-3">
-          {visibleServices.map(({ title, service }) => (
+          {QUICK_SERVICES.slice(0, 4).map(({ title, service }) => (
             <Link
               key={title}
               to={`/book?service=${encodeURIComponent(service)}`}
@@ -87,14 +83,14 @@ function QuickServiceStrip() {
         </div>
         {QUICK_SERVICES.length > 4 ? (
           <div className="mt-3 text-center">
-            <button
-              type="button"
-              aria-expanded={showAll}
-              onClick={() => setShowAll((current) => !current)}
+            <Link
+              to="/services"
+              aria-label="Show more services"
               className="min-h-11 rounded-full px-4 text-sm font-medium text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-plum focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
-              {showAll ? "Show less" : "Show more"}
-            </button>
+              Show more
+              <ArrowRight aria-hidden="true" className="ml-1 inline h-4 w-4" />
+            </Link>
           </div>
         ) : null}
       </div>
