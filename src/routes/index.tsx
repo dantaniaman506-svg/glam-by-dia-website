@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Brush, Crown, Scissors, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,9 @@ const QUICK_SERVICES = [
   { title: "Makeup only", service: BRIDAL_BOOKING_SERVICES.makeupOnly },
   { title: "Hairstyle only", service: BRIDAL_BOOKING_SERVICES.hairstyleOnly },
   { title: "Bridal Makeup & Hair", service: BRIDAL_BOOKING_SERVICES.bridalMakeupHair },
+  { title: "Bridal Trial", service: BRIDAL_BOOKING_SERVICES.bridalTrial },
+  { title: "Groom’s Touch Up", service: BRIDAL_BOOKING_SERVICES.groomTouchUp },
+  { title: "Touch Up Kit", service: BRIDAL_BOOKING_SERVICES.touchUpKit },
 ];
 
 const FEATURES = [
@@ -52,21 +56,20 @@ function Hero() {
 }
 
 function QuickServiceStrip() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleServices = showAll ? QUICK_SERVICES : QUICK_SERVICES.slice(0, 4);
+
   return (
     <section className="px-3 pt-3 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow mb-3 text-center">Bridal &amp; Occasion Services</p>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 lg:gap-3">
-          {QUICK_SERVICES.map(({ title, service }, index) => (
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-3">
+          {visibleServices.map(({ title, service }) => (
             <Link
               key={title}
               to={`/book?service=${encodeURIComponent(service)}`}
               aria-label={`View ${title} service`}
-              className={`group overflow-hidden rounded-[1.8rem] border border-white/80 bg-white/75 text-center shadow-[0_16px_38px_-25px_rgba(120,58,82,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_42px_-24px_rgba(120,58,82,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                index === QUICK_SERVICES.length - 1
-                  ? "max-sm:col-span-2 max-sm:mx-auto max-sm:w-1/2"
-                  : ""
-              }`}
+              className="group overflow-hidden rounded-[1.8rem] border border-white/80 bg-white/75 text-center shadow-[0_16px_38px_-25px_rgba(120,58,82,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_42px_-24px_rgba(120,58,82,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               <BlankImageSlot
                 label={`Reserved for ${title} photo`}
@@ -82,6 +85,18 @@ function QuickServiceStrip() {
             </Link>
           ))}
         </div>
+        {QUICK_SERVICES.length > 4 ? (
+          <div className="mt-3 text-center">
+            <button
+              type="button"
+              aria-expanded={showAll}
+              onClick={() => setShowAll((current) => !current)}
+              className="min-h-11 rounded-full px-4 text-sm font-medium text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-plum focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              {showAll ? "Show less" : "Show more"}
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );
@@ -108,17 +123,49 @@ function AboutSection() {
               <span className="text-script ml-2">Makeup &amp; Hair</span>
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-              Glam by Dia is a Melbourne-based mobile bridal beauty team specialising in bridal
-              makeup and hair. With a studio in Clayton South, we travel across Melbourne and
-              surrounding suburbs to provide professional beauty services at your home, hotel or
-              wedding venue.
+              I&apos;m Diya, the founder of Glam by Dia, a Melbourne-based beauty business
+              specialising in bridal and special occasion makeup and hairstyling.
             </p>
-            <Link to="/about" className="btn-outline mt-6">
-              Meet the team
-              <ArrowRight />
+            <Link
+              to="/about"
+              className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-medium text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-plum focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              Show more
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function GalleryShowcase() {
+  return (
+    <section className="px-3 pt-14 sm:px-6 sm:pt-20">
+      <div className="mx-auto max-w-5xl">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="eyebrow">The Glam by Dia Gallery</p>
+            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">A look at our work</h2>
+          </div>
+          <Link
+            to="/gallery"
+            className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-plum focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            Explore the full gallery
+            <ArrowRight aria-hidden="true" className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          {Array.from({ length: 4 }, (_, index) => (
+            <BlankImageSlot
+              key={index}
+              label={`Reserved for client-approved homepage gallery photo ${index + 1}`}
+              className="aspect-[1.05] rounded-2xl sm:aspect-[0.9]"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -251,6 +298,7 @@ export default function Home() {
         <AboutSection />
         <ServicesSection />
         <FeaturesStrip />
+        <GalleryShowcase />
         <ReviewsAndInstagram />
       </main>
       <Footer />

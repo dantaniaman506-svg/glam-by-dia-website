@@ -46,7 +46,7 @@ function ReviewCard({
       rel="noreferrer"
       aria-label={`Google review from ${name}; open Glam by Dia on Google Maps`}
       tabIndex={duplicate ? -1 : undefined}
-      className="flex h-[15.5rem] w-[min(84vw,22rem)] shrink-0 flex-col rounded-[1.6rem] border border-white/90 bg-white/80 p-5 text-left shadow-[0_18px_44px_-28px_rgba(120,58,82,0.5)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_46px_-24px_rgba(120,58,82,0.55)] sm:p-6"
+      className="flex h-[15.5rem] w-[min(84vw,22rem)] shrink-0 flex-col rounded-[1.6rem] border border-primary/10 bg-white p-5 text-left shadow-[0_16px_38px_-27px_rgba(120,58,82,0.48)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_46px_-24px_rgba(120,58,82,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:p-6"
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-0.5" role="img" aria-label="5 out of 5 stars">
@@ -54,7 +54,7 @@ function ReviewCard({
             <Star
               key={index}
               aria-hidden="true"
-              className="h-4 w-4 fill-[#d7a94a] text-[#d7a94a]"
+              className="h-4 w-4 fill-[#e0ad24] text-[#e0ad24]"
               strokeWidth={1.5}
             />
           ))}

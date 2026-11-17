@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { PageHero, SectionTitle, CtaBanner } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
-import { ArrowRight, HeartIcon, PinIcon, ShieldIcon, UsersIcon } from "@/components/site/icons";
+import { ArrowRight } from "@/components/site/icons";
 import { FAQS, SITE } from "@/lib/site";
 
 const REASONS = [
@@ -17,21 +17,6 @@ const REASONS = [
   "Reliable and organised booking processes",
   "Flexible artist availability",
   "Consistent quality and professional standards",
-];
-
-const VALUES = [
-  { Icon: ShieldIcon, title: "Experienced", text: "Over 10 years of industry experience." },
-  {
-    Icon: HeartIcon,
-    title: "Personalised",
-    text: "Looks shaped around your features and preferences.",
-  },
-  { Icon: PinIcon, title: "Mobile", text: "Convenient service at your home, hotel or venue." },
-  {
-    Icon: UsersIcon,
-    title: "A flexible team",
-    text: "Artists available for individual and group bookings.",
-  },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -106,14 +91,13 @@ export default function About() {
           <Reveal className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
             <p className="eyebrow">About Us</p>
             <h2 className="heading-display mt-2 text-2xl sm:text-3xl">Welcome to Glam by Dia!</h2>
-            <p className="text-script mt-3 text-3xl sm:text-4xl">Every detail, perfected.</p>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
               <p>
-                I’m Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising
-                in bridal and special occasion makeup and hairstyling.
+                I&apos;m Diya, the founder of Glam by Dia, a Melbourne-based beauty business
+                specialising in bridal and special occasion makeup and hairstyling.
               </p>
               <p>
-                At Glam by Dia, we believe beauty is about more than just makeup. It’s about
+                At Glam by Dia, we believe beauty is about more than just makeup. It&apos;s about
                 embracing your individuality, enhancing your natural features and feeling confident
                 in your own skin.
               </p>
@@ -124,9 +108,9 @@ export default function About() {
                 their absolute best.
               </p>
               <p>
-                Whether you’re preparing for your wedding day, a special celebration or an important
-                milestone, we are committed to making your beauty experience enjoyable, seamless and
-                memorable.
+                Whether you&apos;re preparing for your wedding day, a special celebration or an
+                important milestone, we are committed to making your beauty experience enjoyable,
+                seamless and memorable.
               </p>
             </div>
           </Reveal>
@@ -134,26 +118,11 @@ export default function About() {
 
         <section className="px-3 pt-14 sm:px-6">
           <div className="mx-auto max-w-5xl">
-            <SectionTitle eyebrow="Why choose us" title="Why Choose Glam by" script="Dia?" />
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
-              {VALUES.map(({ Icon, title, text }, index) => (
-                <Reveal key={title} delay={index * 55}>
-                  <article className="glass-panel flex h-full items-start gap-4 p-5">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h3 className="heading-display text-lg">{title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-foreground/75">{text}</p>
-                    </div>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-            <ul className="glass-panel mt-4 grid gap-2 p-5 text-sm text-foreground/80 sm:grid-cols-2 sm:p-7">
+            <SectionTitle title="Why Choose Glam by" script="Dia?" />
+            <ul className="glass-panel mt-7 grid gap-3 p-5 text-sm text-foreground/80 sm:grid-cols-2 sm:gap-x-8 sm:p-7 sm:text-base">
               {REASONS.map((reason) => (
                 <li key={reason} className="flex items-start gap-2.5">
-                  <span className="mt-1 text-primary" aria-hidden="true">
+                  <span className="mt-0.5 text-primary" aria-hidden="true">
                     •
                   </span>
                   <span>{reason}</span>

@@ -48,7 +48,7 @@ describe("App routing", () => {
     scrollTo.mockRestore();
   });
 
-  it("shows image-card service shortcuts including the Bridal enquiry", async () => {
+  it("shows four homepage service shortcuts and reveals additional services on demand", async () => {
     const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
     render(
       <MemoryRouter initialEntries={["/"]}>
@@ -56,12 +56,6 @@ describe("App routing", () => {
       </MemoryRouter>,
     );
 
-    const bridalShortcut = await screen.findByRole("link", {
-      name: "View Bridal Makeup & Hair service",
-    });
-    expect(decodeURIComponent(bridalShortcut.getAttribute("href") ?? "")).toContain(
-      "Bridal Makeup and Hair (from $300) — Enquiry",
-    );
     expect(
       await screen.findByRole("link", { name: "View Makeup with hair down service" }),
     ).toBeInTheDocument();
@@ -70,14 +64,127 @@ describe("App routing", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "View Makeup only service" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "View Hairstyle only service" })).toBeInTheDocument();
-    const bridalImage = screen.getByRole("img", {
-      name: "Reserved for Bridal Makeup & Hair photo",
-    });
-    expect(bridalImage.querySelector("img")).toHaveAttribute(
-      "src",
-      "/images/light-grey-image-placeholder.svg",
+    expect(
+      screen.queryByRole("link", { name: "View Bridal Makeup & Hair service" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show more" })).toHaveAttribute(
+      "aria-expanded",
+      "false",
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Show more" }));
+    expect(
+      screen.getByRole("link", { name: "View Bridal Makeup & Hair service" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View Bridal Trial service" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show less" })).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Show less" }));
+    expect(
+      screen.queryByRole("link", { name: "View Bridal Makeup & Hair service" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show more" })).toHaveAttribute(
+      "aria-expanded",
+      "false",
     );
     scrollTo.mockRestore();
+  });
+
+  it("shows four white homepage gallery placeholders before Google reviews", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    const slots = await screen.findAllByRole("img", {
+      name: /Reserved for client-approved homepage gallery photo/,
+    });
+    expect(slots).toHaveLength(4);
+    expect(slots[0]).toHaveClass("bg-white");
+    expect(slots[0]?.querySelector("img")).toHaveAttribute(
+      "src",
+      "/images/white-image-placeholder.svg",
+    );
+    expect(screen.getByRole("link", { name: /Explore the full gallery/ })).toHaveAttribute(
+      "href",
+      "/gallery",
+    );
+    expect(
+      screen
+        .getByRole("heading", { name: "A look at our work" })
+        .compareDocumentPosition(
+          screen.getByRole("heading", { name: "Kind words from our clients" }),
+        ) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("uses the supplied About excerpt on the homepage and links to the full page", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByText(
+        "I'm Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising in bridal and special occasion makeup and hairstyling.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Show more" })).toHaveAttribute("href", "/about");
+  });
+
+  it("shows the exact About Us copy, heading, eight reasons, and closing paragraph", async () => {
+    render(
+      <MemoryRouter initialEntries={["/about"]}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Welcome to Glam by Dia!" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "I'm Diya, the founder of Glam by Dia, a Melbourne-based beauty business specialising in bridal and special occasion makeup and hairstyling.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "At Glam by Dia, we believe beauty is about more than just makeup. It's about embracing your individuality, enhancing your natural features and feeling confident in your own skin.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "We are a team of highly qualified and talented makeup artists and hairstylists, bringing over 10 years of industry experience. Our passion lies in creating beautiful, personalised looks that make every client feel confident, elegant and their absolute best.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Whether you're preparing for your wedding day, a special celebration or an important milestone, we are committed to making your beauty experience enjoyable, seamless and memorable.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Why Choose Glam by Dia?" })).toBeInTheDocument();
+    const reasons = [
+      "Experienced and professional beauty artists",
+      "Convenient mobile makeup and hairstyling services",
+      "Personalised beauty experiences",
+      "Luxury service and attention to detail",
+      "Friendly and responsive communication",
+      "Reliable and organised booking processes",
+      "Flexible artist availability",
+      "Consistent quality and professional standards",
+    ];
+    for (const reason of reasons) {
+      expect(screen.getByText(reason)).toBeInTheDocument();
+    }
+    expect(
+      screen.getByText(
+        "We are proud to have been part of thousands of special moments, helping clients look and feel their best. We look forward to being part of yours!",
+      ),
+    ).toBeInTheDocument();
   });
 
   it("keeps the home hero and Instagram image areas white until approved photos arrive", async () => {
@@ -149,6 +256,9 @@ describe("App routing", () => {
     expect(reviewLinks[4]).toHaveTextContent(/Absolute perfection/);
     expect(reviewLinks[5]).toHaveTextContent(/went above and beyond/);
     expect(reviewLinks.some((link) => link.textContent?.includes("Thank you so much"))).toBe(false);
+    const starRatings = within(reviewsRegion).getAllByRole("img", { name: "5 out of 5 stars" });
+    expect(starRatings).toHaveLength(6);
+    expect(starRatings[0]?.querySelector("svg")).toHaveClass("fill-[#e0ad24]");
   });
 
   it("shows compact footer links for Instagram, maps, phone, and email", async () => {
